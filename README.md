@@ -69,8 +69,49 @@ This Hackaton will challenge you to accomplish the following:
 
 
 
-**Updating**
+## Mars Challenge Application Tiers Explanation
 
-## Tier 1 | Sensors Array ##
+### Tier 1 | Sensors Array ###
 
 The Sensors Array is build using Raspberry Pis. Each member in the team will receive one. Your goal is to configure them to provide you with the atmospheric sensor information. 
+
+**Functionality:**
+- Provides Temperature Information
+- Provides Radiation Information
+- Provides Solar Flare Information
+- End-Point for waking up the Sensor Array
+
+**Implementation:**
+- Setup the Raspberry Pis
+- Configure the Raspberry Pi for WiFi 
+- Install Golang
+- Execute the provided Mars Atmospheric simulator (Web Socket service application written in GO)
+
+
+#### Tier 2 | Sensor Gateway ###
+
+The Sensors gateway collects all the data feeds from each of one of the Sensors. It will detect if any of the sensors has gone offline and send wake up calls to restart the system. It relays the sensor information to the  Aggregation tier
+
+**Functionality:**
+- Relay information to the Aggregation Tier
+- Detect and Wake up Sensor Arrays that have gone offline (extra)
+
+**Implementation:**
+
+
+#### Tier 3 | Aggregator Tier ###
+
+ 
+#### Tier 4 | Aggregator Tier ###
+
+
+#### Tier 5 | Aggregator Tier ###
+
+
+#### Tier 6 | Aggregator Tier ###
+
+
+#### Tier 7 | Aggregator Tier ###
+
+
+
