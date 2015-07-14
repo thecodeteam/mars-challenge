@@ -12,17 +12,7 @@ You and your team just landed in Mars. As you prepare the base, massive Sun stor
 You only have a few hours, 7 of them, to implement a sensor array, build and deploy the monitoring application to engage your shields and create an algorithm based on your data analysis. Will you and your team survive? 
 
 
-**Objectives:**
-
-This Hackaton will challenge you to accomplish the following: 
-
-- Build a modern distributed application (Platform 3) using best practices
-- Deploy a distributed application using Containers 
-- Deploy a distributed application using modern deployment technologies (Messos, Kubernetes)
-- Develop an application on the Internet of Things (IoT) space
-
-
-**Available Resources for each team:**
+**Available hardware and software resources for each team:**
 - 1 x Raspberry PI per Team Member (take away)
 - 1 x WIFI Dongle per Raspberry (take away)
 - 5 x VMs in a Cloud Provider
@@ -30,7 +20,7 @@ This Hackaton will challenge you to accomplish the following:
 
 
 **Challenge Requirements:**
-- Sensors Measurements need to be taken as a time series
+- Sensors Measurements need to be taken as a time series.
 - Deployment of tiers need to be implemented using Containers (not in the Raspberry Pi)
 - Deployment of the application needs to be automated using Deployment Tools
 - All data from sensors and services needs to be logged
@@ -47,17 +37,34 @@ This Hackaton will challenge you to accomplish the following:
 	Tier 5| Data Analysis / Data Aggregation (Service / Spark / Hadoop)|
 	Tier 6| Display Sensor data,  Aggregate information, and shield status (UI)|
 	Tier 7| Backup System|
+
 - UI (Tier 6) to display information: Show Readings & Shield Status
 
 
-**Extra Points for using:**
+**High Level Architecture**
+
+![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/Mars-challenge-high-level-architecture.png )
+
+
+**You get Extra Points for using the following items in your team's implementation:**
 
 - EMC ECS as a data repository
 - Using Spark/Hadoop for data processing
-- Survive Poor network communications between the Gateway Tier and Aggregator Tier using Helios Burn
-- Running Docker container in Raspberry Pi
+- Survive Poor network communications between the Gateway Tier (Tier 2) and Aggregation Tier (Tier 3) using [Helios Burn](https://github.com/emccode/HeliosBurn "Helios Burn Fault Injection Platform")
+- Running a Docker container in Raspberry Pi with the Sensor Software (provided Go application) 
 - Work with limited resources (only drink water)
-- Show historical Data in the UI
+- Show historical Data in the Display Tier (Tier 6)
+
+
+**What would you accomplish from participating on this Hackaton?**
+
+This Hackaton will challenge you to accomplish the following: 
+
+- Build a modern distributed application (Platform 3) using best practices
+- Deploy a distributed application using Containers 
+- Deploy a distributed application using modern deployment technologies (Messos, Kubernetes)
+- Develop an application on the Internet of Things (IoT) space
+
 
 
 **Updating**
