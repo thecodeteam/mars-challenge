@@ -7,9 +7,11 @@
 ![Planet Mars](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/mars-11608_640.jpg)
 
 
-You and your team just landed in Mars. As you prepare the base, massive Sun storms are coming your way. Connectivity to earth has been cut, and although the base has enough energy, your protective shields can only be running for a few minutes at the time, without recharging. Your only chance of survival is to monitor the current temperature and radiation levels in the planet atmosphere to detect sun waves and activate your base shields for protection. 
+You and your team just landed in Mars. As you prepare the base, massive Sun storms are coming your way. That was the last communication you had from Earth. Now connectivity to earth has been cut, and although the base has enough energy, your protective shields can only be running for a few minutes at the time, without recharging. 
 
-You only have a few hours, 7 of them, to implement a sensor array, build and deploy the monitoring application to engage your shields and create an algorithm based on your data analysis. Will you and your team survive? 
+Your only chance of survival is to monitor the current temperature and radiation levels in the planet atmosphere to detect sun flares and activate your base shields for protection.
+
+You only have a few hours, 7 of them, to implement a sensor array, build and deploy the monitoring application to engage/disengage your shields, then fine tune an algorithm based on your data analysis that decides when to charge your shields and when to engage them for protection. Will you and your team survive? 
 
 
 **Available hardware and software resources for each team:**
@@ -68,3 +70,7 @@ This Hackaton will challenge you to accomplish the following:
 
 
 **Updating**
+
+## Tier 1 | Sensors Array ##
+
+The Sensors Array is build using Raspberry Pis. Each member in the team will receive one. Your goal is to configure them to provide you with the atmospheric sensor information. 
