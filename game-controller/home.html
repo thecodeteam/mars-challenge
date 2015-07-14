@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Mars Challenge :: Challenge Controller</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var conn;
+
+            if (window["WebSocket"]) {
+                conn = new WebSocket("ws://{{$}}/ws");
+                conn.onclose = function(evt) {
+                    $(document.body).text("Connection closed.")
+                }
+                conn.onmessage = function(evt) {
+                    $(document.body).text(evt.data)
+                }
+            } else {
+                $(document.body).text("Your browser does not support WebSockets.")
+            }
+        });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

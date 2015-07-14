@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Status</h3>
+      </div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt>Connection</dt>
+          <dd><span class="label" ng-class="{true:'label-success', false:'label-danger'}[connected]">{{connected ? "Connected" : "Not connected"}}</span></dd>
+          <dt>Game status</dt>
+          <dd><span class="label" ng-class="{true:'label-success', false:'label-danger'}[running]">{{running ? "Running" : "Not running"}}</span></dd>
+        </dl>
+        <h2>{{ clock }}</h2>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Temperature</h3>
+      </div>
+      <div class="panel-body">
+        <input type="text" class="temperature">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Radiation</h3>
+      </div>
+      <div class="panel-body">
+        <input type="text" class="radiation">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Solar flare</h3>
+      </div>
+      <div class="panel-body">
+        <div class="solar-flare" ng-class="{true:'on', false:'off'}[solarFlare]"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Stations</h2>
+  </div>
+  <div ng-hide="teams.length" class="col-md-12">
+    <div class="well"><em>Nobody has joined the game yet</em></div>
+  </div>
+  <div ng-repeat="team in teams" class="col-md-3 station">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>{{ team.name | limitTo: 15 }}{{team.name.length > 15 ? '...' : ''}}</h3>
+        <div ng-show="team.life <= 0" class="shield dead"></div>
+        <div ng-show="team.life > 0" class="shield" ng-class="{true:'enabled', false:'disabled'}[team.shield]"></div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ team.energy }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ team.energy }}%">
+            <span class="sr-only">{{ team.energy }}% Complete</span>
+          </div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{ team.life }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ team.life }}%">
+            <span class="sr-only">{{ team.life }}% Complete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
