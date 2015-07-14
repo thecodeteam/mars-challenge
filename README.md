@@ -23,10 +23,10 @@ This Hackaton will challenge you to accomplish the following:
 
 
 **Available Resources for each team:**
-•	1 x Raspberry PI per Team Member (take away)
-•	1 x WIFI Dongle per Raspberry (take away)
-•	5 x VMs in a Cloud Provider
-•	1 x EMC ECS Online Account per Team
+- 1 x Raspberry PI per Team Member (take away)
+- 1 x WIFI Dongle per Raspberry (take away)
+- 5 x VMs in a Cloud Provider
+- 1 x EMC ECS Online Account per Team
 
 
 **Challenge Requirements:**
