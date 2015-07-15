@@ -99,28 +99,40 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 **Implementation:**
 - Consume the Mars Atmospheric Simulator Web Sockets for each Raspberry Pi. this can be up to 5 devices. 
 - Detect if one of the sensor feeds has gone down. Then it will send a request to start the service again
--  Relay the Data to the Aggregation Tier.
+- Relay the Data to the Aggregation Tier.
 
 
 #### Tier 3 | Aggregation Tier ###
 The Aggregation Tier is a service that will take the information provided by the Gateway, aggregate the data, 
 
-
 **Functionality**
-- Receive the Data from the Gateway array
+- Receive per second Data from the Gateway array and calculate the Average temperature and radiation for all the sensors
+- Stores the data on the Data Store
+- Stores the data into a backup Service
+
+**Implementation**
+
 
 
 ### Tier 4 | Data Repository Tier ###
 
 
-
-
 ### Tier 5 | Data Analysis / Data Aggregation Tier ###
 
 
+### Tier 6 | Display Sensor data, Aggregate information, and shield status (UI) ###
 
-### Tier 5 | Data Analysis / Data Aggregation Tier ###
 
+### Tier 7 | Data Backup ###
+
+
+
+## Points Table ##
+
+This is the distribution of points for the Project: 
+
+|Name|Tier|Description|Points|
+|----|----|-----------|------|
 
 
 
