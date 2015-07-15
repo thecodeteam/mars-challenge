@@ -83,7 +83,7 @@ The Sensors Array is build using Raspberry Pis. Each member in the team will rec
 
 **Implementation:**
 - Setup the Raspberry Pis
-- Configure the Raspberry Pi for WiFi 
+- Configure the Raspberry Pi for Wi-Fi 
 - Install Golang
 - Execute the provided Mars Atmospheric simulator (Web Socket service application written in GO)
 
@@ -97,6 +97,9 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 - Detect and Wake up Sensor Arrays that have gone offline (extra)
 
 **Implementation:**
+- Consume the Mars Atmospheric Simulator Web Sockets for each Raspberry Pi. this can be up to 5 devices. 
+- Detect if one of the sensor feeds has gone down. Then it will send a request to start the service again
+-  Relay the Data to the Aggregation Tier.
 
 
 #### Tier 3 | Aggregator Tier ###
