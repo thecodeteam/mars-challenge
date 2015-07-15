@@ -34,7 +34,7 @@ You only have a few hours, 7 of them, to implement a sensor array, build and dep
 	|----|-----------|
 	|Tier 1| Sensors (Raspberry)|
 	|Tier 2| Sensor Gateway (service)|
-	Tier 3| Aggregator Tier (service)|
+	Tier 3| Aggregation Tier (service)|
 	Tier 4| Repository (DB, ECS, etc....)|
 	Tier 5| Data Analysis / Data Aggregation (Service / Spark / Hadoop)|
 	Tier 6| Display Sensor data,  Aggregate information, and shield status (UI)|
@@ -73,7 +73,7 @@ This Hackaton will challenge you to accomplish the following:
 
 ### Tier 1 | Sensors Array ###
 
-The Sensors Array is build using Raspberry Pis. Each member in the team will receive one. Your goal is to configure them to provide you with the atmospheric sensor information. 
+The Sensors Array is build using Raspberry Pis. Each member in the team will receive one. Your goal is to configure them to provide you with the atmospheric sensor information. One problem though, the sensor may go down due to radiation, you and your team need to detect the shutdown and send a wake up call.
 
 **Functionality:**
 - Provides Temperature Information
@@ -88,7 +88,7 @@ The Sensors Array is build using Raspberry Pis. Each member in the team will rec
 - Execute the provided Mars Atmospheric simulator (Web Socket service application written in GO)
 
 
-#### Tier 2 | Sensor Gateway ###
+### Tier 2 | Sensor Gateway ###
 
 The Sensors gateway collects all the data feeds from each of one of the Sensors. It will detect if any of the sensors has gone offline and send wake up calls to restart the system. It relays the sensor information to the  Aggregation tier
 
@@ -102,19 +102,31 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 -  Relay the Data to the Aggregation Tier.
 
 
-#### Tier 3 | Aggregator Tier ###
+#### Tier 3 | Aggregation Tier ###
+The Aggregation Tier is a service that will take the information provided by the Gateway, aggregate the data, 
+
+
+**Functionality**
+- Receive the Data from the Gateway array
+
+
+### Tier 4 | Data Repository Tier ###
+
+
+
+
+### Tier 5 | Data Analysis / Data Aggregation Tier ###
+
+
+
+### Tier 5 | Data Analysis / Data Aggregation Tier ###
+
+
+
+
 
  
-#### Tier 4 | Aggregator Tier ###
 
-
-#### Tier 5 | Aggregator Tier ###
-
-
-#### Tier 6 | Aggregator Tier ###
-
-
-#### Tier 7 | Aggregator Tier ###
 
 
 
