@@ -1,8 +1,8 @@
-# EMCCode Hackaton #
+# EMC{code} Hackathon
 
 
 
-## The Mars Challenge ##
+## The Mars Challenge
 
 ![Planet Mars](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/mars-11608_640.jpg)
 
