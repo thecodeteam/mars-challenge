@@ -86,6 +86,7 @@ The Sensors Array is build using Raspberry Pis. Each member in the team will rec
 - Configure the Raspberry Pi for Wi-Fi 
 - Install Golang
 - Execute the provided Mars Atmospheric simulator (Web Socket service application written in GO)
+- Example of output: **[http://hackathon-engine.cloudapp.net/](http://hackathon-engine.cloudapp.net/ "http://hackathon-engine.cloudapp.net/")**
 
 
 ### Tier 2 | Sensor Gateway ###
@@ -102,7 +103,7 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 - Relay the Data to the Aggregation Tier.
 
 
-#### Tier 3 | Aggregation Tier ###
+### Tier 3 | Aggregation Tier ###
 The Aggregation Tier is a service that will take the information provided by the Gateway, aggregate the data, 
 
 **Functionality**
@@ -115,6 +116,7 @@ The Aggregation Tier is a service that will take the information provided by the
 
 
 ### Tier 4 | Data Repository Tier ###
+
 
 
 ### Tier 5 | Data Analysis / Data Aggregation Tier ###
