@@ -57,7 +57,6 @@ func (h *hub) run() {
 }
 
 func (h *hub) getReadings() {
-	fmt.Println("getReadings")
 	s := status{SolarFlare: false, Temperature: 30.0, Radiation: 50}
 	go solarFlareRoutine(&s)
 	go temperatureRoutine(&s)
