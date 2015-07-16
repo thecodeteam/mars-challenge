@@ -5,8 +5,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -74,25 +72,6 @@ func (c *connection) writePump() {
 	}
 }
 
-func (c *connection) getReadings() {
-	fmt.Println("getReadings")
-	s := status{SolarFlare: false, Temperature: 30.0, Radiation: 50}
-	go solarFlareRoutine(&s)
-	go temperatureRoutine(&s)
-	go radiationRoutine(&s)
-	for {
-		m, err := json.Marshal(&s)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		//m := fmt.Sprintf("Solar flare: %t, Temperature: %.2f, Radiation: %d", s.solarFlare, s.temperature, s.radiation)
-		fmt.Println(string(m))
-		c.send <- []byte(m)
-		time.Sleep(1 * time.Second)
-	}
-}
-
 // serverWs handles websocket requests from the peer.
 func serveWs(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
@@ -107,5 +86,4 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	c := &connection{send: make(chan []byte, 256), ws: ws}
 	h.register <- c
 	go c.writePump()
-	c.getReadings()
 }

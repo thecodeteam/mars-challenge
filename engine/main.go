@@ -26,6 +26,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 func main() {
 	flag.Parse()
 	go h.run()
+	go h.getReadings()
 
 	http.HandleFunc("/", serveHome)
 	http.HandleFunc("/ws", serveWs)

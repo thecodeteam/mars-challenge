@@ -4,6 +4,12 @@
 
 package main
 
+import (
+	"encoding/json"
+	"fmt"
+	"time"
+)
+
 // hub maintains the set of active connections and broadcasts messages to the
 // connections.
 type hub struct {
@@ -47,5 +53,24 @@ func (h *hub) run() {
 				}
 			}
 		}
+	}
+}
+
+func (h *hub) getReadings() {
+	fmt.Println("getReadings")
+	s := status{SolarFlare: false, Temperature: 30.0, Radiation: 50}
+	go solarFlareRoutine(&s)
+	go temperatureRoutine(&s)
+	go radiationRoutine(&s)
+	for {
+		m, err := json.Marshal(&s)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		//m := fmt.Sprintf("Solar flare: %t, Temperature: %.2f, Radiation: %d", s.solarFlare, s.temperature, s.radiation)
+		fmt.Println(string(m))
+		h.broadcast <- []byte(m)
+		time.Sleep(1 * time.Second)
 	}
 }
