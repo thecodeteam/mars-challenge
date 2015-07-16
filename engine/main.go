@@ -13,10 +13,9 @@ func main() {
 	go h.run()
 	go h.getReadings()
 
-	http.HandleFunc("/", serveHome)
-	http.HandleFunc("/ws", serveWs)
+	router := NewRouter()
 
-	err := http.ListenAndServe(*addr, nil)
+	err := http.ListenAndServe(*addr, router)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
