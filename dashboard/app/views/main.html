@@ -1,7 +1,30 @@
 <div class="row">
-  <h4>Mars Challenge</h4>
-
-  <input type="text" class="temperature">
-  <input type="text" class="radiation">
-  <canvas id="myChart" width="400" height="400"></canvas>
+  <div class="col-md-3">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">Temperature</h3>
+      </div>
+      <div class="panel-body">
+        <input type="text" class="temperature">
+      </div>
+    </div>
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+        <h3 class="panel-title">Radiation</h3>
+      </div>
+      <div class="panel-body">
+        <input type="text" class="radiation">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">History</h3>
+      </div>
+      <div class="panel-body">
+        <canvas id="history"></canvas>
+      </div>
+    </div>
+  </div>
 </div>

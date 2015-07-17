@@ -9,11 +9,7 @@
  */
 angular.module('dashboardApp')
   .controller('MainCtrl', function ($websocket) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    var maxHistory = 20;
 
     $(".temperature").knob({
         'min': -142,
@@ -30,36 +26,36 @@ angular.module('dashboardApp')
         'angleArc': 250,
         'angleOffset': -125,
         'readOnly': true,
-        //'fgColor': '#f56954',
+        'fgColor': '#f89406',
     });
 
     var data2 = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: [],
         datasets: [
             {
-                label: "My First dataset",
+                label: "Temperature",
                 fillColor: "rgba(220,220,220,0.2)",
                 strokeColor: "rgba(220,220,220,1)",
                 pointColor: "rgba(220,220,220,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: []
             },
             {
-                label: "My Second dataset",
+                label: "Radiation",
                 fillColor: "rgba(151,187,205,0.2)",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
+                data: []
             }
         ]
     };
 
-    var ctx = document.getElementById("myChart").getContext("2d");
+    var ctx = document.getElementById("history").getContext("2d");
     var myNewChart = new Chart(ctx).Line(data2, {
         bezierCurve: false
     });
@@ -83,10 +79,10 @@ angular.module('dashboardApp')
           .val(data.radiation)
           .trigger('change');
 
-        myNewChart.addData([data.radiation, 10], "August");
-        myNewChart.removeData();
-        console.log(data2.datasets[0].data);
-        //myNewChart.update();
+        myNewChart.addData([data.temperature, data.radiation], "");
+        if (myNewChart.datasets[0].points.length > maxHistory){
+            myNewChart.removeData();
+        }
     });
 
     ws.$on('$close', function () {
