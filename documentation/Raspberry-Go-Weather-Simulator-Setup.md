@@ -1,13 +1,13 @@
 # Setting up the Raspberry Pi Sensors
 
-Logging into to Raspbian, you will need to use the following credentials:
+Logging into to [Raspbian](http://www.raspbian.org/), you will need to use the following credentials:
 
 **user:** pi
 **password:** raspbian
 
 ### Updating Raspbian
 
-Fist step is to update and upgrade Raspian to the latest version. For this perform the following commands: 
+Fist step is to update and upgrade [Raspbian](http://www.raspbian.org/) to the latest version. For this perform the following commands: 
     
     sudo apt-get update
     sudo apt-get upgrade -y
@@ -17,12 +17,12 @@ Fist step is to update and upgrade Raspian to the latest version. For this perfo
 
 There are multiple ways of installing Go 1.4.2 on the Raspberry PI. These are two most popular ways we have found: 
 
-http://dave.cheney.net/2012/09/25/installing-go-on-the-raspberry-pi 
+[http://dave.cheney.net/2012/09/25/installing-go-on-the-raspberry-pi ](http://dave.cheney.net/2012/09/25/installing-go-on-the-raspberry-pi )
 
-And
+and
 
 
-https://xivilization.net/~marek/blog/2015/05/04/go-1-dot-4-2-for-raspberry-pi/
+[https://xivilization.net/~marek/blog/2015/05/04/go-1-dot-4-2-for-raspberry-pi/](https://xivilization.net/~marek/blog/2015/05/04/go-1-dot-4-2-for-raspberry-pi/)
 
     wget https://xivilization.net/~marek/raspbian/xivilization-raspbian.gpg.key -O - | sudo apt-key add -
     sudo wget https://xivilization.net/~marek/raspbian/xivilization-raspbian.list -O /etc/apt/sources.list.d/xivilization-raspbian.list
@@ -31,9 +31,9 @@ https://xivilization.net/~marek/blog/2015/05/04/go-1-dot-4-2-for-raspberry-pi/
     sudo aptitude install golang
 
 
-### Download the Mars Weather Service 
+### Download the Mars Sensors' Service 
 
-Download the Mar's weather service that will provide you with the Temperature and Radiation time series: 
+Download the Mar's Sensors' service that will provide you with the Temperature and Radiation time series: 
 
     git clone https://github.com/emccode/hackathon-mars.git
 
@@ -58,9 +58,9 @@ Install using the following Commands:
     go get https://github.com/gorilla/mux
 
 
-### Executing the Sensor Service
+### Executing the Sensors' Service
 
-You are now ready to star the service. Navigate to the src directory in the hackaton-mars folder. For example: **/home/pi/hackathon-mars/src/**. Then execute the follwing command: 
+You are now ready to star the service. Navigate to the src directory in the hackaton-mars folder. For example: **/home/pi/hackathon-mars/src/**. Then execute the following command: 
 
     cd /home/pi/hackathon-mars/src/
 	go run *.go 
@@ -70,7 +70,7 @@ This will start the service on port 8080. The service will open a websocket in P
 
 ### Opening Port 8080 on the Raspberry Pi 
 
-You may need to open the RaspBerry firewall in order to access the service. In order to do so, run the following commands: 
+You may need to open the Raspberry's firewall in order to access the Sensors' service. In order to do so, run the following commands: 
 
     sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
     sudo iptables-save
