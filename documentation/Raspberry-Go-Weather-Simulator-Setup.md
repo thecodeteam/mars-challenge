@@ -42,7 +42,7 @@ Download the Mar's Sensors' service that will provide you with the Temperature a
 
 Check your Go environment variables by executing `go env`. You will probably have to setup the **GOPATH** variable to point to the folder where you cloned the hackaton-mars git repository. Assuming you cloned the repository in the /home/pi folder, you would setup the GOPATH variable like this: 
 
-    Export GOPATH=/home/pi/hackathon-mars/
+    export GOPATH=/home/pi/hackathon-mars/
 
 
 ### Installing the Required Go Packages
@@ -75,6 +75,17 @@ You may need to open the Raspberry's firewall in order to access the Sensors' se
     sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
     sudo iptables-save
 
+check that the changes have been persisted:
+
+    sudo iptables -L
+
+### Getting your Sensors' URL
+
+To verify the Sensors' service from another computer in the same network, you can perform the following command: 
+
+    sudo ifconfig 
+
+The command should provide you with the Raspberry IP address. The port has been setup to 8080.So, for example the URL could be: http://10.0.0.4:8080 
 
 
  
