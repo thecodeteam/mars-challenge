@@ -14,13 +14,14 @@ const (
 	variationRadiation   = 20
 )
 
-type status struct {
+// Reading contains the current sensor readings
+type Reading struct {
 	SolarFlare  bool    `json:"solarFlare"`
 	Temperature float64 `json:"temperature"`
 	Radiation   int     `json:"radiation"`
 }
 
-func (s *status) updateSolarFlare() {
+func (s *Reading) updateSolarFlare() {
 	x := rand.Intn(2)
 	if x != 0 {
 		s.SolarFlare = true
@@ -29,7 +30,7 @@ func (s *status) updateSolarFlare() {
 	}
 }
 
-func (s *status) updateTemperature() {
+func (s *Reading) updateTemperature() {
 	//TODO: consider solar Flare
 
 	temperature := (rand.Float64() * ((s.Temperature + variationTemperature) - (s.Temperature - variationTemperature))) + (s.Temperature - variationTemperature)
@@ -41,7 +42,7 @@ func (s *status) updateTemperature() {
 	s.Temperature = temperature
 }
 
-func (s *status) updateRadiation() {
+func (s *Reading) updateRadiation() {
 	//TODO: consider solar Flare
 	radiation := rand.Intn((s.Radiation+variationRadiation)-(s.Radiation-variationRadiation)) + (s.Radiation - variationRadiation)
 	if radiation < minRadiation {
@@ -52,7 +53,7 @@ func (s *status) updateRadiation() {
 	s.Radiation = radiation
 }
 
-func solarFlareRoutine(s *status) {
+func solarFlareRoutine(s *Reading) {
 	for {
 		s.updateSolarFlare()
 		// fmt.Println("Flare Status:", s.SolarFlare)
@@ -64,7 +65,7 @@ func solarFlareRoutine(s *status) {
 	}
 }
 
-func temperatureRoutine(s *status) {
+func temperatureRoutine(s *Reading) {
 	for {
 		s.updateTemperature()
 		// fmt.Println("Temperature:", s.Temperature)
@@ -73,7 +74,7 @@ func temperatureRoutine(s *status) {
 	}
 }
 
-func radiationRoutine(s *status) {
+func radiationRoutine(s *Reading) {
 	for {
 		s.updateRadiation()
 		// fmt.Println("Radiation:", s.Radiation)

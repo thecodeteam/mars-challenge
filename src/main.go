@@ -11,7 +11,7 @@ var addr = flag.String("addr", ":8080", "http service address")
 func main() {
 	flag.Parse()
 	go h.run()
-	go h.getReadings()
+	go game.run()
 
 	router := NewRouter()
 
