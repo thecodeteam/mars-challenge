@@ -2,6 +2,7 @@ package main
 
 import (
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -53,32 +54,38 @@ func (s *Reading) updateRadiation() {
 	s.Radiation = radiation
 }
 
-func solarFlareRoutine(s *Reading) {
-	for {
-		s.updateSolarFlare()
-		// fmt.Println("Flare Status:", s.SolarFlare)
-		if s.SolarFlare == true {
-			time.Sleep(10 * time.Second)
-		} else {
-			time.Sleep(30 * time.Second)
+func solarFlareRoutine(wg *sync.WaitGroup, game *GameInfo) {
+	timer := time.NewTimer(0)
+	for game.Running {
+		select {
+		case <-timer.C:
+			game.Reading.updateSolarFlare()
+			if game.Reading.SolarFlare == true {
+				timer.Reset(10 * time.Second)
+			} else {
+				timer.Reset(30 * time.Second)
+			}
 		}
 	}
+	wg.Done()
 }
 
-func temperatureRoutine(s *Reading) {
-	for {
-		s.updateTemperature()
+func temperatureRoutine(wg *sync.WaitGroup, game *GameInfo) {
+	for game.Running {
+		game.Reading.updateTemperature()
 		// fmt.Println("Temperature:", s.Temperature)
 
 		time.Sleep(time.Second)
 	}
+	wg.Done()
 }
 
-func radiationRoutine(s *Reading) {
-	for {
-		s.updateRadiation()
+func radiationRoutine(wg *sync.WaitGroup, game *GameInfo) {
+	for game.Running {
+		game.Reading.updateRadiation()
 		// fmt.Println("Radiation:", s.Radiation)
 
 		time.Sleep(time.Second)
 	}
+	wg.Done()
 }

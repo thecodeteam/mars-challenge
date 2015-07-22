@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"sync"
 	"time"
 )
 
@@ -56,15 +57,18 @@ var game = GameInfo{
 }
 
 func (game *GameInfo) run() {
+	var wg sync.WaitGroup
 	var req GameRequest
 	var joinReq JoinRequest
-	ticker := time.NewTicker(time.Second * 1).C
+	ticker := time.NewTicker(time.Second * 1)
 	for {
 		select {
 		case req = <-game.start:
 			if !game.Running {
 				game.Running = true
 				game.StartedAt = time.Now()
+				wg.Add(3)
+				go game.getReadings(&wg)
 				req.Response <- true
 				log.Println("Game started!")
 			} else {
@@ -75,6 +79,7 @@ func (game *GameInfo) run() {
 		case req = <-game.stop:
 			if game.Running {
 				game.Running = false
+				wg.Wait()
 				req.Response <- true
 				log.Println("Game stopped!")
 			} else {
@@ -94,7 +99,7 @@ func (game *GameInfo) run() {
 				log.Printf("Team '%s' joined the game\n", joinReq.name)
 			}
 			close(joinReq.Response)
-		case <-ticker:
+		case <-ticker.C:
 			m, err := json.Marshal(&game)
 			if err != nil {
 				log.Println("Error parsing to JSON.", err)
@@ -110,8 +115,8 @@ func (game *GameInfo) run() {
 	}
 }
 
-func (game *GameInfo) getReadings() {
-	go solarFlareRoutine(&game.Reading)
-	go temperatureRoutine(&game.Reading)
-	radiationRoutine(&game.Reading)
+func (game *GameInfo) getReadings(wg *sync.WaitGroup) {
+	go solarFlareRoutine(wg, game)
+	go temperatureRoutine(wg, game)
+	radiationRoutine(wg, game)
 }
