@@ -7,17 +7,20 @@ import (
 )
 
 const (
-	initialEnergy = 100
-	initialLife   = 100
+	initialEnergy      = 100
+	initialLife        = 100
+	initialTemperature = 0
+	initialRadiation   = 500
+	initialSolarFlare  = false
 )
 
 // GameInfo contains information about the state of the game
 type GameInfo struct {
-	running   bool
-	startedAt time.Time
-	reading   Reading
-	teams     Teams
-	start     chan []byte
+	Running   bool      `json:"running"`
+	StartedAt time.Time `json:"startedAt"`
+	Reading   Reading   `json:"readings"`
+	Teams     []Team    `json:"teams"`
+	start     chan GameRequest
 	end       chan []byte
 	exit      chan []byte
 }
@@ -30,37 +33,44 @@ type Team struct {
 	life   int64
 }
 
-// Teams list
-type Teams []Team
+// GameRequest is used to interact with the game controller and get a reply back
+type GameRequest struct {
+	Response chan bool
+}
 
 var game = GameInfo{
-	running: false,
-	start:   make(chan []byte),
+	Running: false,
+	start:   make(chan GameRequest),
 	end:     make(chan []byte),
 	exit:    make(chan []byte),
-	reading: Reading{SolarFlare: false, Temperature: 30.0, Radiation: 50},
+	Reading: Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
+	Teams:   make([]Team, 10, 10),
 }
 
 func (game *GameInfo) run() {
-	timer := time.NewTimer(time.Second * 2)
+	var req GameRequest
+	ticker := time.NewTicker(time.Second * 1).C
 	for {
 		select {
-		case <-game.start:
-			if !game.running {
-				game.running = true
-				game.startedAt = time.Now()
+		case req = <-game.start:
+			if !game.Running {
+				game.Running = true
+				game.StartedAt = time.Now()
+				req.Response <- true
 				log.Println("Game started!")
 			} else {
+				req.Response <- false
 				log.Println("Game is already started, not doing anything...")
 			}
+			close(req.Response)
 		case <-game.end:
-			if game.running {
-				game.running = false
+			if game.Running {
+				game.Running = false
 				log.Println("Game stopped!")
 			} else {
 				log.Println("Game is already stopped, not doing anything...")
 			}
-		case <-timer.C:
+		case <-ticker:
 			m, err := json.Marshal(&game)
 			if err != nil {
 				log.Println("Error parsing to JSON.", err)
@@ -77,7 +87,7 @@ func (game *GameInfo) run() {
 }
 
 func (game *GameInfo) getReadings() {
-	go solarFlareRoutine(&game.reading)
-	go temperatureRoutine(&game.reading)
-	radiationRoutine(&game.reading)
+	go solarFlareRoutine(&game.Reading)
+	go temperatureRoutine(&game.Reading)
+	radiationRoutine(&game.Reading)
 }

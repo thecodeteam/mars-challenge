@@ -24,10 +24,7 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveWs(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "GET" {
-		http.Error(w, "Method not allowed", 405)
-		return
-	}
+
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
@@ -36,4 +33,15 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	c := &connection{send: make(chan []byte, 256), ws: ws}
 	h.register <- c
 	go c.writePump()
+}
+
+func serveAPIStart(w http.ResponseWriter, r *http.Request) {
+	req := GameRequest{Response: make(chan bool)}
+	game.start <- req
+	res := <-req.Response
+	if res {
+		w.Write([]byte("Game started"))
+	} else {
+		http.Error(w, "Game already in progress. Not doing anything", 400)
+	}
 }
