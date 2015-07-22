@@ -22,15 +22,16 @@ type GameInfo struct {
 	Teams     []Team    `json:"teams"`
 	start     chan GameRequest
 	stop      chan GameRequest
+	join      chan JoinRequest
 	exit      chan []byte
 }
 
 // Team contains information about a team
 type Team struct {
-	name   string
+	Name   string `json:"name"`
 	token  string
-	energy int64
-	life   int64
+	Energy int64 `json:"energy"`
+	Life   int64 `json:"life"`
 }
 
 // GameRequest is used to interact with the game controller and get a reply back
@@ -38,17 +39,25 @@ type GameRequest struct {
 	Response chan bool
 }
 
+// JoinRequest is used when a team wants to join the game
+type JoinRequest struct {
+	GameRequest
+	name string
+}
+
 var game = GameInfo{
 	Running: false,
 	start:   make(chan GameRequest),
 	stop:    make(chan GameRequest),
+	join:    make(chan JoinRequest),
 	exit:    make(chan []byte),
 	Reading: Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
-	Teams:   make([]Team, 10, 10),
+	Teams:   []Team{},
 }
 
 func (game *GameInfo) run() {
 	var req GameRequest
+	var joinReq JoinRequest
 	ticker := time.NewTicker(time.Second * 1).C
 	for {
 		select {
@@ -73,6 +82,18 @@ func (game *GameInfo) run() {
 				log.Println("Game is already stopped, not doing anything...")
 			}
 			close(req.Response)
+		case joinReq = <-game.join:
+			if game.Running {
+				joinReq.Response <- false
+				log.Printf("Team '%s' cannot join the game because it's already running\n", joinReq.name)
+			} else {
+				//TODO check if name already exists
+				team := Team{Name: joinReq.name, Life: initialLife, Energy: initialEnergy}
+				game.Teams = append(game.Teams, team)
+				joinReq.Response <- true
+				log.Printf("Team '%s' joined the game\n", joinReq.name)
+			}
+			close(joinReq.Response)
 		case <-ticker:
 			m, err := json.Marshal(&game)
 			if err != nil {

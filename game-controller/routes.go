@@ -38,4 +38,10 @@ var routes = Routes{
 		"/api/stop",
 		serveAPIStop,
 	},
+	Route{
+		"Join Game",
+		"POST",
+		"/api/join/{name}",
+		serveAPIJoin,
+	},
 }

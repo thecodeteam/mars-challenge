@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
+
 	// "github.com/gorilla/mux"
 )
 
@@ -54,5 +56,19 @@ func serveAPIStop(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Game stopped"))
 	} else {
 		http.Error(w, "Game already stopped. Not doing anything", 400)
+	}
+}
+
+func serveAPIJoin(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	name := vars["name"]
+
+	req := JoinRequest{GameRequest: GameRequest{Response: make(chan bool)}, name: name}
+	game.join <- req
+	res := <-req.Response
+	if res {
+		w.Write([]byte("You have joined the game"))
+	} else {
+		http.Error(w, "You could not join the game", 400)
 	}
 }
