@@ -32,4 +32,10 @@ var routes = Routes{
 		"/api/start",
 		serveAPIStart,
 	},
+	Route{
+		"Stop Game",
+		"POST",
+		"/api/stop",
+		serveAPIStop,
+	},
 }

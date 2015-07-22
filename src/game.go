@@ -21,7 +21,7 @@ type GameInfo struct {
 	Reading   Reading   `json:"readings"`
 	Teams     []Team    `json:"teams"`
 	start     chan GameRequest
-	end       chan []byte
+	stop      chan GameRequest
 	exit      chan []byte
 }
 
@@ -41,7 +41,7 @@ type GameRequest struct {
 var game = GameInfo{
 	Running: false,
 	start:   make(chan GameRequest),
-	end:     make(chan []byte),
+	stop:    make(chan GameRequest),
 	exit:    make(chan []byte),
 	Reading: Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
 	Teams:   make([]Team, 10, 10),
@@ -63,13 +63,16 @@ func (game *GameInfo) run() {
 				log.Println("Game is already started, not doing anything...")
 			}
 			close(req.Response)
-		case <-game.end:
+		case req = <-game.stop:
 			if game.Running {
 				game.Running = false
+				req.Response <- true
 				log.Println("Game stopped!")
 			} else {
+				req.Response <- false
 				log.Println("Game is already stopped, not doing anything...")
 			}
+			close(req.Response)
 		case <-ticker:
 			m, err := json.Marshal(&game)
 			if err != nil {

@@ -45,3 +45,14 @@ func serveAPIStart(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Game already in progress. Not doing anything", 400)
 	}
 }
+
+func serveAPIStop(w http.ResponseWriter, r *http.Request) {
+	req := GameRequest{Response: make(chan bool)}
+	game.stop <- req
+	res := <-req.Response
+	if res {
+		w.Write([]byte("Game stopped"))
+	} else {
+		http.Error(w, "Game already stopped. Not doing anything", 400)
+	}
+}
