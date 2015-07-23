@@ -17,6 +17,7 @@ const (
 
 // GameInfo contains information about the state of the game
 type GameInfo struct {
+	// Running defines whether the game is running or not
 	Running   bool      `json:"running"`
 	StartedAt time.Time `json:"startedAt"`
 	Reading   Reading   `json:"readings"`
@@ -40,10 +41,16 @@ type GameRequest struct {
 	Response chan bool
 }
 
+// JoinResponse is used when a team wants to join the game
+type JoinResponse struct {
+	success bool
+	token   string
+}
+
 // JoinRequest is used when a team wants to join the game
 type JoinRequest struct {
-	GameRequest
-	name string
+	Response chan JoinResponse
+	name     string
 }
 
 var game = GameInfo{
@@ -89,14 +96,18 @@ func (game *GameInfo) run() {
 			close(req.Response)
 		case joinReq = <-game.join:
 			if game.Running {
-				joinReq.Response <- false
+				joinReq.Response <- JoinResponse{success: false}
 				log.Printf("Team '%s' cannot join the game because it's already running\n", joinReq.name)
 			} else {
-				//TODO check if name already exists
-				team := Team{Name: joinReq.name, Life: initialLife, Energy: initialEnergy}
-				game.Teams = append(game.Teams, team)
-				joinReq.Response <- true
-				log.Printf("Team '%s' joined the game\n", joinReq.name)
+				if teamExists(game.Teams, joinReq.name) {
+					joinReq.Response <- JoinResponse{success: false}
+					log.Printf("Team '%s' already exists.\n", joinReq.name)
+				} else {
+					team := Team{Name: joinReq.name, Life: initialLife, Energy: initialEnergy, token: randToken()}
+					game.Teams = append(game.Teams, team)
+					joinReq.Response <- JoinResponse{success: true, token: team.token}
+					log.Printf("Team '%s' joined the game\n", joinReq.name)
+				}
 			}
 			close(joinReq.Response)
 		case <-ticker.C:

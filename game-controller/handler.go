@@ -63,11 +63,11 @@ func serveAPIJoin(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := vars["name"]
 
-	req := JoinRequest{GameRequest: GameRequest{Response: make(chan bool)}, name: name}
+	req := JoinRequest{Response: make(chan JoinResponse), name: name}
 	game.join <- req
 	res := <-req.Response
-	if res {
-		w.Write([]byte("You have joined the game"))
+	if res.success {
+		w.Write([]byte(res.token))
 	} else {
 		http.Error(w, "You could not join the game", 400)
 	}
