@@ -44,4 +44,16 @@ var routes = Routes{
 		"/api/join/{name}",
 		serveAPIJoin,
 	},
+	Route{
+		"Enable Shield",
+		"POST",
+		"/api/shield/enable",
+		serveAPIEnableShield,
+	},
+	Route{
+		"Disable Shield",
+		"POST",
+		"/api/shield/disable",
+		serveAPIDisableShield,
+	},
 }

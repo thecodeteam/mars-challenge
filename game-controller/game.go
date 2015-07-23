@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"sync"
 	"time"
@@ -26,6 +27,7 @@ type GameInfo struct {
 	stop      chan GameRequest
 	join      chan JoinRequest
 	exit      chan []byte
+	shield    chan ShieldRequest
 }
 
 // Team contains information about a team
@@ -34,6 +36,7 @@ type Team struct {
 	token  string
 	Energy int64 `json:"energy"`
 	Life   int64 `json:"life"`
+	Shield bool  `json:"shield"`
 }
 
 // GameRequest is used to interact with the game controller and get a reply back
@@ -45,6 +48,7 @@ type GameRequest struct {
 type JoinResponse struct {
 	success bool
 	token   string
+	message string
 }
 
 // JoinRequest is used when a team wants to join the game
@@ -53,11 +57,19 @@ type JoinRequest struct {
 	name     string
 }
 
+//ShieldRequest is used to enable/disable shield
+type ShieldRequest struct {
+	Response chan bool
+	enable   bool
+	token    string
+}
+
 var game = GameInfo{
 	Running: false,
 	start:   make(chan GameRequest),
 	stop:    make(chan GameRequest),
 	join:    make(chan JoinRequest),
+	shield:  make(chan ShieldRequest),
 	exit:    make(chan []byte),
 	Reading: Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
 	Teams:   []Team{},
@@ -65,12 +77,10 @@ var game = GameInfo{
 
 func (game *GameInfo) run() {
 	var wg sync.WaitGroup
-	var req GameRequest
-	var joinReq JoinRequest
 	ticker := time.NewTicker(time.Second * 1)
 	for {
 		select {
-		case req = <-game.start:
+		case req := <-game.start:
 			if !game.Running {
 				game.Running = true
 				game.StartedAt = time.Now()
@@ -83,7 +93,7 @@ func (game *GameInfo) run() {
 				log.Println("Game is already started, not doing anything...")
 			}
 			close(req.Response)
-		case req = <-game.stop:
+		case req := <-game.stop:
 			if game.Running {
 				game.Running = false
 				wg.Wait()
@@ -94,22 +104,37 @@ func (game *GameInfo) run() {
 				log.Println("Game is already stopped, not doing anything...")
 			}
 			close(req.Response)
-		case joinReq = <-game.join:
+		case req := <-game.join:
+			res := JoinResponse{success: false}
 			if game.Running {
-				joinReq.Response <- JoinResponse{success: false}
-				log.Printf("Team '%s' cannot join the game because it's already running\n", joinReq.name)
+				res.message = fmt.Sprintf("Team '%s' cannot join the game because it's already running", req.name)
+				log.Println(res.message)
 			} else {
-				if teamExists(game.Teams, joinReq.name) {
-					joinReq.Response <- JoinResponse{success: false}
-					log.Printf("Team '%s' already exists.\n", joinReq.name)
+				if teamExists(game.Teams, req.name) {
+					res.message = fmt.Sprintf("Team '%s' already exists.", req.name)
+					log.Println(res.message)
 				} else {
-					team := Team{Name: joinReq.name, Life: initialLife, Energy: initialEnergy, token: randToken()}
+					team := Team{Name: req.name, Life: initialLife, Energy: initialEnergy, Shield: false, token: randToken()}
 					game.Teams = append(game.Teams, team)
-					joinReq.Response <- JoinResponse{success: true, token: team.token}
-					log.Printf("Team '%s' joined the game\n", joinReq.name)
+					res.success = true
+					res.token = team.token
+					res.message = fmt.Sprintf("Team '%s' joined the game", req.name)
+					log.Printf(res.message)
 				}
 			}
-			close(joinReq.Response)
+			req.Response <- res
+			close(req.Response)
+		case req := <-game.shield:
+			i, ok := getTeamIndexByToken(game.Teams, req.token)
+			if ok {
+				game.Teams[i].Shield = req.enable
+				log.Printf("Team '%s' set shield to %t\n", game.Teams[i].Name, game.Teams[i].Shield)
+				req.Response <- true
+			} else {
+				log.Println("Invalid token")
+				req.Response <- false
+			}
+			close(req.Response)
 		case <-ticker.C:
 			m, err := json.Marshal(&game)
 			if err != nil {

@@ -69,6 +69,38 @@ func serveAPIJoin(w http.ResponseWriter, r *http.Request) {
 	if res.success {
 		w.Write([]byte(res.token))
 	} else {
-		http.Error(w, "You could not join the game", 400)
+		http.Error(w, res.message, 400)
+	}
+}
+
+func serveAPIEnableShield(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("X-Auth-Token")
+	if len(token) == 0 {
+		http.Error(w, "No auth token present", 400)
+		return
+	}
+	req := ShieldRequest{Response: make(chan bool), enable: true, token: token}
+	game.shield <- req
+	res := <-req.Response
+	if res {
+		w.Write([]byte("Shield successfully enabled"))
+	} else {
+		http.Error(w, "Could not enable shield", 400)
+	}
+}
+
+func serveAPIDisableShield(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("X-Auth-Token")
+	if len(token) == 0 {
+		http.Error(w, "No auth token present", 400)
+		return
+	}
+	req := ShieldRequest{Response: make(chan bool), enable: false, token: token}
+	game.shield <- req
+	res := <-req.Response
+	if res {
+		w.Write([]byte("Shield successfully disabled"))
+	} else {
+		http.Error(w, "Could not disable shield", 400)
 	}
 }
