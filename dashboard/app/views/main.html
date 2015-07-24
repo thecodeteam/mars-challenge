@@ -28,3 +28,29 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>Stations</h2>
+  </div>
+  <div ng-hide="teams.length" class="col-md-12">
+    <div class="well"><em>Nobody has joined the game yet</em></div>
+  </div>
+  <div ng-repeat="team in teams" class="col-md-3 station">
+    <div class="thumbnail">
+      <div class="caption">
+        <h3>{{ team.name | limitTo: 15 }}{{team.name.length > 15 ? '...' : ''}}</h3>
+        <div class="shield" ng-class="{true:'enabled', false:'disabled'}[team.shield]"></div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{{ team.energy }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ team.energy }}%">
+            <span class="sr-only">{{ team.energy }}% Complete</span>
+          </div>
+        </div>
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="{{ team.life }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ team.life }}%">
+            <span class="sr-only">{{ team.life }}% Complete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

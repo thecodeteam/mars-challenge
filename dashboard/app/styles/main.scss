@@ -72,6 +72,25 @@ body {
   }
 }
 
+.station {
+  h3 {
+    margin-top: 0px;
+  }
+  
+  .shield {
+    height: 150px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .enabled {
+    background-color: green;
+  }
+
+  .disabled {
+    background-color: red;
+  }
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
 

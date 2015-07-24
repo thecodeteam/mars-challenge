@@ -8,8 +8,9 @@
  * Controller of the dashboardApp
  */
 angular.module('dashboardApp')
-  .controller('MainCtrl', function ($websocket) {
+  .controller('MainCtrl', ['$scope', '$websocket', function ($scope, $websocket) {
     var maxHistory = 20;
+    $scope.teams = [];
 
     $(".temperature").knob({
         'min': -142,
@@ -72,20 +73,27 @@ angular.module('dashboardApp')
     ws.$on('$message', function (data) {
         console.log('Data received:', data);
         $('.temperature')
-          .val(data.temperature)
+          .val(data.readings.temperature)
           .trigger('change');
 
         $('.radiation')
-          .val(data.radiation)
+          .val(data.readings.radiation)
           .trigger('change');
 
-        myNewChart.addData([data.temperature, data.radiation], "");
+        myNewChart.addData([data.readings.temperature, data.readings.radiation], "");
         if (myNewChart.datasets[0].points.length > maxHistory){
             myNewChart.removeData();
         }
+
+        $scope.$apply(function() {
+          $scope.teams = data.teams;
+        });
+
+        console.log('Data.teams:', data.teams)
+        console.log('Scope.teams:', $scope.teams)
     });
 
     ws.$on('$close', function () {
         console.log('Websocket closed!');
     });
-  });
+  }]);
