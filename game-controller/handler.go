@@ -6,8 +6,6 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-
-	// "github.com/gorilla/mux"
 )
 
 var homeTempl = template.Must(template.ParseFiles("home.html"))
