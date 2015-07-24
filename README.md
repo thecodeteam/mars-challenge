@@ -28,6 +28,9 @@ You only have a few hours, 7 of them, to implement a sensor array, build and dep
 - All data from sensors and services needs to be logged
 - All data needs be backed on regular intervals
 - Need to detect and calculate when to turn on the shields (refer to data table)
+
+
+**Bonuses for:** 
 - Build the System using the following Tiers/Services (this will be explain in more details):
 
 	|Tier|Description|
@@ -40,12 +43,11 @@ You only have a few hours, 7 of them, to implement a sensor array, build and dep
 	Tier 6| Display Sensor data,  Aggregate information, and shield status (UI)|
 	Tier 7| Backup System|
 
-- UI (Tier 6) to display information: Show Readings & Shield Status
 
+**High Level Architecture:**
 
-**High Level Architecture**
+![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/marshackathon-Participant-diagram.jpg)
 
-![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/Mars-challenge-high-level-architecture.png )
 
 
 **You get Extra Points for using the following items in your team's implementation:**
@@ -70,6 +72,10 @@ This Hackaton will challenge you to accomplish the following:
 
 
 ## Mars Challenge Application Tiers Explanation
+
+The following diagram shows all the tiers: 
+
+![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/Mars-challenge-high-level-architecture.png )
 
 ### Tier 1 | Sensors Array ###
 
