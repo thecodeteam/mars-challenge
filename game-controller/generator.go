@@ -2,6 +2,7 @@ package main
 
 import (
 	"math/rand"
+	"sync"
 	"time"
 )
 
@@ -14,13 +15,14 @@ const (
 	variationRadiation   = 20
 )
 
-type status struct {
+// Reading contains the current sensor readings
+type Reading struct {
 	SolarFlare  bool    `json:"solarFlare"`
 	Temperature float64 `json:"temperature"`
 	Radiation   int     `json:"radiation"`
 }
 
-func (s *status) updateSolarFlare() {
+func (s *Reading) updateSolarFlare() {
 	x := rand.Intn(2)
 	if x != 0 {
 		s.SolarFlare = true
@@ -29,7 +31,7 @@ func (s *status) updateSolarFlare() {
 	}
 }
 
-func (s *status) updateTemperature() {
+func (s *Reading) updateTemperature() {
 	//TODO: consider solar Flare
 
 	temperature := (rand.Float64() * ((s.Temperature + variationTemperature) - (s.Temperature - variationTemperature))) + (s.Temperature - variationTemperature)
@@ -41,7 +43,7 @@ func (s *status) updateTemperature() {
 	s.Temperature = temperature
 }
 
-func (s *status) updateRadiation() {
+func (s *Reading) updateRadiation() {
 	//TODO: consider solar Flare
 	radiation := rand.Intn((s.Radiation+variationRadiation)-(s.Radiation-variationRadiation)) + (s.Radiation - variationRadiation)
 	if radiation < minRadiation {
@@ -52,32 +54,38 @@ func (s *status) updateRadiation() {
 	s.Radiation = radiation
 }
 
-func solarFlareRoutine(s *status) {
-	for {
-		s.updateSolarFlare()
-		// fmt.Println("Flare Status:", s.SolarFlare)
-		if s.SolarFlare == true {
-			time.Sleep(10 * time.Second)
-		} else {
-			time.Sleep(30 * time.Second)
+func solarFlareRoutine(wg *sync.WaitGroup, game *GameInfo) {
+	timer := time.NewTimer(0)
+	for game.Running {
+		select {
+		case <-timer.C:
+			game.Reading.updateSolarFlare()
+			if game.Reading.SolarFlare == true {
+				timer.Reset(10 * time.Second)
+			} else {
+				timer.Reset(30 * time.Second)
+			}
 		}
 	}
+	wg.Done()
 }
 
-func temperatureRoutine(s *status) {
-	for {
-		s.updateTemperature()
+func temperatureRoutine(wg *sync.WaitGroup, game *GameInfo) {
+	for game.Running {
+		game.Reading.updateTemperature()
 		// fmt.Println("Temperature:", s.Temperature)
 
 		time.Sleep(time.Second)
 	}
+	wg.Done()
 }
 
-func radiationRoutine(s *status) {
-	for {
-		s.updateRadiation()
+func radiationRoutine(wg *sync.WaitGroup, game *GameInfo) {
+	for game.Running {
+		game.Reading.updateRadiation()
 		// fmt.Println("Radiation:", s.Radiation)
 
 		time.Sleep(time.Second)
 	}
+	wg.Done()
 }

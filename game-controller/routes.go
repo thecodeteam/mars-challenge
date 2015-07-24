@@ -26,4 +26,34 @@ var routes = Routes{
 		"/ws",
 		serveWs,
 	},
+	Route{
+		"Start Game",
+		"POST",
+		"/api/start",
+		serveAPIStart,
+	},
+	Route{
+		"Stop Game",
+		"POST",
+		"/api/stop",
+		serveAPIStop,
+	},
+	Route{
+		"Join Game",
+		"POST",
+		"/api/join/{name}",
+		serveAPIJoin,
+	},
+	Route{
+		"Enable Shield",
+		"POST",
+		"/api/shield/enable",
+		serveAPIEnableShield,
+	},
+	Route{
+		"Disable Shield",
+		"POST",
+		"/api/shield/disable",
+		serveAPIDisableShield,
+	},
 }
