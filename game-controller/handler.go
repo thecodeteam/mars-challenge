@@ -38,24 +38,36 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveAPIStart(w http.ResponseWriter, r *http.Request) {
-	req := GameRequest{Response: make(chan bool)}
+	token := r.Header.Get("X-Auth-Token")
+	if len(token) == 0 {
+		http.Error(w, "No auth token present", 400)
+		return
+	}
+
+	req := TokenRequest{GameRequest: GameRequest{Response: make(chan GameResponse)}, token: token}
 	game.start <- req
 	res := <-req.Response
-	if res {
-		w.Write([]byte("Game started"))
+	if res.success {
+		w.Write([]byte(res.message))
 	} else {
-		http.Error(w, "Game already in progress. Not doing anything", 400)
+		http.Error(w, res.message, 400)
 	}
 }
 
 func serveAPIStop(w http.ResponseWriter, r *http.Request) {
-	req := GameRequest{Response: make(chan bool)}
+	token := r.Header.Get("X-Auth-Token")
+	if len(token) == 0 {
+		http.Error(w, "No auth token present", 400)
+		return
+	}
+
+	req := TokenRequest{GameRequest: GameRequest{Response: make(chan GameResponse)}, token: token}
 	game.stop <- req
 	res := <-req.Response
-	if res {
-		w.Write([]byte("Game stopped"))
+	if res.success {
+		w.Write([]byte(res.message))
 	} else {
-		http.Error(w, "Game already stopped. Not doing anything", 400)
+		http.Error(w, res.message, 400)
 	}
 }
 
@@ -63,11 +75,11 @@ func serveAPIJoin(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := vars["name"]
 
-	req := JoinRequest{Response: make(chan JoinResponse), name: name}
+	req := JoinRequest{GameRequest: GameRequest{Response: make(chan GameResponse)}, name: name}
 	game.join <- req
 	res := <-req.Response
 	if res.success {
-		w.Write([]byte(res.token))
+		w.Write([]byte(res.message))
 	} else {
 		http.Error(w, res.message, 400)
 	}
@@ -79,10 +91,10 @@ func serveAPIEnableShield(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "No auth token present", 400)
 		return
 	}
-	req := ShieldRequest{Response: make(chan bool), enable: true, token: token}
+	req := ShieldRequest{TokenRequest: TokenRequest{GameRequest: GameRequest{Response: make(chan GameResponse)}, token: token}, enable: true}
 	game.shield <- req
 	res := <-req.Response
-	if res {
+	if res.success {
 		w.Write([]byte("Shield successfully enabled"))
 	} else {
 		http.Error(w, "Could not enable shield", 400)
@@ -95,10 +107,10 @@ func serveAPIDisableShield(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "No auth token present", 400)
 		return
 	}
-	req := ShieldRequest{Response: make(chan bool), enable: false, token: token}
+	req := ShieldRequest{TokenRequest: TokenRequest{GameRequest: GameRequest{Response: make(chan GameResponse)}, token: token}, enable: false}
 	game.shield <- req
 	res := <-req.Response
-	if res {
+	if res.success {
 		w.Write([]byte("Shield successfully disabled"))
 	} else {
 		http.Error(w, "Could not disable shield", 400)
