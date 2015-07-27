@@ -19,15 +19,16 @@ const (
 // GameInfo contains information about the state of the game
 type GameInfo struct {
 	// Running defines whether the game is running or not
-	Running   bool      `json:"running"`
-	StartedAt time.Time `json:"startedAt"`
-	Reading   Reading   `json:"readings"`
-	Teams     []Team    `json:"teams"`
-	start     chan GameRequest
-	stop      chan GameRequest
-	join      chan JoinRequest
-	exit      chan []byte
-	shield    chan ShieldRequest
+	Running    bool      `json:"running"`
+	StartedAt  time.Time `json:"startedAt"`
+	Reading    Reading   `json:"readings"`
+	Teams      []Team    `json:"teams"`
+	adminToken string
+	start      chan TokenRequest
+	stop       chan TokenRequest
+	join       chan JoinRequest
+	exit       chan []byte
+	shield     chan ShieldRequest
 }
 
 // Team contains information about a team
@@ -39,35 +40,10 @@ type Team struct {
 	Shield bool  `json:"shield"`
 }
 
-// GameRequest is used to interact with the game controller and get a reply back
-type GameRequest struct {
-	Response chan bool
-}
-
-// JoinResponse is used when a team wants to join the game
-type JoinResponse struct {
-	success bool
-	token   string
-	message string
-}
-
-// JoinRequest is used when a team wants to join the game
-type JoinRequest struct {
-	Response chan JoinResponse
-	name     string
-}
-
-//ShieldRequest is used to enable/disable shield
-type ShieldRequest struct {
-	Response chan bool
-	enable   bool
-	token    string
-}
-
 var game = GameInfo{
 	Running: false,
-	start:   make(chan GameRequest),
-	stop:    make(chan GameRequest),
+	start:   make(chan TokenRequest),
+	stop:    make(chan TokenRequest),
 	join:    make(chan JoinRequest),
 	shield:  make(chan ShieldRequest),
 	exit:    make(chan []byte),
@@ -75,65 +51,35 @@ var game = GameInfo{
 	Teams:   []Team{},
 }
 
-func (game *GameInfo) run() {
+func (game *GameInfo) run(adminToken string) {
+	game.adminToken = adminToken
 	var wg sync.WaitGroup
 	ticker := time.NewTicker(time.Second * 1)
 	for {
 		select {
 		case req := <-game.start:
-			if !game.Running {
-				game.Running = true
-				game.StartedAt = time.Now()
+			success, message := game.startGame(req.token)
+			if success {
 				wg.Add(3)
 				go game.getReadings(&wg)
-				req.Response <- true
-				log.Println("Game started!")
-			} else {
-				req.Response <- false
-				log.Println("Game is already started, not doing anything...")
+				go game.runEngine()
 			}
+			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case req := <-game.stop:
-			if game.Running {
-				game.Running = false
+			success, message := game.stopGame(req.token)
+			if success {
 				wg.Wait()
-				req.Response <- true
-				log.Println("Game stopped!")
-			} else {
-				req.Response <- false
-				log.Println("Game is already stopped, not doing anything...")
 			}
+			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case req := <-game.join:
-			res := JoinResponse{success: false}
-			if game.Running {
-				res.message = fmt.Sprintf("Team '%s' cannot join the game because it's already running", req.name)
-				log.Println(res.message)
-			} else {
-				if teamExists(game.Teams, req.name) {
-					res.message = fmt.Sprintf("Team '%s' already exists.", req.name)
-					log.Println(res.message)
-				} else {
-					team := Team{Name: req.name, Life: initialLife, Energy: initialEnergy, Shield: false, token: randToken()}
-					game.Teams = append(game.Teams, team)
-					res.success = true
-					res.token = team.token
-					res.message = fmt.Sprintf("Team '%s' joined the game", req.name)
-					log.Printf(res.message)
-				}
-			}
-			req.Response <- res
+			success, message := game.joinGame(req.name)
+			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case req := <-game.shield:
-			i, ok := getTeamIndexByToken(game.Teams, req.token)
-			if ok {
-				game.Teams[i].Shield = req.enable
-				log.Printf("Team '%s' set shield to %t\n", game.Teams[i].Name, game.Teams[i].Shield)
-				req.Response <- true
-			} else {
-				log.Println("Invalid token")
-				req.Response <- false
-			}
+			success, message := game.enableShield(req.token, req.enable)
+			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case <-ticker.C:
 			m, err := json.Marshal(&game)
@@ -149,6 +95,65 @@ func (game *GameInfo) run() {
 			return
 		}
 	}
+}
+
+func (game *GameInfo) stopGame(token string) (bool, string) {
+	if !game.authorizeAdmin(token) {
+		log.Printf("Unauthorized request to stop game. Token: %s\n", token)
+		return false, "Unauthorized"
+	}
+	if game.Running {
+		game.Running = false
+		log.Println("Game stopped!")
+		return true, "Game stopped"
+	}
+	log.Println("Game is already stopped, not doing anything...")
+	return false, "Game is already stopped, not doing anything"
+}
+
+func (game *GameInfo) startGame(token string) (bool, string) {
+	if !game.authorizeAdmin(token) {
+		log.Printf("Unauthorized request to start game. Token: %s\n", token)
+		return false, "Unauthorized"
+	}
+	if !game.Running {
+		game.Running = true
+		game.StartedAt = time.Now()
+		log.Println("Game started!")
+		return true, "Game started"
+	}
+	log.Println("Game is already started, not doing anything...")
+	return false, "Game is already started, not doing anything"
+}
+
+func (game *GameInfo) joinGame(name string) (bool, string) {
+	if game.Running {
+		message := fmt.Sprintf("Team '%s' cannot join the game because it's already running", name)
+		log.Println(message)
+		return false, message
+	}
+	if game.teamExists(name) {
+		message := fmt.Sprintf("Team '%s' already exists.", name)
+		log.Println(message)
+		return false, message
+	}
+	team := Team{Name: name, Life: initialLife, Energy: initialEnergy, Shield: false, token: randToken()}
+	game.Teams = append(game.Teams, team)
+	log.Printf("Team '%s' joined the game", name)
+	return true, team.token
+}
+
+func (game *GameInfo) enableShield(token string, enable bool) (bool, string) {
+	i, ok := game.authorizeTeam(token)
+	if !ok {
+		log.Printf("Invalid token '%s'\n", token)
+		return false, "Unauthorized"
+	}
+
+	game.Teams[i].Shield = enable
+	message := fmt.Sprintf("Team '%s' set shield to %t", game.Teams[i].Name, game.Teams[i].Shield)
+	log.Println(message)
+	return true, message
 }
 
 func (game *GameInfo) getReadings(wg *sync.WaitGroup) {
