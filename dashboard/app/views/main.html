@@ -1,5 +1,20 @@
 <div class="row">
   <div class="col-md-3">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Status</h3>
+      </div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt>Connection</dt>
+          <dd><span class="label" ng-class="{true:'label-success', false:'label-danger'}[connected]">{{connected ? "Connected" : "Not connected"}}</span></dd>
+          <dt>Game status</dt>
+          <dd><span class="label" ng-class="{true:'label-success', false:'label-danger'}[running]">{{running ? "Running" : "Not running"}}</span></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
     <div class="panel panel-danger">
       <div class="panel-heading">
         <h3 class="panel-title">Temperature</h3>
@@ -8,6 +23,8 @@
         <input type="text" class="temperature">
       </div>
     </div>
+  </div>
+  <div class="col-md-3">
     <div class="panel panel-warning">
       <div class="panel-heading">
         <h3 class="panel-title">Radiation</h3>
@@ -17,16 +34,18 @@
       </div>
     </div>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-3">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">History</h3>
+        <h3 class="panel-title">Solar flare</h3>
       </div>
       <div class="panel-body">
-        <canvas id="history"></canvas>
+        <p>{{ solarFlare }}</p>
       </div>
     </div>
   </div>
+</div>
+
 </div>
 <div class="row">
   <div class="col-md-12">

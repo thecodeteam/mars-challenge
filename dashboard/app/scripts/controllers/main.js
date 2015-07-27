@@ -11,6 +11,8 @@ angular.module('dashboardApp')
   .controller('MainCtrl', ['$scope', '$websocket', function ($scope, $websocket) {
     var maxHistory = 20;
     $scope.teams = [];
+    $scope.connected = false;
+    $scope.running = false;
 
     $(".temperature").knob({
         'min': -142,
@@ -56,10 +58,10 @@ angular.module('dashboardApp')
         ]
     };
 
-    var ctx = document.getElementById("history").getContext("2d");
-    var myNewChart = new Chart(ctx).Line(data2, {
-        bezierCurve: false
-    });
+    // var ctx = document.getElementById("history").getContext("2d");
+    // var myNewChart = new Chart(ctx).Line(data2, {
+    //     bezierCurve: false
+    // });
 
     var ws = $websocket.$new({
       url: 'ws://localhost:8080/ws',
@@ -68,10 +70,17 @@ angular.module('dashboardApp')
 
     ws.$on('$open', function () {
         console.log('Websocket is open');
+        $scope.$apply(function() {
+          $scope.connected = true;
+        });
     });
 
     ws.$on('$message', function (data) {
         console.log('Data received:', data);
+
+        $scope.running = data.running;
+        $scope.solarFlare = data.readings.solarFlare;
+
         $('.temperature')
           .val(data.readings.temperature)
           .trigger('change');
@@ -80,20 +89,21 @@ angular.module('dashboardApp')
           .val(data.readings.radiation)
           .trigger('change');
 
-        myNewChart.addData([data.readings.temperature, data.readings.radiation], "");
-        if (myNewChart.datasets[0].points.length > maxHistory){
-            myNewChart.removeData();
-        }
+        // myNewChart.addData([data.readings.temperature, data.readings.radiation], "");
+        // if (myNewChart.datasets[0].points.length > maxHistory){
+        //     myNewChart.removeData();
+        // }
 
         $scope.$apply(function() {
           $scope.teams = data.teams;
         });
-
-        console.log('Data.teams:', data.teams)
-        console.log('Scope.teams:', $scope.teams)
     });
 
     ws.$on('$close', function () {
         console.log('Websocket closed!');
+        $scope.$apply(function() {
+          $scope.connected = false;
+        });
+
     });
   }]);
