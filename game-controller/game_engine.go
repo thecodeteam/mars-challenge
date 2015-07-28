@@ -1,15 +1,20 @@
 package main
 
-import "time"
+import (
+	"log"
+	"sync"
+	"time"
+)
 
-func (game *GameInfo) runEngine() {
+func (game *GameInfo) runEngine(wg *sync.WaitGroup) {
+	wg.Add(len(game.Teams))
 	for i := range game.Teams {
-		go handleTeam(&game.Teams[i])
+		go game.handleTeam(&game.Teams[i], wg)
 	}
 }
 
-func handleTeam(team *Team) {
-	for team.Life > 0 {
+func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
+	for team.Life > 0 && game.Running {
 		time.Sleep(1 * time.Second)
 
 		if team.Energy <= 0 {
@@ -23,4 +28,6 @@ func handleTeam(team *Team) {
 
 		team.Life--
 	}
+	log.Println("Exiting team", team.Name)
+	wg.Done()
 }
