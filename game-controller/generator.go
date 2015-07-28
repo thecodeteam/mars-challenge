@@ -95,6 +95,7 @@ func (s *Reading) updateRadiationTrend() {
 }
 
 func solarFlareRoutine(wg *sync.WaitGroup, game *GameInfo) {
+	ticker := time.NewTicker(1 * time.Second)
 	timer := time.NewTimer(0)
 	for game.Running {
 		select {
@@ -105,6 +106,8 @@ func solarFlareRoutine(wg *sync.WaitGroup, game *GameInfo) {
 			} else {
 				timer.Reset(30 * time.Second)
 			}
+		case <-ticker.C:
+			// Ticker to check exit condition
 		}
 	}
 	wg.Done()
