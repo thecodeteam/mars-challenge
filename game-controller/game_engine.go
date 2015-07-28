@@ -28,6 +28,6 @@ func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
 
 		team.Life--
 	}
-	log.Println("Exiting team", team.Name)
+	log.Println("Exiting goroutine for team", team.Name)
 	wg.Done()
 }
