@@ -110,6 +110,7 @@ func solarFlareRoutine(wg *sync.WaitGroup, game *GameInfo) {
 			// Ticker to check exit condition
 		}
 	}
+	log.Println("Exiting solar flare routing")
 	wg.Done()
 }
 
@@ -125,6 +126,7 @@ func temperatureRoutine(wg *sync.WaitGroup, game *GameInfo) {
 			timerTrend.Reset(time.Duration(rand.Intn(maxTrendSeconds-minTrendSeconds)+minTrendSeconds) * time.Second)
 		}
 	}
+	log.Println("Exiting temperature routing")
 	wg.Done()
 }
 
@@ -140,5 +142,6 @@ func radiationRoutine(wg *sync.WaitGroup, game *GameInfo) {
 			timerTrend.Reset(time.Duration(rand.Intn(maxTrendSeconds-minTrendSeconds)+minTrendSeconds) * time.Second)
 		}
 	}
+	log.Println("Exiting radiation routing")
 	wg.Done()
 }

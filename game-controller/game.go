@@ -60,9 +60,8 @@ func (game *GameInfo) run(adminToken string) {
 		case req := <-game.start:
 			success, message := game.startGame(req.token)
 			if success {
-				wg.Add(3)
 				go game.getReadings(&wg)
-				go game.runEngine()
+				go game.runEngine(&wg)
 			}
 			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
@@ -82,6 +81,12 @@ func (game *GameInfo) run(adminToken string) {
 			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case <-ticker.C:
+			if game.Running && game.isOver() {
+				log.Println("Game is over. Only one team is left.")
+				game.Running = false
+				wg.Wait()
+			}
+
 			m, err := json.Marshal(&game)
 			if err != nil {
 				log.Println("Error parsing to JSON.", err)
@@ -116,14 +121,20 @@ func (game *GameInfo) startGame(token string) (bool, string) {
 		log.Printf("Unauthorized request to start game. Token: %s\n", token)
 		return false, "Unauthorized"
 	}
-	if !game.Running {
-		game.Running = true
-		game.StartedAt = time.Now()
-		log.Println("Game started!")
-		return true, "Game started"
+	if game.Running {
+		log.Println("Game is already started, not doing anything...")
+		return false, "Game is already started, not doing anything"
 	}
-	log.Println("Game is already started, not doing anything...")
-	return false, "Game is already started, not doing anything"
+
+	if len(game.Teams) < 2 {
+		log.Println("At least 2 players are needed to start the game")
+		return false, "At least 2 players are needed to start the game"
+	}
+
+	game.Running = true
+	game.StartedAt = time.Now()
+	log.Println("Game started!")
+	return true, "Game started"
 }
 
 func (game *GameInfo) joinGame(name string) (bool, string) {
@@ -157,6 +168,7 @@ func (game *GameInfo) enableShield(token string, enable bool) (bool, string) {
 }
 
 func (game *GameInfo) getReadings(wg *sync.WaitGroup) {
+	wg.Add(3)
 	go solarFlareRoutine(wg, game)
 	go temperatureRoutine(wg, game)
 	radiationRoutine(wg, game)

@@ -32,3 +32,13 @@ func (game *GameInfo) authorizeTeam(token string) (int, bool) {
 func (game *GameInfo) authorizeAdmin(token string) bool {
 	return game.adminToken == token
 }
+
+func (game *GameInfo) isOver() bool {
+	remainingTeams := 0
+	for _, v := range game.Teams {
+		if v.Life > 0 {
+			remainingTeams++
+		}
+	}
+	return remainingTeams == 1
+}
