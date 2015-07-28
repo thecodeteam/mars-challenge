@@ -155,7 +155,7 @@ The  data analysis tier takes the data from the Data Aggregation tier and determ
 
 
 ### Tier 6 | Monitoring and Control Dashboard Tier
-The  Monitoring dashboard is a service allows the team in Mars to view the sensor data, the analysis information, and shield status. In addition the dashboard needs to send the information to the 
+The  Monitoring dashboard is a service allows the team in Mars to view the sensor data, the analysis information, and shield status. In addition the dashboard needs to send the join/exit challenge  to the Mars Challenge engine websocket.
 
 **Functionality:**
 - Receives sensor data from the Data Aggregation tier.
