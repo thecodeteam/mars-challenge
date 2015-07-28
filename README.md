@@ -112,10 +112,10 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 
 
 ### Tier 3 | Aggregation Tier
-The Aggregation Tier is a service that will take the information provided by the Gateway, aggregate the data, 
+The Aggregation Tier is a service that will take the information provided by the Gateway, aggregates the data from all sensors into an AVG. This is AVG is used by the Data Analysis tier to perform the shields and re-charing logic
 
 **Functionality**
-- Receive per second Data from the Gateway array and calculate the Average temperature and radiation for all the sensors
+- Receives per second Data from the Gateway array and calculate the Average temperature and radiation for all the sensors
 - Stores the data on the Data Store
 - Stores the data into a backup Service
 
@@ -126,14 +126,16 @@ The Aggregation Tier is a service that will take the information provided by the
 
 
 ### Tier 4 | Data Repository Tier
-The  data analysis tier takes the data from the  dashboard is a service allows the team in Mars to view the sensor data, the analysis information, and shield status. This is a bonus tier 
+The  data Repository tier stores the data in the system. This tier can be implemented using any data repository.
 
 **Functionality:**
 - Receives sensor data from the Data Aggregation tier.
-- Displays information for sensor data, data analysis and shield status
-- Display information about the team status on the MARS Challenge engine.
+- Stores the data for further usage
+- Stores the Backup data
+- Stores the log data from all services
 
 **Implementation:**
+- Needs to be a clustered service
 - Needs to be implemented as a service
 - Service needs to be executed in a container
 - Service needs to be deployed as part of the application
@@ -170,9 +172,9 @@ The  Monitoring dashboard is a service allows the team in Mars to view the senso
 ### Tier 7 | Data Backup
 The Data Backup tier takes care of taking the sensor data and back it up on 1 min batches for future analysis. This is a bonus tier 
 
-**Functionality:**Service
-- Receive per second Data from the Data Aggregation tier, a queue or the data repository and performs a 1 minute backup. the Gateway array and calculate the Average temperature and radiation for all the sensors
-- Stores the data into a backup Service
+**Functionality:**
+- Receives per second Data from the Data Aggregation tier, a queue or the data repository and performs a 1 minute backup. the Gateway array and calculate the Average temperature and radiation for all the sensors
+- Stores the data in the Data Repository Tier
 
 **Implementation:**
 - Needs to be implemented as a service
