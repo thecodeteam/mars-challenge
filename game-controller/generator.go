@@ -61,7 +61,7 @@ func (s *Reading) updateTemperature() {
 func (s *Reading) updateTemperatureTrend() {
 	ratio := (s.Temperature - minTemperature) / (maxTemperature - minTemperature)
 	chance := rand.Float64()
-	s.temperatureUptrend = chance > ratio
+	s.temperatureUptrend = chance > ratio || s.SolarFlare
 	log.Printf("[Temperature] Ratio: %.2f, Change: %.2f, Uptrend: %t\n", ratio, chance, s.temperatureUptrend)
 }
 
@@ -90,7 +90,7 @@ func (s *Reading) updateRadiation() {
 func (s *Reading) updateRadiationTrend() {
 	ratio := (float64)(s.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
 	chance := rand.Float64()
-	s.radiationUptrend = chance > ratio
+	s.radiationUptrend = chance > ratio || s.SolarFlare
 	log.Printf("[Radiation] Ratio: %.2f, Change: %.2f, Uptrend: %t\n", ratio, chance, s.radiationUptrend)
 }
 
