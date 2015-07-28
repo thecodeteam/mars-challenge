@@ -94,6 +94,8 @@ The Sensors Array is build using Raspberry Pis. Each member in the team will rec
 - Execute the provided Mars Atmospheric simulator (Web Socket service application written in GO)
 - Example of output: **[http://hackathon-engine.cloudapp.net/](http://hackathon-engine.cloudapp.net/ "http://hackathon-engine.cloudapp.net/")**
 
+Setting up the RaspberryPi with the weather simulator: **[Setting up the RaspBerry Pi](https://github.com/emccode/hackathon-mars/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md)**
+
 
 ### Tier 2 | Sensor Gateway ###
 
