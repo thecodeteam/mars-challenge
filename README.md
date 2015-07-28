@@ -39,8 +39,8 @@ You only have a few hours, 7 of them, to implement a sensor array, build and dep
 	|Tier 2| Sensor Gateway (service)|
 	Tier 3| Aggregation Tier (service)|
 	Tier 4| Repository (DB, ECS, etc....)|
-	Tier 5| Data Analysis / Data Aggregation (Service / Spark / Hadoop)|
-	Tier 6| Display Sensor data,  Aggregate information, and shield status (UI)|
+	Tier 5| Data Analysis (Service / Spark / Hadoop)|
+	Tier 6| Monitoring and Control Dashboard Tier|
 	Tier 7| Backup System|
 
 
@@ -60,9 +60,9 @@ You only have a few hours, 7 of them, to implement a sensor array, build and dep
 - Show historical Data in the Display Tier (Tier 6)
 
 
-**What would you accomplish from participating on this Hackaton?**
+**What would you accomplish from participating on this Hackathon?**
 
-This Hackaton will challenge you to accomplish the following: 
+This Hackathon will challenge you to accomplish the following: 
 
 - Build a modern distributed application (Platform 3) using best practices
 - Deploy a distributed application using Containers 
@@ -111,7 +111,7 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 - Relay the Data to the Aggregation Tier.
 
 
-### Tier 3 | Aggregation Tier ###
+### Tier 3 | Aggregation Tier
 The Aggregation Tier is a service that will take the information provided by the Gateway, aggregate the data, 
 
 **Functionality**
@@ -120,20 +120,64 @@ The Aggregation Tier is a service that will take the information provided by the
 - Stores the data into a backup Service
 
 **Implementation**
+- Needs to be implemented as a service
+- Service needs to be executed in a container
+- Service needs to be deployed as part of the application
 
 
+### Tier 4 | Data Repository Tier
+The  data analysis tier takes the data from the  dashboard is a service allows the team in Mars to view the sensor data, the analysis information, and shield status. This is a bonus tier 
 
-### Tier 4 | Data Repository Tier ###
+**Functionality:**
+- Receives sensor data from the Data Aggregation tier.
+- Displays information for sensor data, data analysis and shield status
+- Display information about the team status on the MARS Challenge engine.
+
+**Implementation:**
+- Needs to be implemented as a service
+- Service needs to be executed in a container
+- Service needs to be deployed as part of the application
 
 
+### Tier 5 | Data Analysis Tier
+The  data analysis tier takes the data from the Data Aggregation tier and determines what actions to take (Shields up/Down). Participant can use any technology they choose. The process can be automated or manual.  
 
-### Tier 5 | Data Analysis / Data Aggregation Tier ###
+**Functionality:**
+- Receives sensor data from the Data Aggregation tier.
+- May Shield Up/Down information to the MARS Challenge engine or delegate that functionality to the Monitoring and Control Dashboard Tier
+
+**Implementation:**
+- Needs to be implemented as a service
+- Service needs to be executed in a container
+- Service needs to be deployed as part of the application
 
 
-### Tier 6 | Display Sensor data, Aggregate information, and shield status (UI) ###
+### Tier 6 | Monitoring and Control Dashboard Tier
+The  Monitoring dashboard is a service allows the team in Mars to view the sensor data, the analysis information, and shield status. In addition the dashboard needs to send the information to the 
+
+**Functionality:**
+- Receives sensor data from the Data Aggregation tier.
+- Displays information for sensor data, data analysis and shield status
+- Display information about the team status on the MARS Challenge engine.
 
 
-### Tier 7 | Data Backup ###
+**Implementation:**
+- Needs to be implemented as a service
+- Service needs to be executed in a container
+- Service needs to be deployed as part of the application
+
+
+### Tier 7 | Data Backup
+The Data Backup tier takes care of taking the sensor data and back it up on 1 min batches for future analysis. This is a bonus tier 
+
+**Functionality:**Service
+- Receive per second Data from the Data Aggregation tier, a queue or the data repository and performs a 1 minute backup. the Gateway array and calculate the Average temperature and radiation for all the sensors
+- Stores the data into a backup Service
+
+**Implementation:**
+- Needs to be implemented as a service
+- Service needs to be executed in a container
+- Service needs to be deployed as part of the application
 
 
 
