@@ -37,7 +37,6 @@ func (s *Reading) updateSolarFlare() {
 }
 
 func (s *Reading) updateTemperature() {
-	//TODO: consider solar Flare
 	var min float64
 	var max float64
 
@@ -66,7 +65,6 @@ func (s *Reading) updateTemperatureTrend() {
 }
 
 func (s *Reading) updateRadiation() {
-	//TODO: consider solar Flare
 	var min int
 	var max int
 
