@@ -40,5 +40,5 @@ func (game *GameInfo) isOver() bool {
 			remainingTeams++
 		}
 	}
-	return remainingTeams == 1
+	return remainingTeams <= 1
 }
