@@ -2,8 +2,15 @@ package main
 
 import (
 	"log"
+	"math"
 	"sync"
 	"time"
+)
+
+const (
+	maxEnergyGain = 5
+	maxEnergyLoss = 5
+	maxLifeLoss   = 5
 )
 
 func (game *GameInfo) runEngine(wg *sync.WaitGroup) {
@@ -14,6 +21,12 @@ func (game *GameInfo) runEngine(wg *sync.WaitGroup) {
 }
 
 func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
+	var temperatureRatio float64
+	var radiationRatio float64
+	var energyGain float64
+	var energyLoss float64
+	var lifeLoss float64
+
 	for team.Life > 0 && game.Running {
 		time.Sleep(1 * time.Second)
 
@@ -22,12 +35,24 @@ func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
 		}
 
 		if team.Shield {
-			team.Energy--
+			radiationRatio = (float64)(game.Reading.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
+			energyLoss = radiationRatio * maxEnergyLoss
+			team.Energy = int64(math.Max(float64(team.Energy)-math.Ceil(energyLoss), 0))
+			log.Printf("Team %s: Energy -%.2f\n", team.Name, energyLoss)
 			continue
 		}
 
-		team.Life--
+		radiationRatio = (float64)(game.Reading.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
+		lifeLoss = radiationRatio * maxLifeLoss
+		team.Life = int64(math.Max(float64(team.Life)-math.Ceil(lifeLoss), 0))
+
+		temperatureRatio = (game.Reading.Temperature - minTemperature) / (maxTemperature - minTemperature)
+		energyGain = temperatureRatio * maxEnergyGain
+		team.Energy = int64(math.Min(float64(team.Energy)+math.Ceil(energyGain), 100))
+
+		log.Printf("Team %s: Life -%.2f, Energy +%.2f\n", team.Name, lifeLoss, energyGain)
 	}
+
 	log.Println("Exiting goroutine for team", team.Name)
 	wg.Done()
 }
