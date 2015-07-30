@@ -6,8 +6,7 @@
 from websocket import create_connection
 ws = create_connection("ws://localhost:8080/ws")
 
-var = 1
-while var == 1 :  # This constructs an infinite loop
+while True :  # This constructs an infinite loop
   result =  ws.recv()
   print "Received '%s'" % result
   
