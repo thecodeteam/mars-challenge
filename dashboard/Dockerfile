@@ -4,9 +4,6 @@ FROM ubuntu
 # Maintainer info
 MAINTAINER Adrian Moreno <adrian.moreno@emc.com>
 
-#  Update the sources list
-RUN apt-get update
-
 # Get the project
 RUN apt-get update &&\
   apt-get install -y git-core nodejs-legacy npm nginx
@@ -22,8 +19,6 @@ RUN cd /opt &&\
 RUN rm /etc/nginx/sites-enabled/default &&\
   ln -s /opt/mars-challenge/dashboard/dashboard_nginx.conf /etc/nginx/sites-enabled/dashboard
 
-RUN service nginx restart
-
 EXPOSE 80
 
-CMD /bin/bash
+CMD CMD ["nginx", "-g", "daemon off;"]
