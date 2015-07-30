@@ -21,4 +21,4 @@ RUN rm /etc/nginx/sites-enabled/default &&\
 
 EXPOSE 80
 
-CMD CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
