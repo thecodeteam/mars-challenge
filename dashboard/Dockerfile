@@ -19,6 +19,9 @@ RUN cd /opt &&\
 RUN rm /etc/nginx/sites-enabled/default &&\
   ln -s /opt/mars-challenge/dashboard/dashboard_nginx.conf /etc/nginx/sites-enabled/dashboard
 
+# Set the default directory where CMD will execute
+WORKDIR /opt/mars-challenge/dashboard
+
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD sh start.sh
