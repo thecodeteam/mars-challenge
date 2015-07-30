@@ -19,8 +19,10 @@ RUN cd /opt &&\
   bower install --allow-root --force-latest --config.interactive=false
 
 # setup all the config files
-RUN rm /etc/nginx/sites-enabled/default
-RUN ln -s /opt/mars-challenge/dashboard/dashboard_nginx.conf /etc/nginx/sites-enabled/dashboard
+RUN rm /etc/nginx/sites-enabled/default &&\
+  ln -s /opt/mars-challenge/dashboard/dashboard_nginx.conf /etc/nginx/sites-enabled/dashboard
+
+RUN service nginx restart
 
 EXPOSE 80
 
