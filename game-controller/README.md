@@ -1,8 +1,29 @@
+# Mars Challenge
+
 ## Game Controller
 
 Execute the controller:
 
     go run *.go
+
+### Contents
+
+- [Dependencies](#dependencies)
+- [Docker container](#docker-container)
+- [Websocket](#websocket)
+- [API](#api)
+
+## Docker container
+
+The Docker image for the Game Controller is located in [Docker hub](https://registry.hub.docker.com/u/emccode/mars-challenge-controller/). To get the image just run `docker pull emccode/mars-challenge-controller`.
+
+You can provide an admin token of your choice to perform some privileged requests. To do so, just set the `ADMIN_TOKEN` environment variable to whatever you want. If no admin token is provided, a random token will be generated and displayed in the logs.
+
+##### Example
+
+In the following case we are going to use "1234" as admin token and listen on the port 80 on our host machine that will bind to the container's exposed port 8080.
+
+    docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 emccode/mars-challenge-controller
 
 
 ## Dependencies
