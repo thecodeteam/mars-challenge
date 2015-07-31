@@ -69,6 +69,23 @@ func serveAPIStop(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func serveAPIReset(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("X-Auth-Token")
+	if len(token) == 0 {
+		http.Error(w, "No auth token present", 400)
+		return
+	}
+
+	req := TokenRequest{GameRequest: GameRequest{Response: make(chan GameResponse)}, token: token}
+	game.reset <- req
+	res := <-req.Response
+	if res.success {
+		w.Write([]byte(res.message))
+	} else {
+		http.Error(w, res.message, 400)
+	}
+}
+
 func serveAPIJoin(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	name := vars["name"]

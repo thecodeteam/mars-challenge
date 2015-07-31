@@ -11,7 +11,7 @@ import (
 const (
 	initialEnergy      = 100
 	initialLife        = 100
-	initialTemperature = 0
+	initialTemperature = -53.5
 	initialRadiation   = 500
 	initialSolarFlare  = false
 )
@@ -26,6 +26,7 @@ type GameInfo struct {
 	adminToken string
 	start      chan TokenRequest
 	stop       chan TokenRequest
+	reset      chan TokenRequest
 	join       chan JoinRequest
 	exit       chan []byte
 	shield     chan ShieldRequest
@@ -44,6 +45,7 @@ var game = GameInfo{
 	Running: false,
 	start:   make(chan TokenRequest),
 	stop:    make(chan TokenRequest),
+	reset:   make(chan TokenRequest),
 	join:    make(chan JoinRequest),
 	shield:  make(chan ShieldRequest),
 	exit:    make(chan []byte),
@@ -78,6 +80,10 @@ func (game *GameInfo) run(adminToken string) {
 			close(req.Response)
 		case req := <-game.shield:
 			success, message := game.enableShield(req.token, req.enable)
+			req.Response <- GameResponse{success: success, message: message}
+			close(req.Response)
+		case req := <-game.reset:
+			success, message := game.resetGame(req.token)
 			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case <-ticker.C:
@@ -135,6 +141,25 @@ func (game *GameInfo) startGame(token string) (bool, string) {
 	game.StartedAt = time.Now()
 	log.Println("Game started!")
 	return true, "Game started"
+}
+
+func (game *GameInfo) resetGame(token string) (bool, string) {
+	if !game.authorizeAdmin(token) {
+		log.Printf("Unauthorized request to reset game. Token: %s\n", token)
+		return false, "Unauthorized"
+	}
+
+	if game.Running {
+		log.Println("Cannot reset game while it is running")
+		return false, "Cannot reset game while it is running"
+	}
+
+	game.Teams = []Team{}
+	game.Reading.Temperature = initialTemperature
+	game.Reading.Radiation = initialRadiation
+	game.Reading.SolarFlare = initialSolarFlare
+	// TODO: Reset startedAt
+	return true, "Game reset successfully"
 }
 
 func (game *GameInfo) joinGame(name string) (bool, string) {

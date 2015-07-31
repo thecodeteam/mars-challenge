@@ -39,6 +39,12 @@ var routes = Routes{
 		serveAPIStop,
 	},
 	Route{
+		"Reset Game",
+		"POST",
+		"/api/reset",
+		serveAPIReset,
+	},
+	Route{
 		"Join Game",
 		"POST",
 		"/api/join/{name}",
