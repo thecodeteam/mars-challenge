@@ -93,12 +93,31 @@ body {
   }
 
   .enabled {
-    background-color: green;
+    background: url(/images/shield-on.png) no-repeat center;
+    background-size: contain;
   }
 
   .disabled {
-    background-color: red;
+    background: url(/images/shield-off.png) no-repeat center;
+    background-size: contain;
   }
+  .dead {
+    background: url(/images/dead.png) no-repeat center;
+    background-size: contain;
+  }
+}
+
+.solar-flare {
+  height: 150px;
+}
+.solar-flare.on {
+  background: url(/images/flare-on.png) no-repeat center;
+  background-size: contain;
+}
+
+.solar-flare.off {
+  background: url(/images/flare-off.png) no-repeat center;
+  background-size: contain;
 }
 
 .dl-horizontal dt {

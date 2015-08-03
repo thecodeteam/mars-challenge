@@ -8,10 +8,30 @@
  * Controller of the dashboardApp
  */
 angular.module('dashboardApp')
-  .controller('MainCtrl', ['$scope', '$websocket', function ($scope, $websocket) {
+  .controller('MainCtrl', ['$scope', '$websocket', '$interval', function ($scope, $websocket, $interval) {
+    var timer, interval, updateTimer, secondsToHHMMSS;
+    $scope.clock = "00:00:00";
+    timer = 0;
+
+    secondsToHHMMSS = function(value) {
+      var seconds = parseInt(value % 60);
+      var minutes = parseInt((value / 60) % 60);
+      var hours = parseInt((value / (60 * 60)) % 24);
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+      return hours + ":" + minutes + ":" + seconds;
+    };
+
+    updateTimer = function() {
+        timer += 1;
+        $scope.clock = secondsToHHMMSS(timer);
+    };
+
     $scope.teams = [];
     $scope.connected = false;
     $scope.running = false;
+    $scope.solarFlare = false;
 
     $(".temperature").knob({
         'min': -142,
@@ -44,10 +64,22 @@ angular.module('dashboardApp')
     });
 
     ws.$on('$message', function (data) {
-        console.log('Data received:', data);
+        //console.log('Data received:', data);
 
-        $scope.running = data.running;
-        $scope.solarFlare = data.readings.solarFlare;
+        if ($scope.running !== data.running) {
+          if (data.running) {
+            timer = 0;
+            interval = $interval(updateTimer, 1000);
+          }
+          else {
+            $interval.cancel(interval);
+          }
+        }
+
+        $scope.$apply(function() {
+          $scope.running = data.running;
+          $scope.solarFlare = data.readings.solarFlare;
+        });
 
         $('.temperature')
           .val(data.readings.temperature)
@@ -57,9 +89,12 @@ angular.module('dashboardApp')
           .val(data.readings.radiation)
           .trigger('change');
 
-        $scope.$apply(function() {
-          $scope.teams = data.teams;
-        });
+        if ( angular.toJson($scope.teams) !==  angular.toJson(data.teams) ) {
+          $scope.$apply(function() {
+            $scope.teams = data.teams;
+          });
+        }
+
     });
 
     ws.$on('$close', function () {
