@@ -16,7 +16,7 @@ RUN cd /opt &&\
   cd /opt/mars-challenge/dashboard/ &&\
   npm install &&\
   bower install --allow-root --force-latest --config.interactive=false &&\
-  grunt --force &&\
+  grunt build --force &&\
   cp -r dist /app
 
 # setup all the config files
