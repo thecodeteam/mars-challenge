@@ -8,19 +8,20 @@ MAINTAINER Adrian Moreno <adrian.moreno@emc.com>
 RUN apt-get update &&\
   apt-get install -y git-core nodejs-legacy npm nginx
 
-RUN npm install bower -g
+RUN npm install bower grunt-cli -g &&\
+  npm install grunt
 
 RUN cd /opt &&\
   git clone https://github.com/emccode/mars-challenge &&\
   cd /opt/mars-challenge/dashboard/ &&\
-  bower install --allow-root --force-latest --config.interactive=false
+  npm install &&\
+  bower install --allow-root --force-latest --config.interactive=false &&\
+  grunt --force &&\
+  cp -r dist /app
 
 # setup all the config files
 RUN rm /etc/nginx/sites-enabled/default &&\
   ln -s /opt/mars-challenge/dashboard/dashboard_nginx.conf /etc/nginx/sites-enabled/dashboard
-
-# Set the default directory where CMD will execute
-WORKDIR /opt/mars-challenge/dashboard
 
 EXPOSE 80
 
