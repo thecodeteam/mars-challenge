@@ -38,6 +38,31 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	go c.writePump()
 }
 
+func serveAPIConfig(w http.ResponseWriter, r *http.Request) {
+
+	config := struct {
+		MaxTemperature float64 `json:"maxTemperature"`
+		MinTemperature float64 `json:"minTemperature"`
+		MaxRadiation   float64 `json:"maxRadiation"`
+		MinRadiation   float64 `json:"minRadiation"`
+		AutoReadings   bool    `json:"autoReadings"`
+	}{
+		maxTemperature,
+		minTemperature,
+		maxRadiation,
+		minRadiation,
+		game.autoReadings,
+	}
+
+	m, err := json.Marshal(&config)
+	if err != nil {
+		http.Error(w, "Error parsing JSON", 400)
+		return
+	}
+
+	w.Write([]byte(m))
+}
+
 func serveAPIReadings(w http.ResponseWriter, r *http.Request) {
 	token := r.Header.Get("X-Auth-Token")
 	if len(token) == 0 {

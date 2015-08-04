@@ -14,6 +14,10 @@ const (
 	initialTemperature = -53.5
 	initialRadiation   = 500
 	initialSolarFlare  = false
+	maxTemperature     = 35.00
+	minTemperature     = -142.00
+	maxRadiation       = 1000
+	minRadiation       = 0
 )
 
 // GameInfo contains information about the state of the game

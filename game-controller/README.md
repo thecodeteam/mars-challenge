@@ -23,7 +23,7 @@ The Docker image for the Game Controller is located in [Docker hub](https://regi
 
 You can provide an admin token of your choice to perform some privileged requests. To do so, just set the `ADMIN_TOKEN` environment variable to whatever you want. If no admin token is provided, a random token will be generated and displayed in the logs.
 
-If you want to provide external readings to the game controller you need to set the `AUTO_READINGS` environment variable to `false`. If it is not set it will default to `true`.
+If you want to provide external readings to the game controller you need to set the `AUTO_READINGS` environment variable to `false`. If it is not set it will default to `true`. Read the API specification to learn more about how to provide external readings.
 
 ##### Example
 
@@ -92,7 +92,7 @@ Game ended with a winner team:
 
 Endpoint to provide readings from an external source. **Requires administrator rights**. Only enabled if the `AUTO_READINGS` environment variable is `false` when launching the program.
 
-##### Body
+##### Request Body
 
 The `Sensor` data structure is provided as a JSON-formatted text.
 
@@ -125,6 +125,33 @@ If one of the provided readings is out of bounds:
     Content-Length: 53
 
     Temperature not within valid range [-142.00, 35.00]
+
+
+#### GET /api/config
+
+Endpoint to obtain the game configuration.
+
+##### Response Body
+
+JSON-formatted text containing the following keys:
+
+- `minTemperature`: Float value containing the minimum temperature.
+- `maxTemperature`: Float value containing the maximum temperature.
+- `minRadiation`: Integer value containing the minimum radiation.
+- `maxRadiation`: Integer value containing the minimum radiation.
+- `autoReadings`: Boolean value indicating whether the game auto-generates sensor readings or not.
+
+##### Example
+
+    $ curl -i -X GET http://localhost:8080/api/config
+    HTTP/1.1 200 OK
+    Date: Tue, 04 Aug 2015 11:35:55 GMT
+    Content-Length: 100
+    Content-Type: text/plain; charset=utf-8
+
+    {"maxTemperature":35,"minTemperature":-142,"maxRadiation":1000,"minRadiation":0,"autoReadings":true}
+
+
 
 #### POST /api/start
 

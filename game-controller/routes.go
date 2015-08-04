@@ -74,4 +74,10 @@ var routes = Routes{
 		"/api/readings",
 		serveAPIReadings,
 	},
+	Route{
+		"Get Game Config",
+		"GET",
+		"/api/config",
+		serveAPIConfig,
+	},
 }

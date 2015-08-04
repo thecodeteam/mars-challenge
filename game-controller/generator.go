@@ -8,10 +8,6 @@ import (
 )
 
 const (
-	maxTemperature       = 35.00
-	minTemperature       = -142.00
-	maxRadiation         = 1000
-	minRadiation         = 0
 	variationTemperature = 5.00
 	variationRadiation   = 20
 	maxTrendSeconds      = 20
