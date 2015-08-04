@@ -51,6 +51,12 @@ var routes = Routes{
 		serveAPIJoin,
 	},
 	Route{
+		"Kick Team",
+		"POST",
+		"/api/kick/{name}",
+		serveAPIKick,
+	},
+	Route{
 		"Enable Shield",
 		"POST",
 		"/api/shield/enable",

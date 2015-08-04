@@ -28,6 +28,7 @@ type GameInfo struct {
 	stop       chan TokenRequest
 	reset      chan TokenRequest
 	join       chan JoinRequest
+	kick       chan KickRequest
 	exit       chan []byte
 	shield     chan ShieldRequest
 }
@@ -47,6 +48,7 @@ var game = GameInfo{
 	stop:    make(chan TokenRequest),
 	reset:   make(chan TokenRequest),
 	join:    make(chan JoinRequest),
+	kick:    make(chan KickRequest),
 	shield:  make(chan ShieldRequest),
 	exit:    make(chan []byte),
 	Reading: Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
@@ -76,6 +78,10 @@ func (game *GameInfo) run(adminToken string) {
 			close(req.Response)
 		case req := <-game.join:
 			success, message := game.joinGame(req.name)
+			req.Response <- GameResponse{success: success, message: message}
+			close(req.Response)
+		case req := <-game.kick:
+			success, message := game.kickTeam(req.token, req.name)
 			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case req := <-game.shield:
@@ -177,6 +183,27 @@ func (game *GameInfo) joinGame(name string) (bool, string) {
 	game.Teams = append(game.Teams, team)
 	log.Printf("Team '%s' joined the game", name)
 	return true, team.token
+}
+
+func (game *GameInfo) kickTeam(token, name string) (bool, string) {
+	var message string
+
+	if !game.authorizeAdmin(token) {
+		log.Printf("Unauthorized request to kick team. Token: %s\n", token)
+		return false, "Unauthorized"
+	}
+
+	i, ok := game.getTeamIndex(name)
+	if !ok {
+		message = fmt.Sprintf("Team '%s' does not exist", name)
+		log.Println(message)
+		return false, message
+	}
+
+	game.Teams = append(game.Teams[:i], game.Teams[i+1:]...)
+	message = fmt.Sprintf("Team '%s' left the game", name)
+	log.Println(message)
+	return true, message
 }
 
 func (game *GameInfo) enableShield(token string, enable bool) (bool, string) {

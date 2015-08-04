@@ -170,6 +170,32 @@ If the team name already exists:
 
     Team 'foobar' already exists.
 
+
+
+#### POST /api/kick/{team_name}
+
+Kicks a team from the game. **Requires administrator rights.**
+
+##### Example
+
+    $ curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/kick/foobar
+    HTTP/1.1 200 OK
+    Date: Tue, 04 Aug 2015 08:55:26 GMT
+    Content-Length: 27
+    Content-Type: text/plain; charset=utf-8
+
+    Team 'foobar' left the game
+
+If the team name does not exist:
+
+    $ curl -i -X POST http://localhost:8080/api/kick/foobar2
+    HTTP/1.1 400 Bad Request
+    Content-Type: text/plain; charset=utf-8
+    Date: Fri, 31 Jul 2015 09:55:39 GMT
+    Content-Length: 30
+
+    Team 'foobar2' does not exist
+
 #### POST /api/shield/{enable|disable}
 
 Enables or disables the shield. **Requires a team token**.

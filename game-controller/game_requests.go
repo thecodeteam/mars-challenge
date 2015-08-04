@@ -23,6 +23,12 @@ type JoinRequest struct {
 	name string
 }
 
+// KickRequest is used when a team wants to leave the game
+type KickRequest struct {
+	TokenRequest
+	name string
+}
+
 //ShieldRequest is used to enable/disable shield
 type ShieldRequest struct {
 	TokenRequest

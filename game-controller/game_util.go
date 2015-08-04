@@ -20,6 +20,15 @@ func (game *GameInfo) teamExists(name string) bool {
 	return false
 }
 
+func (game *GameInfo) getTeamIndex(name string) (int, bool) {
+	for i, v := range game.Teams {
+		if v.Name == name {
+			return i, true
+		}
+	}
+	return -1, false
+}
+
 func (game *GameInfo) authorizeTeam(token string) (int, bool) {
 	for i, v := range game.Teams {
 		if v.token == token {
