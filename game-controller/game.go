@@ -25,6 +25,7 @@ type GameInfo struct {
 	// Running defines whether the game is running or not
 	Running      bool      `json:"running"`
 	StartedAt    time.Time `json:"startedAt"`
+	Timestamp    time.Time `json:"timestamp"`
 	Reading      Reading   `json:"readings"`
 	Teams        []Team    `json:"teams"`
 	adminToken   string
@@ -110,6 +111,8 @@ func (game *GameInfo) run(adminToken string) {
 				game.Running = false
 				wg.Wait()
 			}
+
+			game.Timestamp = time.Now()
 
 			m, err := json.Marshal(&game)
 			if err != nil {
