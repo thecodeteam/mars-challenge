@@ -34,7 +34,7 @@ In the following case we are going to use "1234" as admin token and listen on th
 
 An example modifying the **AUTO_READINGS**: 
 
-    docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 AUTO_READINGS=true  emccode/mars-challenge-controller
+    docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 -e AUTO_READINGS=false  emccode/mars-challenge-controller
 
 
 ## Dependencies
