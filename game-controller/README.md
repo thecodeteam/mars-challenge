@@ -14,6 +14,7 @@ Run the controller to accept external sensor readings and with a custom administ
 
 - [Dependencies](#dependencies)
 - [Docker container](#docker-container)
+- [Game logic](#game-logic)
 - [Websocket](#websocket)
 - [API](#api)
 
@@ -39,6 +40,26 @@ The game controller has the following dependencies:
   - mux: `go get github.com/gorilla/mux`
   - websockets: `go get github.com/gorilla/websockets`
 
+## Game logic
+
+Temperature and radiation levels affect team's energy and life respectively. Every second the game engine checks the levels and applies the following algorithm to determine how energy and life are affected.
+
+    radiationRatio = (currentRadiation - minRadiation) / (maxRadiation - minRadiation)
+    temperatureRatio = (currentTemperature - minTemperature) / (maxTemperature - minTemperature)
+
+    if shield is ON:
+      energyLoss = radiationRatio * 5
+      team.energy = team.energy - ceil(energyLoss)
+    else:
+      lifeLoss = radiationRatio * 5
+      team.life = team.life - ceil(lifeLoss)
+
+      energyGain = temperatureRatio * 5
+      team.energy = team.energy + ceil(energyGain)
+
+`temperatureRatio` and `radiationRatio` will range from 0 to 1 depending on the relative value of the current level, e.g., if we want to calculate the energy gain for a temperature of -53.5, `temperatureRatio` will be 0.5 because it is exactly between the minimum (-142) and the maximum (35). Therefore, the `energyGain` will be 0.5 * 5 = 2.5, rounded up to 3.
+
+
 ## Websocket
 
 The websocket endpoint is located in `/ws`. It sends the following JSON structure every second.
@@ -47,6 +68,7 @@ The websocket endpoint is located in `/ws`. It sends the following JSON structur
 |---|---|
 | `running` | Whether the game is running or not. Values are either `true` or `false` |
 | `startedAt` | Date and time when the game was started. |
+| `timestamp` | Current server date and time. |
 | `readings` | `Sensor` data structure |
 | `teams` | List of `Team` data structure |
 
@@ -71,20 +93,20 @@ The websocket endpoint is located in `/ws`. It sends the following JSON structur
 
 Stopped game with no teams:
 
-    {"running":false,"startedAt":"0001-01-01T00:00:00Z","readings":{"solarFlare":false,"temperature":-53.5,"radiation":500},"teams":[]}
+    {"running":false,"startedAt":"0001-01-01T00:00:00Z", "timestamp": "2015-08-04T15:09:20.923151468+02:00","readings":{"solarFlare":false,"temperature":-53.5,"radiation":500},"teams":[]}
 
 Stopped game with two teams ready to play:
 
-    {"running":false,"startedAt":"0001-01-01T00:00:00Z","readings":{"solarFlare":false,"temperature":-53.5,"radiation":500},"teams":[{"name":"bar","energy":100,"life":100,"shield":false},{"name":"foo","energy":100,"life":100,"shield":true}]}
+    {"running":false,"startedAt":"0001-01-01T00:00:00Z","timestamp": "2015-08-04T15:09:20.923151468+02:00","readings":{"solarFlare":false,"temperature":-53.5,"radiation":500},"teams":[{"name":"bar","energy":100,"life":100,"shield":false},{"name":"foo","energy":100,"life":100,"shield":true}]}
 
 Game in progress with two teams playing:
 
-    {"running":true,"startedAt":"2015-07-31T12:21:49.511228099+02:00","readings":{"solarFlare":false,"temperature":-3.43,"radiation":785},"teams":[{"name":"bar","energy":45,"life":11,"shield":false},{"name":"foo","energy":7,"life":57,"shield":true}]}
+    {"running":true,"startedAt":"2015-07-31T12:21:49.511228099+02:00","timestamp": "2015-07-31T12:21:56.215288591+02:00","readings":{"solarFlare":false,"temperature":-3.43,"radiation":785},"teams":[{"name":"bar","energy":45,"life":11,"shield":false},{"name":"foo","energy":7,"life":57,"shield":true}]}
 
 
 Game ended with a winner team:
 
-    {"running":false,"startedAt":"2015-07-31T12:21:49.511228099+02:00","readings":{"solarFlare":false,"temperature":-53.5,"radiation":500},"teams":[{"name":"bar","energy":0,"life":8,"shield":false},{"name":"foo","energy":4,"life":0,"shield":false}]}
+    {"running":false,"startedAt":"2015-07-31T12:21:49.511228099+02:00","timestamp": "2015-07-31T12:21:56.215288591+02:00","readings":{"solarFlare":false,"temperature":-53.5,"radiation":500},"teams":[{"name":"bar","energy":0,"life":8,"shield":false},{"name":"foo","energy":4,"life":0,"shield":false}]}
 
 ## API
 
