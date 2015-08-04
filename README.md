@@ -49,7 +49,6 @@ You only have a few hours, 7 of them, to implement a sensor array, build and dep
 ![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/marshackathon-Participant-diagram.jpg)
 
 
-
 **You get Extra Points for using the following items in your team's implementation:**
 
 - EMC ECS as a data repository.
@@ -70,8 +69,8 @@ This Hackathon will challenge you to accomplish the following:
 - Develop an application on the Internet of Things (IoT) space.
 
 
-
-
+[
+**Click here to review the Mars challenge Instructions**](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-instructions.md "Mars Hackathon Instructions")
  
 
 
