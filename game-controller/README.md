@@ -174,7 +174,7 @@ If the team name already exists:
 
 Enables or disables the shield. **Requires a team token**.
 
-##### Example
+##### Example Shield Enabled
 
     $ curl -i -H 'X-Auth-Token: 1335aa6af5d0289f' -X POST http://localhost:8080/api/shield/enable
     HTTP/1.1 200 OK
@@ -193,3 +193,24 @@ If the token is not valid or not set:
     Content-Length: 24
 
     Could not enable shield
+
+##### Example Shield Disabled
+
+    $ curl -i -H 'X-Auth-Token: 1335aa6af5d0289f' -X POST http://localhost:8080/api/shield/disable
+
+    HTTP/1.1 200 OK
+    Date: Fri, 31 Jul 2015 10:38:20 GMT
+    Content-Length: 27
+    Content-Type: text/plain; charset=utf-8
+
+    Shield successfully disabled
+
+If the token is not valid or not set:
+
+    $ curl -i -H 'X-Auth-Token: 1111' -X POST http://localhost:8080/api/shield/disable
+    HTTP/1.1 400 Bad Request
+    Content-Type: text/plain; charset=utf-8
+    Date: Fri, 31 Jul 2015 10:44:38 GMT
+    Content-Length: 24
+
+    Could not disable shield
