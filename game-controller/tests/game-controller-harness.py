@@ -166,7 +166,7 @@ else:
     print ('Team \'' + team3_name + '\' joining game Failed!')
     print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
 
-time.sleep(2)
+time.sleep(10)
 print("\nStarting the Game...")
 # Starting the Game Server
 server_start(server_url)
