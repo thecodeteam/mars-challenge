@@ -11,6 +11,16 @@ func randToken() string {
 	return fmt.Sprintf("%x", b)
 }
 
+func (reading *Reading) validate() (bool, string) {
+	if reading.Temperature < minTemperature || reading.Temperature > maxTemperature {
+		return false, fmt.Sprintf("Temperature not within valid range [%.2f, %.2f]", minTemperature, maxTemperature)
+	}
+	if reading.Radiation < minRadiation || reading.Radiation > maxRadiation {
+		return false, fmt.Sprintf("Radiation not within valid range [%.2f, %.2f]", minRadiation, maxRadiation)
+	}
+	return true, ""
+}
+
 func (game *GameInfo) teamExists(name string) bool {
 	for _, v := range game.Teams {
 		if v.Name == name {

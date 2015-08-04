@@ -68,4 +68,10 @@ var routes = Routes{
 		"/api/shield/disable",
 		serveAPIDisableShield,
 	},
+	Route{
+		"Input readings",
+		"POST",
+		"/api/readings",
+		serveAPIReadings,
+	},
 }

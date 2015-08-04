@@ -34,3 +34,9 @@ type ShieldRequest struct {
 	TokenRequest
 	enable bool
 }
+
+// ReadingsRequest is used to provide readings from an external source
+type ReadingsRequest struct {
+	TokenRequest
+	readings Reading
+}

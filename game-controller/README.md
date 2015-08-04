@@ -2,9 +2,13 @@
 
 ## Game Controller
 
-Execute the controller:
+Run the controller:
 
     go run *.go
+
+Run the controller to accept external sensor readings and with a custom administrator token:
+
+    ADMIN_TOKEN=1234 AUTO_READINGS=false go run *.go
 
 ### Contents
 
@@ -18,6 +22,8 @@ Execute the controller:
 The Docker image for the Game Controller is located in [Docker hub](https://registry.hub.docker.com/u/emccode/mars-challenge-controller/). To get the image just run `docker pull emccode/mars-challenge-controller`.
 
 You can provide an admin token of your choice to perform some privileged requests. To do so, just set the `ADMIN_TOKEN` environment variable to whatever you want. If no admin token is provided, a random token will be generated and displayed in the logs.
+
+If you want to provide external readings to the game controller you need to set the `AUTO_READINGS` environment variable to `false`. If it is not set it will default to `true`.
 
 ##### Example
 
@@ -81,6 +87,44 @@ Game ended with a winner team:
     {"running":false,"startedAt":"2015-07-31T12:21:49.511228099+02:00","readings":{"solarFlare":false,"temperature":-53.5,"radiation":500},"teams":[{"name":"bar","energy":0,"life":8,"shield":false},{"name":"foo","energy":4,"life":0,"shield":false}]}
 
 ## API
+
+#### POST /api/readings
+
+Endpoint to provide readings from an external source. **Requires administrator rights**. Only enabled if the `AUTO_READINGS` environment variable is `false` when launching the program.
+
+##### Body
+
+The `Sensor` data structure is provided as a JSON-formatted text.
+
+##### Example
+
+    $ curl -i -H 'X-Auth-Token: 1234' -X POST -d '{"solarFlare":true,"temperature":-100,"radiation":384}' http://localhost:8080/api/readings
+    HTTP/1.1 200 OK
+    Date: Tue, 04 Aug 2015 10:34:07 GMT
+    Content-Length: 16
+    Content-Type: text/plain; charset=utf-8
+
+    Readings updated
+
+If the game does not accept external readings (i.e. `AUTO_READINGS` is `false`):
+
+    $ curl -i -H 'X-Auth-Token: 1234' -X POST -d '{"solarFlare":false,"temperature":12,"radiation":93}' http://localhost:8080/api/readings
+    HTTP/1.1 400 Bad Request
+    Content-Type: text/plain; charset=utf-8
+    Date: Tue, 04 Aug 2015 10:33:40 GMT
+    Content-Length: 75
+
+    Game running with auto generated readings, not accepting external readings
+
+If one of the provided readings is out of bounds:
+
+    $ curl -i -H 'X-Auth-Token: 1234' -X POST -d '{"solarFlare":true,"temperature":-150,"radiation":54}' http://localhost:8080/api/readings
+    HTTP/1.1 400 Bad Request
+    Content-Type: text/plain; charset=utf-8
+    Date: Tue, 04 Aug 2015 10:23:08 GMT
+    Content-Length: 53
+
+    Temperature not within valid range [-142.00, 35.00]
 
 #### POST /api/start
 

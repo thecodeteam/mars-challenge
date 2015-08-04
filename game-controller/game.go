@@ -19,18 +19,20 @@ const (
 // GameInfo contains information about the state of the game
 type GameInfo struct {
 	// Running defines whether the game is running or not
-	Running    bool      `json:"running"`
-	StartedAt  time.Time `json:"startedAt"`
-	Reading    Reading   `json:"readings"`
-	Teams      []Team    `json:"teams"`
-	adminToken string
-	start      chan TokenRequest
-	stop       chan TokenRequest
-	reset      chan TokenRequest
-	join       chan JoinRequest
-	kick       chan KickRequest
-	exit       chan []byte
-	shield     chan ShieldRequest
+	Running      bool      `json:"running"`
+	StartedAt    time.Time `json:"startedAt"`
+	Reading      Reading   `json:"readings"`
+	Teams        []Team    `json:"teams"`
+	adminToken   string
+	autoReadings bool
+	start        chan TokenRequest
+	stop         chan TokenRequest
+	reset        chan TokenRequest
+	join         chan JoinRequest
+	kick         chan KickRequest
+	readings     chan ReadingsRequest
+	exit         chan []byte
+	shield       chan ShieldRequest
 }
 
 // Team contains information about a team
@@ -43,16 +45,18 @@ type Team struct {
 }
 
 var game = GameInfo{
-	Running: false,
-	start:   make(chan TokenRequest),
-	stop:    make(chan TokenRequest),
-	reset:   make(chan TokenRequest),
-	join:    make(chan JoinRequest),
-	kick:    make(chan KickRequest),
-	shield:  make(chan ShieldRequest),
-	exit:    make(chan []byte),
-	Reading: Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
-	Teams:   []Team{},
+	Running:      false,
+	autoReadings: false,
+	start:        make(chan TokenRequest),
+	stop:         make(chan TokenRequest),
+	reset:        make(chan TokenRequest),
+	join:         make(chan JoinRequest),
+	kick:         make(chan KickRequest),
+	shield:       make(chan ShieldRequest),
+	readings:     make(chan ReadingsRequest),
+	exit:         make(chan []byte),
+	Reading:      Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
+	Teams:        []Team{},
 }
 
 func (game *GameInfo) run(adminToken string) {
@@ -63,7 +67,7 @@ func (game *GameInfo) run(adminToken string) {
 		select {
 		case req := <-game.start:
 			success, message := game.startGame(req.token)
-			if success {
+			if success && game.autoReadings {
 				go game.getReadings(&wg)
 				go game.runEngine(&wg)
 			}
@@ -71,7 +75,7 @@ func (game *GameInfo) run(adminToken string) {
 			close(req.Response)
 		case req := <-game.stop:
 			success, message := game.stopGame(req.token)
-			if success {
+			if success && game.autoReadings {
 				wg.Wait()
 			}
 			req.Response <- GameResponse{success: success, message: message}
@@ -90,6 +94,10 @@ func (game *GameInfo) run(adminToken string) {
 			close(req.Response)
 		case req := <-game.reset:
 			success, message := game.resetGame(req.token)
+			req.Response <- GameResponse{success: success, message: message}
+			close(req.Response)
+		case req := <-game.readings:
+			success, message := game.updateReadings(req.readings, req.token)
 			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case <-ticker.C:
@@ -217,6 +225,24 @@ func (game *GameInfo) enableShield(token string, enable bool) (bool, string) {
 	message := fmt.Sprintf("Team '%s' set shield to %t", game.Teams[i].Name, game.Teams[i].Shield)
 	log.Println(message)
 	return true, message
+}
+
+func (game *GameInfo) updateReadings(readings Reading, token string) (bool, string) {
+	if !game.authorizeAdmin(token) {
+		log.Printf("Unauthorized request to kick team. Token: %s\n", token)
+		return false, "Unauthorized"
+	}
+
+	if game.autoReadings {
+		return false, "Game running with auto generated readings, not accepting external readings"
+	}
+
+	if ok, message := readings.validate(); !ok {
+		return false, message
+	}
+
+	game.Reading = readings
+	return true, "Readings updated"
 }
 
 func (game *GameInfo) getReadings(wg *sync.WaitGroup) {

@@ -1,7 +1,10 @@
 package main
 
 import (
+	"bytes"
+	"encoding/json"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -33,6 +36,33 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	c := &connection{send: make(chan []byte, 256), ws: ws}
 	h.register <- c
 	go c.writePump()
+}
+
+func serveAPIReadings(w http.ResponseWriter, r *http.Request) {
+	token := r.Header.Get("X-Auth-Token")
+	if len(token) == 0 {
+		http.Error(w, "No auth token present", 400)
+		return
+	}
+
+	defer r.Body.Close()
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "Error processing the body", 400)
+		return
+	}
+	dec := json.NewDecoder(bytes.NewReader(body))
+	var reading Reading
+	dec.Decode(&reading)
+
+	req := ReadingsRequest{TokenRequest: TokenRequest{GameRequest: GameRequest{Response: make(chan GameResponse)}, token: token}, readings: reading}
+	game.readings <- req
+	res := <-req.Response
+	if res.success {
+		w.Write([]byte(res.message))
+	} else {
+		http.Error(w, res.message, 400)
+	}
 }
 
 func serveAPIStart(w http.ResponseWriter, r *http.Request) {
