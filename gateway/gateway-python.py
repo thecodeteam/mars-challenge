@@ -20,6 +20,7 @@ logging.config.dictConfig(settings.GATEWAY_LOGGING)
 logger = logging.getLogger("root")
 
 
+
 # Global Variables
 sensor_endpoint = os.environ['SENSOR_ENDPOINT']
 controller_endpoint = os.environ['GC_ENDPOINT']
