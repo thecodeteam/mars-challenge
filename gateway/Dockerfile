@@ -8,7 +8,7 @@ MAINTAINER Patrick Butler Monterde <Patrick.butlermonterde@emc.com>
 RUN apt-get update &&\
   apt-get install -y git-core python python-pip python-dev
 
-RUN pip install websocket
+RUN pip install websocket-client
 
 RUN cd /opt &&\
   git clone https://github.com/emccode/mars-challenge &&\
