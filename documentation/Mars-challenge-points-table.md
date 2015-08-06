@@ -50,9 +50,9 @@ For each one of the tasks completed your team will get points. These Points will
 
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
-|BC-1|Developer's Setup|Tier 2| Deploy an environment that includes Tiers 1,2,3,4, and 5 so your team can develop the algorithm to survive the event|10|
-|BC-2|Limited Resources|Tier 2| Deploy an environment that includes Tiers 1,2,3,4, and 5 so your team can develop the algorithm to survive the event|10|
-
+|BC-1|Developer's Setup|BC| Deploy an environment that includes Tiers 1,2,3,4, and 5 so your team can develop the algorithm to survive the event|10|
+|BC-2|Limited Resources|BC| The team commits to only drink water for the entire challenge. It is Mars after all!|10|
+|BC-3|The Diplomat|BC| The commits to only drink water for the entire challenge. It is Mars after all!|10|
 
 
 
