@@ -16,3 +16,9 @@
 
 	Set SENSOR_ENDPOINT=localhost:80
 	set GC_ENDPOINT=localhost:81
+	
+	
+	Use as base docker pull python:2.7
+	
+	create a requirements.txt
+	https://registry.hub.docker.com/u/library/python/ 
