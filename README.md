@@ -34,14 +34,13 @@ You only have a few hours, 7 of them, to implement a sensor array, build and dep
 - Build the System using the following Tiers/Services (this will be explain in more details):
 
 	|Tier|Description|
-	|----|-----------|
+	|------|-----------|
 	|Tier 1| Sensors (Raspberry)|
-	|Tier 2| Sensor Gateway (service)|
-	Tier 3| Aggregation Tier (service)|
-	Tier 4| Repository (DB, ECS, etc....)|
-	Tier 5| Data Analysis (Service / Spark / Hadoop)|
-	Tier 6| Monitoring and Control Dashboard Tier|
-	Tier 7| Backup System|
+	|Tier 2| Sensor Gateway and Aggregation (service)|
+	|Tier 3| Repository (DB, ECS, etc....)|
+	|Tier 4| Data Analysis (Service / Spark / Hadoop)|
+	|Tier 5| Monitoring and Control Dashboard Tier|
+	|Tier 6| Backup System|
 
 
 **High Level Architecture:**
