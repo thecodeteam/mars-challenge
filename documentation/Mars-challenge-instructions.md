@@ -1,23 +1,28 @@
 # Mars Challenge Instructions 
 
 
+### Contents
+
+- [Introduction](#Introduction)
+- [Goals](#Goals)
+- [Systems Tiers](#Systems-Tiers)
+	- [Tier 1 | Sensors Array](#ier-1-|-Sensors-Array)
+	- [Tier 2 | Sensor Gateway and Aggregation](#Tier 2 | Sensor Gateway and Aggregation)
+	- [Tier 3 | Data Repository Tier](#Tier 3 | Data Repository Tier)
+	- [Tier 4 | Data Analysis Tier](#Tier 4 | Data Analysis Tier)
+	- [Tier 5 | Team Client and Control Dashboard Tier](#Tier 5 | Team Client and Control Dashboard Tier)
+	- [Tier 6 | Data Backup](#Tier 6 | Data Backup)
+- [Points Table](#Points-Table)
 
 
-
-
-
-
-
-
-
-
-
-
-## Mars Challenge Application Tiers Explanation
+## Introduction 
 
 The following diagram shows all the tiers: 
 
 ![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/Mars-challenge-high-level-architecture.png )
+
+
+## Systems Tiers
 
 ### Tier 1 | Sensors Array ###
 
@@ -82,8 +87,8 @@ The  data analysis tier takes the data from the Data Aggregation tier and determ
 - Service needs to be deployed as part of the application.
 
 
-### Tier 5 | Monitoring and Control Dashboard Tier
-The  Monitoring dashboard is a service allows the team in Mars to view the sensor data, the analysis information, and shield status. In addition the dashboard needs to send the join/exit challenge  to the Mars Challenge engine websocket.
+### Tier 5 | Team Client and Control Dashboard Tier
+The  Team Client and Control dashboard is the core of the teams HQ operations. This service allows the team in Mars to view their sensor data, the analysis information, and shield status. In addition the dashboard needs to send the join/exit challenge  to the Mars Challenge engine websocket.
 
 **Functionality:**
 - Receives sensor data from the Data Aggregation tier.
@@ -110,3 +115,13 @@ The Data Backup tier takes care of taking the sensor data and back it up on 1 mi
 - Service needs to be deployed as part of the application.
 
 
+## Points Table 
+
+The Points table shows the points received for each one of the tasks that your team completes. Points are distributed per:
+
+- Application Tier
+- Deployment and Management 
+- Completing the scenarios
+- Bonus Points
+
+**Detailed Points Table is located [here](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") **

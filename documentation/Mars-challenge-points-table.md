@@ -1,5 +1,4 @@
 
-
 ## Points Distribution Table ##
 
 For each one of the tasks completed your team will get points. These Points will be added at the end of the Challenge. The team that has the most amount of points will win the challenge: 
@@ -35,6 +34,14 @@ For each one of the tasks completed your team will get points. These Points will
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
 |T4-1|Developer's Setup|Tier 2| Build a container with the Gateway Software and Deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
+
+
+**Tier 5 | Monitoring and Control Dashboard Tier:**
+
+|####|Name|Tier|Description|Points|
+|----|----|----|-----------|------|
+|T5-1|The Monitor| Build a container with the Gateway Software and Deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
+
 
 
 
