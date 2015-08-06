@@ -1,3 +1,5 @@
+ 
+ 
  Start the Sensor-Client container
 
  	docker run -d --name=sensor -p 80:8080  emccode/mars-challenge-client
@@ -13,9 +15,9 @@
  Start the Gateway
 
 	docker run -d --name=gateway  -e SENSOR_ENDPOINT=localhost:80 -e GC_ENDPOINT=localhost:81  pbutlerm/mars-challenge-gateway
-
-	Set SENSOR_ENDPOINT=localhost:80
+Set SENSOR_ENDPOINT=localhost:80
 	set GC_ENDPOINT=localhost:81
+	
 	
 	
 	Use as base docker pull python:2.7

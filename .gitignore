@@ -49,4 +49,4 @@ npm-debug.log
 /scripts/bower/bower-*
 *.~vsd
 *.pyc
-gateway/gateway.log
+gateway/python/gateway.log

@@ -4,19 +4,17 @@
 # if you encounter errors with a Six import:
 # you can try: pip remove six; pip install six
 import time
+import logging
+import logging.config
+import os
 
 import websocket
 import requests
-import json
-import logging
-import logging.config
-import settings
-import errno
-import os
-from socket import error as socket_error
+
+import gateway.python.settings
 
 # Logging Initialization
-logging.config.dictConfig(settings.GATEWAY_LOGGING)
+logging.config.dictConfig(gateway.python.settings.GATEWAY_LOGGING)
 logger = logging.getLogger("root")
 
 
