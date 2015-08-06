@@ -6,12 +6,14 @@
 import time
 
 from websocket import create_connection
+import websocket
 import requests
 import json
 import logging
 import logging.config
 import settings
 import errno
+import os
 from socket import error as socket_error
 
 # Logging Initialization
@@ -20,12 +22,17 @@ logger = logging.getLogger("root")
 
 
 # Global Variables
-controller_url = 'http://localhost:8080/api/readings'
+sensor_endpoint = os.environ['SENSOR_ENDPOINT']
+controller_endpoint = os.environ['GC_ENDPOINT']
+
+controller_url = 'http://' + controller_endpoint + '/api/readings'  #'http://localhost:8080/api/readings'
 admin_password = '1234'
 auth_header = {'X-Auth-Token': admin_password}
-sensor_socket = "ws://localhost:8085/ws"
+sensor_socket = 'ws://' + sensor_endpoint +'/ws'  # "ws://localhost:8085/ws"
 sensor_data = ''
 
+logger.info("Sensor EndPoint: {0}.".format(controller_url))
+logger.info("Game Controller EndPoint: {0}.".format(sensor_socket))
 
 #Check that the Sensor is ready to serve weather data
 while True:
@@ -33,8 +40,8 @@ while True:
         logger.info("Trying to connect to Sensor Socket: {0:s}".format(sensor_socket))
         ws = create_connection(sensor_socket)
         break
-    except socket_error as serror:
-        logger.info("Error (Sensor Socket): {}".format(str(serror.strerror)))
+    except websocket.WebSocketException as serror:
+        logger.info("Error (Sensor Socket): {}".format(str(serror.message)))
         time.sleep(5)
         continue
 
