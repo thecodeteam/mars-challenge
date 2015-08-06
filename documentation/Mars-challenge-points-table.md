@@ -12,7 +12,7 @@ For each one of the tasks completed your team will get points. These Points will
 |2 |My Sensors' Containers|Tier 1| Build a container with the Sensor Software and Deploy it on DockerHub.com. Use this containers for the rest of the challenge|5|
 
 
-**TIER 2 | The Gateway/Aggregator:**
+**TIER 2 | The Gateway/Aggregation:**
 
 |#|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
@@ -23,6 +23,8 @@ For each one of the tasks completed your team will get points. These Points will
 
 
 **TIER 1-2-3:**
+
+
 |#|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
 |7|Developer's Setup|Tier 2| Build a container with the Gateway Software and Deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
