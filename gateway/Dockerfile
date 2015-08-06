@@ -6,7 +6,9 @@ MAINTAINER Patrick Butler Monterde <Patrick.butlermonterde@emc.com>
 
 # Get the project
 RUN apt-get update &&\
-  apt-get install -y git-core
+  apt-get install -y git-core python python-pip python-dev
+
+RUN pip install websocket
 
 RUN cd /opt &&\
   git clone https://github.com/emccode/mars-challenge &&\
