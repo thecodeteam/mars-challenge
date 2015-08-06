@@ -46,14 +46,12 @@ For each one of the tasks completed your team will get points. These Points will
 |7|Developer's Setup|Tier 2| Build a container with the Gateway Software and Deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
 
 
-**BONUS Challenge**
+**BONUS Challenge:**
 
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
 |BC-1|Developer's Setup|BC| Deploy an environment that includes Tiers 1,2,3,4, and 5 so your team can develop the algorithm to survive the event|10|
 |BC-2|Limited Resources|BC| The team commits to only drink water for the entire challenge. It is Mars after all!|10|
-|BC-3|The Diplomat|BC| The commits to only drink water for the entire challenge. It is Mars after all!|10|
+|BC-3|The FOOs|BC| The commits to share all the information about what you are doing. Open Source works even in Space!|10|
+|BC-4|Evil Genius|BC| The team commits to not sharing any information with anybody. You and your team are Evil Geniuses!|10|
 
-
-
-Sensory Overload
