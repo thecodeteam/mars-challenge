@@ -5,7 +5,6 @@
 # you can try: pip remove six; pip install six
 import time
 
-from websocket import create_connection
 import websocket
 import requests
 import json
@@ -38,7 +37,7 @@ logger.info("Game Controller EndPoint: {0}.".format(sensor_socket))
 while True:
     try:
         logger.info("Trying to connect to Sensor Socket: {0:s}".format(sensor_socket))
-        ws = create_connection(sensor_socket)
+        ws = websocket.create_connection(sensor_socket)
         break
     except websocket.WebSocketException as serror:
         logger.info("Error (Sensor Socket): {}".format(str(serror.message)))
