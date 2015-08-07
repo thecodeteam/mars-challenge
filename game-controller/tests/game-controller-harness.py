@@ -9,7 +9,7 @@ import random
 
 
 #Replace this variables as appropriate
-server_url = 'http://192.168.59.103:81/api'
+server_url = 'http://192.168.59.103:8080/api'
 admin_header = {'X-Auth-Token': '1234'}
 
 
