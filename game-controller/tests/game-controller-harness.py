@@ -1,10 +1,15 @@
 #!/usr/bin/env python
+# Test Harness to test the Game Controller Functionality
+#
+
 
 import requests  # https://github.com/kennethreitz/requests/
 import time
 import random
 
-server_url = 'http://192.168.59.103:8080/api'
+
+#Replace this variables as appropriate
+server_url = 'http://192.168.59.103:81/api'
 admin_header = {'X-Auth-Token': '1234'}
 
 
@@ -39,8 +44,8 @@ def server_stop(server_url):
     """Stop game
        curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/stop
     """
-    url = server_url + '/stop'
-    stop_game = requests.post(url, headers=admin_header)
+    game_stop_url = server_url + '/stop'
+    stop_game = requests.post(game_stop_url, headers=admin_header)
     if stop_game.status_code == 200:
         print('Server: Game has been Stopped!')
     else:
@@ -49,19 +54,47 @@ def server_stop(server_url):
 
 
 def server_check_game_started(server_url):
-    """Start game
-       curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/start
     """
-    url = server_url + '/start'
-    start_game = requests.post(url, headers=admin_header)
+    Start game
+    curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/start
+    """
+    gstart_url = '{0}/start'.format(server_url)
+    start_game = requests.post(gstart_url, headers=admin_header)
     if start_game.status_code == 400:
         return True
     else:
         return False
 
-# Shield Calls ------------------------------------------------
 
-#Shield Manipulation
+def server_kick_team(server_url, team_name):
+    """
+    Kicks a team from the registration list. Before the game is started.
+    Example Curl: curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/kick/foobar
+    :param server_url: The Server URL
+    :param team_name: The Team's name
+    """
+    kick_url = server_url + '/kick/' + team_name
+    team_kicked = requests.post(kick_url, headers=admin_header)
+    if team_kicked.status_code == 200:
+        print('Server: The team: {0} has been Kicked out!'.format(team_name))
+    else:
+        print ('Server: Team Kick failed for Team: {0}'.format(team_name))
+        print ("HTTP Code: {0} | Response: {1}".format(str(team_kicked.status_code), team_kicked.text))
+
+
+def server_config(server_url):
+    """
+    Retries the Server's configuration parameters
+    curl -i -X GET http://localhost:8080/api/config
+    :param server_url:
+    :return: Nothing
+    """
+    kick_url = '{0}/config'.format(server_url)
+    srv_config = requests.get(kick_url)
+    print ("HTTP Code: {0} | Response: {1}".format(str(srv_config.status_code), srv_config.text))
+
+
+# Shield Calls ------------------------------------------------
 def team_shield_up(team_name, team_auth):
     """
     Sets the team shield up
@@ -77,7 +110,7 @@ def team_shield_up(team_name, team_auth):
         print ('Server: Team: ' + team_name + ' Shield UP! request Failed!')
         print ("HTTP Code: " + str(shield_up.status_code) + " | Response: " + shield_up.text)
 
-#Starting Shield Manipulation
+
 def team_shield_down(team_name, team_auth):
     """
     Sets the team shield Down
@@ -92,7 +125,7 @@ def team_shield_down(team_name, team_auth):
         print ('Server: Team: ' + team_name + ' Shield DOWN! request Failed!')
         print ("HTTP Code: " + str(shield_down.status_code) + " | Response: " + shield_down.text)
 
-
+# Test Harness ------------------------------------------------
 print("Starting the Test Harness")
 print("-------------------------")
 
@@ -109,7 +142,19 @@ else:
 
 time.sleep(2)
 
-print("\nAdding Teams...")
+# Testing Server Configuration Functionality
+# ------------------------------------------------
+
+print("\nChecking the Server Configuration")
+print("------------------------------------")
+server_config(server_url)
+
+# Testing Adding Teams to Game Functionality
+# ------------------------------------------------
+
+print("\nAdding Teams")
+print("--------------")
+
 # Adding team: TheBorg
 team1_name = 'TheBorgs'
 team1_auth = ''
@@ -166,39 +211,57 @@ else:
     print ('Team \'' + team3_name + '\' joining game Failed!')
     print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
 
+
+# Testing Kick Team Functionality
+# ------------------------------------------------
+
+print("\nChecking the Server Kick Functionality")
+print("----------------------------------------")
+print("Kicking {0}  team out...".format(team1_name))
+print("Team {0} has Auth Key: {1}".format(team1_name, str(team1_auth)))
+
+server_kick_team(server_url, team1_name)
+
+print("Adding  {0}  team back in...".format(team1_name))
+
+url = server_url + '/join/' + team1_name
+payload = ''
+# POST with form-encoded data
+response = requests.post(url, data=payload)
+
+team1_auth = response.text
+
+if response.status_code == 200:
+    print ('Team \'' + team1_name + '\' joined the game!')
+    print (team1_name + ' authentication Code: ' + team1_auth)
+else:
+    print ('Team \'' + team1_name + '\' joining game Failed!')
+    print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
+
 time.sleep(10)
-print("\nStarting the Game...")
+
+
+# Starting the the GAME
+# ------------------------------------------------
+
+print("\nStarting the Game")
+print("-------------------")
 # Starting the Game Server
 server_start(server_url)
 
 # Starting the Teams Logic
 while True:
-    team = random.randrange(0,3)
-    action = random.randrange(1,3)
-    team_list =[(team1_name,team1_auth), (team2_name, team2_auth), (team3_name, team3_auth)]
+    team = random.randrange(0, 3)
+    action = random.randrange(1, 3)
+    team_list = [(team1_name, team1_auth), (team2_name, team2_auth), (team3_name, team3_auth)]
     # print("\nGameMove: Team: " + team_list[team][0] + ' Action:' + str(action) + ' Name: ' + team_list[team][0] +'|'+ team_list[team][1])
     if action > 1:
         print("\nGameMove: Team: " + team_list[team][0] + ' Action: Shield UP! | Team Key: ' + team_list[team][1])
-        team_shield_up(team_list[team][0],(team_list[team][1]))
+        team_shield_up(team_list[team][0], (team_list[team][1]))
     else:
-         print("\nGameMove: Team: " + team_list[team][0] + ' Action: Shield Down! | Team Key: ' + team_list[team][1])
-         team_shield_down(team_list[team][0],(team_list[team][1]))
+        print("\nGameMove: Team: " + team_list[team][0] + ' Action: Shield Down! | Team Key: ' + team_list[team][1])
+        team_shield_down(team_list[team][0], (team_list[team][1]))
     time.sleep(2)
     if server_check_game_started(server_url) == False:
         print('\nServer: Game is Over...')
         break
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
