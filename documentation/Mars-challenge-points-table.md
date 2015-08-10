@@ -3,10 +3,10 @@
 
 For each one of the tasks completed your team will get points. These Points will be added at the end of the Challenge. The team that has the most amount of points will win the challenge: 
 
-- [Challenge Competition](#Challenge-Competition)
-- [Points per Tier](#TIER-1-|-Sensors-Array) 
-- [Bonus Points](#BONUS-Challenge)
-- [DevOps Points](#Dev/Ops:) 
+- [Challenge Competition](#challenge-competition)
+- [Points per Tier](#tier-1-|-sensors-array) 
+- [Bonus Points](#bonus-challenge)
+- [DevOps Points](#dev/ops:) 
 
 
 
