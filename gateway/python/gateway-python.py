@@ -11,10 +11,10 @@ import os
 import websocket
 import requests
 
-import gateway.python.settings
+import settings
 
 # Logging Initialization
-logging.config.dictConfig(gateway.python.settings.GATEWAY_LOGGING)
+logging.config.dictConfig(settings.GATEWAY_LOGGING)
 logger = logging.getLogger("root")
 
 
