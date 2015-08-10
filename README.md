@@ -16,7 +16,7 @@ Welcome to the Mars Challenge, you and your team are about to embark into a 7 ho
 
 *You only have a few hours, 7 of them, to implement a sensor array, build and deploy the monitoring application to engage/disengage your shields, then fine tune an algorithm based on your data analysis that decides when to charge your shields and when to engage them for protection. Will you and your team survive?*
 
-You and your team will have at your disposal the necessary tools to survive and win the challenge, however you will need all wits and skills to work together and implement a solution that allows you to survive and compete against other teams to find out who is the last survivor
+You and your team will have at your disposal the necessary tools to survive and win the challenge, however you will need all wits and skills to work together and implement a solution that allows you to survive and compete against other teams to find out who would be the last survivor.
 
 
 **Available hardware and software resources for each team:**
@@ -37,7 +37,9 @@ You and your team will have at your disposal the necessary tools to survive and 
 
 **For more details refer to the:[ Mars Challenge Instructions document](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-instructions.md "Mars challenge Instructions document")**
 
-## License
+## License & Contributions
+
+[Please follow this link for License and Contributions](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-Challenge-licence.md "License and Contributions")
 
  
 
