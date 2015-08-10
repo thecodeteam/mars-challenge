@@ -5,24 +5,71 @@
 
 - [Introduction](#Introduction)
 - [Goals](#Goals)
-- [Systems Tiers](#Systems-Tiers)
-	- [Tier 1 | Sensors Array](#ier-1-|-Sensors-Array)
-	- [Tier 2 | Sensor Gateway and Aggregation](#Tier 2 | Sensor Gateway and Aggregation)
-	- [Tier 3 | Data Repository Tier](#Tier 3 | Data Repository Tier)
-	- [Tier 4 | Data Analysis Tier](#Tier 4 | Data Analysis Tier)
-	- [Tier 5 | Team Client and Control Dashboard Tier](#Tier 5 | Team Client and Control Dashboard Tier)
-	- [Tier 6 | Data Backup](#Tier 6 | Data Backup)
-- [Points Table](#Points-Table)
+- [Requirements](#requirements)
+- [Winning](#winning)
+- [Challenge Phases](#challenge-phases)
+- [System Tiers](#system's-tiers)
+- [Points Table](#points-table)
 
 
 ## Introduction 
 
-The following diagram shows all the tiers: 
-
-![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/Mars-challenge-high-level-architecture.png )
+Welcome to the Mars Challenge, you and your team are about to embark into a 7 hours space adventure that will challenge your **developer, operational, data analysis and infrastructure** skills. The Challenge puts you in the arid lands of Mars: 
 
 
-## Systems Tiers
+*You and your team just landed in Mars. As you prepare your base of operations, massive Sun storms are coming your way. That was the last communication you had from Earth. Now connectivity to earth has been cut, and although the base has enough energy, your protective shields can only be running for a few minutes at the time, without recharging.* 
+
+*Your only chance of survival is to monitor the current temperature and radiation levels in the planet atmosphere to detect sun flares and activate your base shields for protection.*
+
+*You only have a few hours, 7 of them, to implement a sensor array, build and deploy the monitoring application to engage/disengage your shields, then fine tune an algorithm based on your data analysis that decides when to charge your shields and when to engage them for protection. Will you and your team survive?*
+
+You and your team will have at your disposal the necessary tools to survive and win the challenge, however you will need all wits and skills to work together and implement a solution that allows you to survive and compete against other teams to find out who would be the last survivor.
+
+
+## Goals 
+
+This challenge was build by people passionate about technology for people as passionate or more about technology. The goals for the challenge are the following: 
+
+- Network with people that share the same Passions as you do
+- Gather on teams to accomplish something fun and learn something while doing it
+- Build and deploy a modern distributed application application using best practices.
+- Deploy a distributed application using Containers. 
+- Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Messos, and Kubernetes).
+- Develop an application on the Internet of Things (IoT) space.
+
+## Requirements
+
+This Challenge requires the following for their participants:
+
+- Each Participant needs to bring their own computer/laptop
+- Have a good attitude and plan to have serious technical fun
+- Be a Team player 
+- Adhere to the LinuxCon/ContainterCon/MessosCon code of Conduct
+
+## Winning
+
+[Each task you accomplish has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table"). The Team that has the most amount of points by the end of the 7 hours wins the challenge. 
+
+
+# Challenge Phases
+
+The Challenge is designed to be completed in 7 hours. is organized 
+
+
+
+
+
+![Mars Challenge Participants Stage 1](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg)
+
+
+![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
+
+
+
+
+## Mars System's Tiers
+
+Building the Mar's Challenge system is not an easy task. You and your team will find a lot of real word problems that plague our industry. You will have to determine if wh 
 
 ### Tier 1 | Sensors Array ###
 
