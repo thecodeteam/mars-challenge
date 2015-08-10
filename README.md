@@ -35,7 +35,21 @@ You and your team will have at your disposal the necessary tools to survive and 
 - Team solutions need to connect to the Mars Challenge [Game controller](https://github.com/emccode/mars-challenge/tree/master/game-controller "Game Controller") 
 
 
+**What would you accomplish from participating on this Hackathon?**
+
+This Hackathon will challenge you to accomplish the following: 
+
+- Build a modern distributed application (Platform 3) using best practices.
+- Deploy a distributed application using Containers. 
+- Deploy a distributed application using modern deployment technologies (Messos, Kubernetes).
+- Develop an application on the Internet of Things (IoT) space.
+
+
 **For more details refer to the:[ Mars Challenge Instructions document](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-instructions.md "Mars challenge Instructions document")**
+
+
+
+
 
 ## License & Contributions
 
