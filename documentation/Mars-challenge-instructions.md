@@ -17,6 +17,17 @@
 
 ## Introduction 
 
+Welcome to the Mars Challenge, you and your team are about to embark into a 7 hours space adventure that will challenge your **developer, operational, data analysis and infrastructure** skills. The Challenge puts you in arid land of Mars: 
+
+
+*You and your team just landed in Mars. As you prepare your base of operations, massive Sun storms are coming your way. That was the last communication you had from Earth. Now connectivity to earth has been cut, and although the base has enough energy, your protective shields can only be running for a few minutes at the time, without recharging.* 
+
+*Your only chance of survival is to monitor the current temperature and radiation levels in the planet atmosphere to detect sun flares and activate your base shields for protection.*
+
+*You only have a few hours, 7 of them, to implement a sensor array, build and deploy the monitoring application to engage/disengage your shields, then fine tune an algorithm based on your data analysis that decides when to charge your shields and when to engage them for protection. Will you and your team survive?*
+
+
+
 The following diagram shows all the tiers: 
 
 ![High level architecture diagram](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/Mars-challenge-high-level-architecture.png )
@@ -24,7 +35,7 @@ The following diagram shows all the tiers:
 
 ## Systems Tiers
 
-### Tier 1 | Sensors Array ###
+### Tier 1 Sensors Array
 
 The Sensors Array is build using Raspberry Pis. Each member in the team will receive one. Your goal is to configure them to provide you with the atmospheric sensor information. One problem though, the sensor may go down due to radiation, you and your team mayneed to detect the shutdown and send a wake up call.
 
@@ -119,9 +130,9 @@ The Data Backup tier takes care of taking the sensor data and back it up on 1 mi
 
 The Points table shows the points received for each one of the tasks that your team completes. Points are distributed per:
 
-- Application Tier
+- Completing the system and been able to participate
+- Implementing different tiers
 - Deployment and Management 
-- Completing the scenarios
 - Bonus Points
 
-**Detailed Points Table is located [here](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") **
+**[Detailed Points Table is located here](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
