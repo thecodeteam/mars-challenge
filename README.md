@@ -19,6 +19,9 @@ Welcome to the Mars Challenge, you and your team are about to embark into a 7 ho
 You and your team will have at your disposal the necessary tools to survive and win the challenge, however you will need all wits and skills to work together and implement a solution that allows you to survive and compete against other teams to find out who would be the last survivor.
 
 
+![Mars Challenge High Level Architecture](https://github.com/emccode/mars-challenge/blob/master/documentation/images/Mars-challenge-high-level-architecture.JPG)
+
+
 **Available hardware and software resources for each team:**
 - 1 x Raspberry PI per Team Member (take away)
 - 1 x WIFI Dongle per Raspberry (take away)
