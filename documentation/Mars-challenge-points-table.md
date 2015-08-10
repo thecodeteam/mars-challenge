@@ -5,7 +5,7 @@ For each one of the tasks completed your team will get points. These Points will
 
 - [Challenge Competition](#challenge-competition)
 - [Points per Tier](#points-per-tier) 
-- [Bonus Points](#bonus-challenge)
+- [Bonus Points](#bonus-points)
 - [DevOps Points](#devops) 
 
 
@@ -14,7 +14,7 @@ For each one of the tasks completed your team will get points. These Points will
 
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
-|CC-1|Competitor|CC| Compete against other teams in  Official Game| 30| 
+|CC-1|Level Up!|CC|Build and deploy a solution that can compete against other teams in an Official Game| 30| 
 |CC-2|Challenge Champion|CC| Winning the an official competition| 20| 
 
 
