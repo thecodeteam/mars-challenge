@@ -55,7 +55,7 @@ This Hackathon will challenge you to accomplish the following:
 [Please follow this link for License and Contributions](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-Challenge-licence.md "License and Contributions")
 
  
- ## DevOps Tools 
+## DevOps Tools 
  
 |Service| Status|
 |-------|-------|
