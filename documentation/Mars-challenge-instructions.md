@@ -113,15 +113,22 @@ A Demo implementations of a Command and Control (Tier 5) Service, implemented in
 
 ## Testing the Command and Control Center
 
-In order to Test your Team Command and Control center you can run the Mar's Game Controller in testing mode. You will need the following:
+In order to Test your Team Command and Control center you can run the Mar's Game Controller in testing mode. You will need the to run the Game Controller and Game Controller's Dashboard. 
+
+![Testing the Command and Control Center](https://github.com/emccode/mars-challenge/blob/master/documentation/images/Mars-challenge-testing-control-center.JPG)
+
+
+The Game containers are located here: 
 
 |Service Name|Container Location|
 |----|----|
 |Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
+Use the following commands to setup the containers: 
+
  
-Executing the Game Controller Mode for Testing purposes:
+First, start by executing the Game Controller Mode for Testing purposes:
 
     docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 emccode/mars-challenge-controller
 
