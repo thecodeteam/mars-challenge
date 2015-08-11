@@ -34,7 +34,7 @@ This challenge was build by people passionate about technology for people as pas
 
 - Network with people that share the same Passions as you do
 - Gather on teams to accomplish something fun and learn something while doing it
-- Build and deploy a modern distributed application application using best practices.
+- Build and deploy a modern distributed application using best practices.
 - Deploy a distributed application using Containers. 
 - Practice container configuration, execution and debugging. 
 - Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Messos, and Kubernetes).

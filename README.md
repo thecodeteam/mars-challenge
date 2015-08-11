@@ -43,7 +43,7 @@ You and your team will have at your disposal the necessary tools to survive and 
 
 This Hackathon will challenge you to accomplish the following: 
 
-- Build and deploy a modern distributed application application using best practices.
+- Build and deploy a modern distributed application using best practices.
 - Deploy a distributed application using Containers. 
 - Practice container configuration, execution and debugging. 
 - Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Messos, and Kubernetes).
