@@ -8,6 +8,7 @@
 - [Requirements](#requirements)
 - [Winning](#winning)
 - [Challenge Phases](#challenge-phases)
+- [Testing the Team's Command and Control Center](#testing-the-team's-command-and-control-center)
 - [System Tiers](#system's-tiers)
 - [Points Table](#points-table)
 
@@ -34,6 +35,7 @@ This challenge was build by people passionate about technology for people as pas
 - Gather on teams to accomplish something fun and learn something while doing it
 - Build and deploy a modern distributed application application using best practices.
 - Deploy a distributed application using Containers. 
+- Practice container configuration, execution and debugging. 
 - Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Messos, and Kubernetes).
 - Develop an application on the Internet of Things (IoT) space.
 
@@ -48,22 +50,60 @@ This Challenge requires the following for their participants:
 
 ## Winning
 
-[Each task you accomplish has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table"). The Team that has the most amount of points by the end of the 7 hours wins the challenge. 
+The Challenge is designed to be completed in 7 hours. Each team will have to choose which features [(tasks)](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "List of Tasks") wants to implement and deploy as part of their solution. The only condition is to have a working solution that satisfies task [CC-1](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md) (been able to participate in an official Game). 
+
+[Each task your team accomplishes has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table"). The Team that has the most amount of points by the end of the seven hours wins the challenge. 
 
 
-# Challenge Phases
+## Challenge Approach
 
-The Challenge is designed to be completed in 7 hours. is organized 
+For this challenge we are providing most of the services and associated containers. We have divided the challenge in two sections to make things more comprehensive: 
+
+**Section 1:** This section focuses on getting the sensor data from the Sensor services to the Command and Control Tier.  
+
+ ![Mars Challenge Participants Stage 1](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg)
 
 
+|Service Name|Container Location|
+|----|----|
+|Sensor Client Service (Tier 1)| [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")|
+|Gateway and Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")|
+|Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
+|Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
+
+A Demo implementations of a Command and Control (Tier 5) Service, implemented in Python, is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
 
-
-![Mars Challenge Participants Stage 1](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg)
 
 
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
 
+
+## Testing the Team's Command and Control Center
+
+In order to Test your Team Command and Control center you can run the Mar's Game Controller in testing mode. You will need the following:
+
+|Service Name|Container Location|
+|----|----|
+|Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
+|Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
+
+ 
+Executing the Game Controller Mode for Testing purposes:
+
+    docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 emccode/mars-challenge-controller
+
+Then execute the Game Controller Dashboard and map it to the endpoint used by the Game Controller: 
+
+    docker run -d --name dashboard -e WS_ENDPOINT=localhost:80/ws -p 82:80 emccode/mars-challenge-dashboard
+
+Where `-e WS_ENDPOINT=localhost:80/ws` is the location of the Game Controller and  `-p 82:80` is the endpoint of the Game Controller Dashboard.
+
+A Demo of a Command and Control (Tier 5) Center, implemented in Python, is provided and  is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
+
+The Demo implements all the interfaces provides by the Game Controller and implements Shield operations based on sensor data. 
+
+**Note:** Refer to the [Game controller Information page](https://github.com/emccode/mars-challenge/tree/master/game-controller "Game Controller information page") for more details on the Game Controller API and configuration. 
 
 
 

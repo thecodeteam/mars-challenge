@@ -42,11 +42,11 @@ You and your team will have at your disposal the necessary tools to survive and 
 
 This Hackathon will challenge you to accomplish the following: 
 
-- Build a modern distributed application (Platform 3) using best practices.
+- Build and deploy a modern distributed application application using best practices.
 - Deploy a distributed application using Containers. 
-- Deploy a distributed application using modern deployment technologies (Messos, Kubernetes).
+- Practice container configuration, execution and debugging. 
+- Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Messos, and Kubernetes).
 - Develop an application on the Internet of Things (IoT) space.
-
 
 **For more details refer to the:[ Mars Challenge Instructions document](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-instructions.md "Mars challenge Instructions document")**
 
