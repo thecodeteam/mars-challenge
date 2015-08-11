@@ -1,6 +1,6 @@
 # EMC{code} Hackathon
 
-
+[![codecov.io](http://codecov.io/github/emccode/mars-challenge/coverage.svg?branch=master)](http://codecov.io/github/emccode/mars-challenge?branch=master)
 
 ## The Mars Challenge
 
