@@ -186,14 +186,65 @@ Second, execute the Game Controller Dashboard and map it to the endpoint used by
 
     docker run -d --name dashboard -e WS_ENDPOINT=localhost:80/ws -p 82:80 emccode/mars-challenge-dashboard
 
-Where `-e WS_ENDPOINT=localhost:80/ws` is the location of the Game Controller and  `-p 82:80` is the endpoint of the Game Controller Dashboard.
+Where `-e WS_ENDPOINT=localhost:80/ws` is the location of the Game Controller and  `-p 82:80` is the endpoint of the Game Controller Dashboard. You can check the Game Controller Dashboard service running on the specified address . In our example, the address would be: `http://<host ip address>:82`.
+
+The last step is to execute the Command and Control Center code. You can run the code directly or run it as a container. 
 
 A Demo of a Command and Control (Tier 5) Center, implemented in Python, is provided and  is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
 The Demo implements all the interfaces provides by the Game Controller and implements Shield operations based on sensor data. 
 
-**Note:** Refer to the [Game controller Information page](https://github.com/emccode/mars-challenge/tree/master/game-controller "Game Controller information page") for more details on the Game Controller API and configuration. 
+For our example we will run the code directly from command line/terminal: 
 
+1. Get the code from the code repository: `https://github.com/emccode/mars-challenge/`. You can perform a git clone: `git clone https://github.com/emccode/mars-challenge.git`
+2. Navigate to the `/clients/python` folder
+3. Edit the Team-client.py file. On lines 16 and 17, change the Values of the **IP address and ports** to the ones that you used for the Game Controller. These are the variables:
+	- Line 16: `server_url = 'http://192.168.59.103:8080/api'`   # URL of the SERVER API 
+	- Line 17: `server_ws = 'ws://192.168.59.103:8080/ws'`       # URL of the Sensors Websocket 
+4. Save the File
+5. Execute the following command: `sudo python Team-client.py'. The Program will wait until the game starts to register. 
+6. To Start a Game in the Game Controller **Requires administrator rights.**
+		
+	    $ curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/start
+	    HTTP/1.1 200 OK
+	    Date: Fri, 31 Jul 2015 09:30:48 GMT
+	    Content-Length: 12
+	    Content-Type: text/plain; charset=utf-8
+	
+	    Game started
+	
+	It will return a 400 if the game is already running:
+	
+	    $ curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/start
+	    HTTP/1.1 400 Bad Request
+	    Content-Type: text/plain; charset=utf-8
+	    Date: Fri, 31 Jul 2015 10:21:51 GMT
+	    Content-Length: 44
+	
+	    Game is already started, not doing anything
+
+7. To Reset a Game in the Game Controller **Requires administrator rights.**
+
+	    $ curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/reset
+	    HTTP/1.1 200 OK
+	    Date: Fri, 31 Jul 2015 09:51:37 GMT
+	    Content-Length: 23
+	    Content-Type: text/plain; charset=utf-8
+	
+	    Game reset successfully
+	
+	If the game is still running:
+	
+	    $ curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/reset
+	    HTTP/1.1 400 Bad Request
+	    Content-Type: text/plain; charset=utf-8
+	    Date: Fri, 31 Jul 2015 10:19:46 GMT
+	    Content-Length: 38
+	
+	    Cannot reset game while it is running 
+
+
+**Note:** Refer to the [Game controller Information page](https://github.com/emccode/mars-challenge/tree/master/game-controller "Game Controller information page") for more details on the Game Controller API and configuration. 
 
 
 ## System Tiers
