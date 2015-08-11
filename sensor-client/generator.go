@@ -29,7 +29,7 @@ type Reading struct {
 	Radiation          int     `json:"radiation"`
 	temperatureUptrend bool
 	radiationUptrend   bool
-	Stamp
+	Stamp		  JSONTime `json:"stamp"`
 }
 
 func (s *Reading) updateSolarFlare() {
