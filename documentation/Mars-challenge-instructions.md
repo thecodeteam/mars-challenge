@@ -10,6 +10,7 @@
 - [Challenge Phases](#challenge-phases)
 - [Testing the Command and Control Center](#testing-the-command-and-control-center)
 - [System Tiers](#system's-tiers)
+- [System Deployment](#system-deployment)
 - [Points Table](#points-table)
 
 
@@ -66,17 +67,18 @@ For this challenge we are providing most of the services, the codebases, and ass
 You can use the implementation and containers provided or you can choose to build your own. There are [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") associated for each decision that you make. 
 
 
-These are the locations for each one o code that you can use to build your own containers
+These are the locations for each one o code that you can can find information and code for each one of the serices:
 
 |Service Name|Folder Location|
 |----|----|
-|Sensor Client Service (Tier 1)|https://github.com/emccode/mars-challenge/tree/master/sensor-client|
-|Gateway and Aggregator Service (Tier 2)|https://github.com/emccode/mars-challenge/tree/master/gateway|
-|Data Repository (Tier 3)| |
-|Data Analysis  (Tier 4)| |
-|Team Command & Control (Tier 5)|https://github.com/emccode/mars-challenge/tree/master/clients/python|
-|Game Controller|https://github.com/emccode/mars-challenge/tree/master/game-controller|
-|Game Controller Dashboard|https://github.com/emccode/mars-challenge/tree/master/dashboard|
+|Sensor Client Service (Tier 1)|[https://github.com/emccode/mars-challenge/tree/master/sensor-client](https://github.com/emccode/mars-challenge/tree/master/sensor-client)|
+|Gateway and Aggregator Service (Tier 2)|[https://github.com/emccode/mars-challenge/tree/master/gateway](https://github.com/emccode/mars-challenge/tree/master/gateway)|
+|Data Repository (Tier 3)| Refer to the [System Tiers](#system's-tiers) section for more information . |
+|Data Analysis  (Tier 4)| Refer to the [System Tiers](#system's-tiers) for more information.|
+|Team Command & Control (Tier 5)|[https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python)|
+|Game Controller|[https://github.com/emccode/mars-challenge/tree/master/game-controller](https://github.com/emccode/mars-challenge/tree/master/game-controller)|
+|Game Controller Dashboard|[https://github.com/emccode/mars-challenge/tree/master/dashboard](https://github.com/emccode/mars-challenge/tree/master/dashboard)|
+|RaspBerry Pi Sensor Setup|[https://github.com/emccode/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md](https://github.com/emccode/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md)|
 
 
 These are the containers avaliable for all the teams to use: 
@@ -95,6 +97,7 @@ These are the containers avaliable for all the teams to use:
 
  ![Mars Challenge Participants Stage 1](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg)
 
+In order to implement section 1 you will need the following components: 
 
 |Service Name|Container Location|
 |----|----|
@@ -105,10 +108,25 @@ These are the containers avaliable for all the teams to use:
 
 A Demo implementations of a Command and Control (Tier 5) Service, implemented in Python, is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
+Once you have the components in place, you and your team will have to 
+create a deployment and orchestrate how services are deployed 1 by one in a specif order:
+
+1. Sensor Serivce
+2. Game Controller
+3. Game Controller UI
+4. Gateway and Aggregation service
+5. Team Control and Command Center service
+
+You will get points for automating the deployment and orchestration of this section. 
 
 
+
+**Section 2:** This section focusess on getting the rest of services that work with the Team Command and Control center:
 
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
+
+[TODO]
+
 
 
 ## Testing the Command and Control Center
@@ -150,7 +168,7 @@ The Demo implements all the interfaces provides by the Game Controller and imple
 
 Building the Mar's Challenge system is not an easy task. You and your team will find a lot of real word problems that plague our industry. You will have to determine what do you need to get the job done and what do you want to work for maximizing your chances of survival. 
 
-This is a list of all the tiers that a solution  do you want to build and 
+The following is list of all the tiers in the solution with explanations for each of them:
 
 ### Tier 1 | Sensors Array ###
 
@@ -171,6 +189,7 @@ The Sensors Array is build using Raspberry Pis. Each member in the team will rec
 
 Setting up the RaspberryPi with the weather simulator: **[Setting up the RaspBerry Pi](https://github.com/emccode/hackathon-mars/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md)**.
 
+A container Implementation is located here: [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")
 
 ### Tier 2 | Sensor Gateway and Aggregation ###
 
@@ -181,11 +200,15 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 - Detect and Wake up Sensor Arrays that have gone offline (extra).
 
 **Implementation:**
-- Consume the Mars Atmospheric Simulator Web Sockets for each Raspberry Pi. this can be up to 5 devices. 
+- Consume the Mars Atmospheric Simulator Web Sockets for each Raspberry Pi. This can be up to 5 devices. 
 - Detect if one of the sensor feeds has gone down. Then it will send a request to start the service again.
 - Relay the Data to the Aggregation Tier.
 
-Implementation of the Gateway tier are located in this folder: 
+Implementations of the Gateway tier are located in this folder: [https://github.com/emccode/mars-challenge/tree/master/gateway](https://github.com/emccode/mars-challenge/tree/master/gateway)
+
+A container with a working gateway can be found here: [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")
+
+
 
 
 ### Tier 3 | Data Repository Tier
@@ -231,6 +254,8 @@ The  Team Client and Control dashboard is the core of the teams HQ operations. T
 - Service needs to be executed in a container.
 - Service needs to be deployed as part of the application.
 
+**Note:** Refer to the [Testing the Command and Control Center](#testing-the-command-and-control-center) section on this document for more information
+
 
 ### Tier 6 | Data Backup
 The Data Backup tier takes care of taking the sensor data and back it up on 1 min batches for future analysis. This is a bonus tier. 
@@ -243,6 +268,11 @@ The Data Backup tier takes care of taking the sensor data and back it up on 1 mi
 - Needs to be implemented as a service.
 - Service needs to be executed in a container.
 - Service needs to be deployed as part of the application.
+
+
+## Systems Deployment
+
+[TODO]
 
 
 ## Points Table 
