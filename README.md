@@ -23,10 +23,11 @@ You and your team will have at your disposal the necessary tools to survive and 
 
 
 **Available hardware and software resources for each team:**
-- 1 x Raspberry PI per Team Member (take away)
+- 1 x [Raspberry PI 2](http://www.amazon.com/CanaKit-Raspberry-Complete-Original-Preloaded/dp/B008XVAVAW/ref=sr_1_1?s=electronics&ie=UTF8&qid=1439267179&sr=1-1&keywords=raspberry+pi+2) per Team Member (take away)
 - 1 x WIFI Dongle per Raspberry (take away)
 - 5 x VMs in a Cloud Provider
 - 1 x EMC ECS Online Account per Team
+- 1 x REDIS Online Account per Team
 
 
 **Challenge Requirements:**
