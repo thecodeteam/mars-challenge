@@ -25,7 +25,7 @@ You and your team will have at your disposal the necessary tools to survive and 
 - 1 x WIFI Dongle per Raspberry (take away)
 - 5 x VMs in a Cloud Provider
 - 1 x EMC ECS Online Account per Team
-- 1 x REDIS Online Account per Team
+- 1 x [Redis Cloud](https://redislabs.com/pricing?service=redis) Account per Team
 
 
 **Challenge Requirements:**
