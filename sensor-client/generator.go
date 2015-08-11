@@ -3,8 +3,18 @@ package main
 import (
 	"math/rand"
 	"time"
+	"fmt"
 )
+type Marshaler interface {
+    MarshalJSON() ([]byte, error)
+}
+type JSONTime time.Time
 
+func (t JSONTime)MarshalJSON() ([]byte, error) {
+    //do your serializing here
+    stamp := fmt.Sprintf("\"%s\"", time.Now().Format(time.Stamp))
+    return []byte(stamp), nil
+}
 const (
 	variationTemperature = 5.00
 	variationRadiation   = 20
@@ -19,6 +29,7 @@ type Reading struct {
 	Radiation          int     `json:"radiation"`
 	temperatureUptrend bool
 	radiationUptrend   bool
+	Stamp
 }
 
 func (s *Reading) updateSolarFlare() {
