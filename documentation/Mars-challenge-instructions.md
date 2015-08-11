@@ -4,12 +4,12 @@
 ### Contents
 
 - [Introduction](#Introduction)
-- [Goals](#Goals)
+- [Goals](#goals)
 - [Requirements](#requirements)
 - [Winning](#winning)
-- [Challenge Phases](#challenge-phases)
+- [Challenge Approach](#challenge-approach)
 - [Testing the Command and Control Center](#testing-the-command-and-control-center)
-- [System Tiers](#system's-tiers)
+- [System Tiers](#system-tiers)
 - [System Deployment](#system-deployment)
 - [Points Table](#points-table)
 
@@ -164,7 +164,7 @@ The Demo implements all the interfaces provides by the Game Controller and imple
 
 
 
-## Mars System's Tiers
+## System Tiers
 
 Building the Mar's Challenge system is not an easy task. You and your team will find a lot of real word problems that plague our industry. You will have to determine what do you need to get the job done and what do you want to work for maximizing your chances of survival. 
 
