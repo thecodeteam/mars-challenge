@@ -8,7 +8,7 @@
 - [Requirements](#requirements)
 - [Winning](#winning)
 - [Challenge Phases](#challenge-phases)
-- [Testing the Team's Command and Control Center](#testing-the-team's-command-and-control-center)
+- [Testing the Command and Control Center](#testing-the-command-and-control-center)
 - [System Tiers](#system's-tiers)
 - [Points Table](#points-table)
 
@@ -52,12 +52,44 @@ This Challenge requires the following for their participants:
 
 The Challenge is designed to be completed in 7 hours. Each team will have to choose which features [(tasks)](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "List of Tasks") wants to implement and deploy as part of their solution. The only condition is to have a working solution that satisfies task [CC-1](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md) (been able to participate in an official Game). 
 
-[Each task your team accomplishes has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table"). The Team that has the most amount of points by the end of the seven hours wins the challenge. 
+**[Each task your team accomplishes has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
+
+For each task, functionality needs to be successfully demoed to a Judge, then points will be assigned. Point count for each team will be visible for the entire lenght of the contest.
+
+**The team that has the most amount of points by the end of the seven hours wins the challenge.** 
 
 
 ## Challenge Approach
 
-For this challenge we are providing most of the services and associated containers. We have divided the challenge in two sections to make things more comprehensive: 
+For this challenge we are providing most of the services, the codebases, and associated containers for the tiers that make the solution. 
+
+You can use the implementation and containers provided or you can choose to build your own. There are [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") associated for each decision that you make. 
+
+
+These are the locations for each one o code that you can use to build your own containers
+
+|Service Name|Folder Location|
+|----|----|
+|Sensor Client Service (Tier 1)|https://github.com/emccode/mars-challenge/tree/master/sensor-client|
+|Gateway and Aggregator Service (Tier 2)|https://github.com/emccode/mars-challenge/tree/master/gateway|
+|Data Repository (Tier 3)| |
+|Data Analysis  (Tier 4)| |
+|Team Command & Control (Tier 5)|https://github.com/emccode/mars-challenge/tree/master/clients/python|
+|Game Controller|https://github.com/emccode/mars-challenge/tree/master/game-controller|
+|Game Controller Dashboard|https://github.com/emccode/mars-challenge/tree/master/dashboard|
+
+
+These are the containers avaliable for all the teams to use: 
+
+|Service Name|Container Location|
+|----|----|
+|Sensor Client Service (Tier 1)| [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")|
+|Gateway and Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")|
+|Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
+|Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
+
+
+ We have divided the challenge in two sections to make things more comprehensive: 
 
 **Section 1:** This section focuses on getting the sensor data from the Sensor services to the Command and Control Tier.  
 
@@ -79,7 +111,7 @@ A Demo implementations of a Command and Control (Tier 5) Service, implemented in
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
 
 
-## Testing the Team's Command and Control Center
+## Testing the Command and Control Center
 
 In order to Test your Team Command and Control center you can run the Mar's Game Controller in testing mode. You will need the following:
 
@@ -109,11 +141,13 @@ The Demo implements all the interfaces provides by the Game Controller and imple
 
 ## Mars System's Tiers
 
-Building the Mar's Challenge system is not an easy task. You and your team will find a lot of real word problems that plague our industry. You will have to determine if wh 
+Building the Mar's Challenge system is not an easy task. You and your team will find a lot of real word problems that plague our industry. You will have to determine what do you need to get the job done and what do you want to work for maximizing your chances of survival. 
+
+This is a list of all the tiers that a solution  do you want to build and 
 
 ### Tier 1 | Sensors Array ###
 
-The Sensors Array is build using Raspberry Pis. Each member in the team will receive one. Your goal is to configure them to provide you with the atmospheric sensor information. One problem though, the sensor may go down due to radiation, you and your team mayneed to detect the shutdown and send a wake up call.
+The Sensors Array is build using Raspberry Pis. Each member in the team will receive one. Your goal is to configure them to provide you with the atmospheric sensor information. One problem though, the sensor may go down due to radiation, you and your team may need to detect the shutdown and send a wake up call.
 
 **Functionality:**
 - Provides Temperature Information.
@@ -143,6 +177,8 @@ The Sensors gateway collects all the data feeds from each of one of the Sensors.
 - Consume the Mars Atmospheric Simulator Web Sockets for each Raspberry Pi. this can be up to 5 devices. 
 - Detect if one of the sensor feeds has gone down. Then it will send a request to start the service again.
 - Relay the Data to the Aggregation Tier.
+
+Implementation of the Gateway tier are located in this folder: 
 
 
 ### Tier 3 | Data Repository Tier
@@ -211,4 +247,4 @@ The Points table shows the points received for each one of the tasks that your t
 - Completing the scenarios
 - Bonus Points
 
-**Detailed Points Table is located [here](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") **
+**Detailed Points Table is located [here](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
