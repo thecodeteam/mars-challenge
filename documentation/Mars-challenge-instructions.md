@@ -7,7 +7,8 @@
 - [Goals](#goals)
 - [Requirements](#requirements)
 - [Winning](#winning)
-- [Challenge Approach](#challenge-approach)
+- [Challenge Assets](#challenge-assets)
+- [Participant's Implementation](#participant's-implementation)
 - [Testing the Command and Control Center](#testing-the-command-and-control-center)
 - [System Tiers](#system-tiers)
 - [System Deployment](#system-deployment)
@@ -55,33 +56,37 @@ The Challenge is designed to be completed in 7 hours. Each team will have to cho
 
 **[Each task your team accomplishes has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
 
-For each task, functionality needs to be successfully demoed to a Judge, then points will be assigned. Point count for each team will be visible for the entire lenght of the contest.
+For each task, functionality needs to be successfully demoed to a Judge, then points will be assigned. Point count for each team will be visible for the entire length of the contest.
 
 **The team that has the most amount of points by the end of the seven hours wins the challenge.** 
 
 
-## Challenge Approach
+## Challenge Assets
 
 For this challenge we are providing most of the services, the codebases, and associated containers for the tiers that make the solution. 
 
-You can use the implementation and containers provided or you can choose to build your own. There are [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") associated for each decision that you make. 
 
 
-These are the locations for each one o code that you can can find information and code for each one of the serices:
+### Services and Codebases locations
+
+
+These are the locations for each one o code that you can can find information and code for each one of the services:
+
 
 |Service Name|Folder Location|
 |----|----|
-|Sensor Client Service (Tier 1)|[https://github.com/emccode/mars-challenge/tree/master/sensor-client](https://github.com/emccode/mars-challenge/tree/master/sensor-client)|
-|Gateway and Aggregator Service (Tier 2)|[https://github.com/emccode/mars-challenge/tree/master/gateway](https://github.com/emccode/mars-challenge/tree/master/gateway)|
-|Data Repository (Tier 3)| Refer to the [System Tiers](#system's-tiers) section for more information . |
-|Data Analysis  (Tier 4)| Refer to the [System Tiers](#system's-tiers) for more information.|
-|Team Command & Control (Tier 5)|[https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python)|
+|Sensor Client Service|[https://github.com/emccode/mars-challenge/tree/master/sensor-client](https://github.com/emccode/mars-challenge/tree/master/sensor-client)|
+|Gateway and Aggregator Service|[https://github.com/emccode/mars-challenge/tree/master/gateway](https://github.com/emccode/mars-challenge/tree/master/gateway)|
+|Data Repository| Refer to the [System Tiers](#system-tiers) section for more information . |
+|Data Analysis | Refer to the [System Tiers](#system-tiers) for more information.|
+|Team Command & Control|[https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python)|
 |Game Controller|[https://github.com/emccode/mars-challenge/tree/master/game-controller](https://github.com/emccode/mars-challenge/tree/master/game-controller)|
 |Game Controller Dashboard|[https://github.com/emccode/mars-challenge/tree/master/dashboard](https://github.com/emccode/mars-challenge/tree/master/dashboard)|
 |RaspBerry Pi Sensor Setup|[https://github.com/emccode/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md](https://github.com/emccode/mars-challenge/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md)|
 
+### Containers
 
-These are the containers avaliable for all the teams to use: 
+These are the containers available for all the teams to use: 
 
 |Service Name|Container Location|
 |----|----|
@@ -90,10 +95,22 @@ These are the containers avaliable for all the teams to use:
 |Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
+**Note:** You can use the implementation and containers provided or you can choose to build your own. There are [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") associated for each decision that you make. 
 
- We have divided the challenge in two sections to make things more comprehensive: 
+## Participant's Implementation
 
-**Section 1:** This section focuses on getting the sensor data from the Sensor services to the Command and Control Tier.  
+ Participants have an opportunity to implement multiple tier and functionality. These are been organized on the following groups:
+ 
+ 1. Section 1: Getting Data From the Sensors to the Command and Control Service
+ 2. Section 2: Perform Analytics and Data saving operations 
+ 3. Section 3: DevOps and Application Management 
+
+ 
+
+###  Section 1: Getting Data From the Sensors to the Command and Control Service
+
+
+This section focuses on getting the sensor data from the Sensor services to the Command and Control Tier.  
 
  ![Mars Challenge Participants Stage 1](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg)
 
@@ -109,9 +126,9 @@ In order to implement section 1 you will need the following components:
 A Demo implementations of a Command and Control (Tier 5) Service, implemented in Python, is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
 Once you have the components in place, you and your team will have to 
-create a deployment and orchestrate how services are deployed 1 by one in a specif order:
+create a deployment and orchestrate how services are deployed 1 by one in a specify order:
 
-1. Sensor Serivce
+1. Sensor Service
 2. Game Controller
 3. Game Controller UI
 4. Gateway and Aggregation service
@@ -121,11 +138,12 @@ You will get points for automating the deployment and orchestration of this sect
 
 
 
-**Section 2:** This section focusess on getting the rest of services that work with the Team Command and Control center:
+**Section 2:** This section focusses on getting the rest of services that work with the Team Command and Control center:
 
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
 
 [TODO]
+
 
 
 
