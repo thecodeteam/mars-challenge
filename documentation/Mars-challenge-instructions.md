@@ -48,26 +48,14 @@ This Challenge requires the following for their participants:
 
 ## Winning
 
-The Challenge is designed to be completed in 7 hours. Each team will have to choose which features [(tasks)](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "List of Tasks") wants to implement and deploy as part of their solution. The only condition is to have a working solution that satisfies task [CC-1](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md) (been able to participate in an official Game). 
-
-[Each task your team accomplishes has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table"). The Team that has the most amount of points by the end of the seven hours wins the challenge. 
+[Each task you accomplish has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table"). The Team that has the most amount of points by the end of the 7 hours wins the challenge. 
 
 
 # Challenge Phases
 
-There are two main stages in the game:
-
-- Stage 1: 
+The Challenge is designed to be completed in 7 hours. is organized 
 
 
-|Service Name|Container Location|
-|----|----|
-|Sensor Client Service (Tier 1)| [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")|
-|Gateway and Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")|
-|Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
-|Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
-
-A Demo implementations of a Command and Control (Tier 5) Service, implemented in Python, is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
 
 
