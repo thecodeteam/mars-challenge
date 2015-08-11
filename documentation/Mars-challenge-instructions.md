@@ -102,12 +102,9 @@ These are the containers available for all the teams to use:
  Participants have an opportunity to implement multiple tier and functionality. These are been organized on the following groups:
  
  - Section 1: Getting Data From the Sensors to the Command and Control Service
- - Section 2: Perform Analytics and Data saving operations 
+ - Section 2: Perform Analytic and Data saving operations 
  - Section 3: DevOps and Application Management 
 
- The
-
- 
 
 ###  Section 1: Getting Data From the Sensors to the Command and Control Service
 
@@ -127,8 +124,7 @@ In order to implement section 1 you will need the following components:
 
 A Demo implementations of a Command and Control (Tier 5) Service, implemented in Python, is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
-Once you have the components in place, you and your team will have to 
-create a deployment and orchestrate how services are deployed 1 by one in a specify order:
+Once you have the components in place, you and your team will have to create a deployment and orchestrate how services are deployed be by one in a specify order:
 
 1. Sensor Service
 2. Game Controller
@@ -136,23 +132,35 @@ create a deployment and orchestrate how services are deployed 1 by one in a spec
 4. Gateway and Aggregation service
 5. Team Control and Command Center service
 
-You will get points for automating the deployment and orchestration of this section. 
+You will get [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") for automating the deployment and orchestration of this section. 
 
 
 ### Section 2: Perform Analytics and Data saving operations 
 
 
-**Section 2:** This section focusses on getting the rest of services that work with the Team Command and Control center:
+**Section 2:** This section focuses on getting the rest of services that work with the Team Command and Control center:
 
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
 
-[TODO]
+You can test your implementation of the Command & Control (C&C) service using the information in [Testing the Command and Control Center](#testing-the-command-and-control-center) section. Once you have the C&C service ready and on a container, you can start adding the other pieces that you may need. These are some of the options: 
+
+
+
+
+
 
 ### Section 3: DevOps and Application Management 
 
-Even in Mars, you will need to deploy your application, in your infrastructure to get to the functionality you and your team have implemented. 
+Even in Mars, you will need to deploy your application, in your infrastructure to get to the functionality you and your team have implemented. The goal is for you and your team to get experience managing and deploying micro services applications. Some important aspects of managing micro services are:
 
-We are providing VM environment on a Cloud provider for you to do so
+- Service Discovery: Implement Service Discovery between all the containers deployed in the solution.
+- Service Monitoring: Implement Service Monitoring of all containers deployed in the solution.
+- Service Configuration: Implement Service configuration for all the Tiers/containers.
+- Service Orchestration: Implement Service Orchestration for all the Tiers/containers.
+- Automated Service Deployment: Deployment of the implemented system using Docker Tooling, Kubernetes, Messos, Puppet/Ansible/Chef/Saltstack or other Tooling.
+- Logging Router: Deploy, connect and route the logs of the application using a logging router.
+
+**Note:** We are providing VMs on a Cloud provider for you to do deploy your system. You can use any tooling to automate this process. 
 
 
 
