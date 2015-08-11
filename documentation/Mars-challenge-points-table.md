@@ -18,7 +18,6 @@ For each one of the tasks completed your team will get points. These Points will
 |CC-2|Challenge Champion|CC| Winning the an official competition| 20| 
 
 
-
 ## Points Per Tier
 
 ### Tier 1 Sensors Array:
@@ -83,6 +82,7 @@ For each one of the tasks completed your team will get points. These Points will
 |DO-6|Kubernetes Me up!|DO| Deployment of the implemented system using Kubernetes Tooling| 15|
 |DO-7|Messos Me up!|DO| Deployment of the implemented system using Messos Tooling| 15|
 |DO-8|Deploy Me up!|DO| Deployment of the implemented system using Puppet/Ansible/Chef/Saltstack or other Tooling| 10|
+|DO-9|Logging Router|DO|Deploy, connect and route the logs of the application using a logging router|10|
 
 
 ## Bonus Points

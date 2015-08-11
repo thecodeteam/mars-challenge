@@ -1,6 +1,5 @@
 # Mars Challenge Instructions 
 
-
 ### Contents
 
 - [Introduction](#Introduction)
@@ -66,9 +65,7 @@ For each task, functionality needs to be successfully demoed to a Judge, then po
 For this challenge we are providing most of the services, the codebases, and associated containers for the tiers that make the solution. 
 
 
-
 ### Services and Codebases locations
-
 
 These are the locations for each one o code that you can can find information and code for each one of the services:
 
@@ -108,10 +105,9 @@ These are the containers available for all the teams to use:
 
 ###  Section 1: Getting Data From the Sensors to the Command and Control Service
 
-
 This section focuses on getting the sensor data from the Sensor services to the Command and Control Tier.  
 
- ![Mars Challenge Participants Stage 1](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg)
+ ![Mars Challenge Participants Stage 1](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg).
 
 In order to implement section 1 you will need the following components: 
 
@@ -137,7 +133,6 @@ You will get [points](https://github.com/emccode/mars-challenge/blob/master/docu
 
 ### Section 2: Perform Analytics and Data saving operations 
 
-
 **Section 2:** This section focuses on getting the rest of services that work with the Team Command and Control center:
 
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
@@ -145,24 +140,18 @@ You will get [points](https://github.com/emccode/mars-challenge/blob/master/docu
 You can test your implementation of the Command & Control (C&C) service using the information in [Testing the Command and Control Center](#testing-the-command-and-control-center) section. Once you have the C&C service ready and on a container, you can start adding the other pieces that you may need. These are some of the options: 
 
 
-
-
-
-
 ### Section 3: DevOps and Application Management 
 
 Even in Mars, you will need to deploy your application, in your infrastructure to get to the functionality you and your team have implemented. The goal is for you and your team to get experience managing and deploying micro services applications. Some important aspects of managing micro services are:
 
-- Service Discovery: Implement Service Discovery between all the containers deployed in the solution.
-- Service Monitoring: Implement Service Monitoring of all containers deployed in the solution.
-- Service Configuration: Implement Service configuration for all the Tiers/containers.
-- Service Orchestration: Implement Service Orchestration for all the Tiers/containers.
-- Automated Service Deployment: Deployment of the implemented system using Docker Tooling, Kubernetes, Messos, Puppet/Ansible/Chef/Saltstack or other Tooling.
-- Logging Router: Deploy, connect and route the logs of the application using a logging router.
+- **Service Discovery:** Implement Service Discovery between all the containers deployed in the solution.
+- **Service Monitoring:** Implement Service Monitoring of all containers deployed in the solution.
+- **Service Configuration:** Implement Service configuration for all the Tiers/containers.
+- **Service Orchestration:** Implement Service Orchestration for all the Tiers/containers.
+- **Automated Service Deployment:** Deployment of the implemented system using Docker Tooling, Kubernetes, Messos, Puppet/Ansible/Chef/Saltstack or other Tooling.
+- **Logging Router:** Deploy, connect and route the logs of the application using a logging router.
 
 **Note:** We are providing VMs on a Cloud provider for you to do deploy your system. You can use any tooling to automate this process. 
-
-
 
 
 ## Testing the Command and Control Center
@@ -179,14 +168,21 @@ The Game containers are located here:
 |Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
-Use the following commands to setup the containers: 
+The provided containers are Docker containers. You need to have docker installed on the host(s)  that you plan to run these on. you will be start up the containers on the following order: 
 
+1. Game Controller
+2. Game Controller UI
+3. Command and Control Service
+
+Please use the following commands to setup the containers: 
  
-First, start by executing the Game Controller Mode for Testing purposes:
+First, start by executing the Game Controller Container. You can define both the listening port: `-p 80:8080` and the Admin Token: `-e ADMIN_TOKEN=1234` to what you may need:
 
     docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 emccode/mars-challenge-controller
 
-Then execute the Game Controller Dashboard and map it to the endpoint used by the Game Controller: 
+you can check the Game Controller service running by running a browser against the host: `http://<host ip address>:80`.
+
+Second, execute the Game Controller Dashboard and map it to the endpoint used by the Game Controller: 
 
     docker run -d --name dashboard -e WS_ENDPOINT=localhost:80/ws -p 82:80 emccode/mars-challenge-dashboard
 
@@ -304,11 +300,6 @@ The Data Backup tier takes care of taking the sensor data and back it up on 1 mi
 - Needs to be implemented as a service.
 - Service needs to be executed in a container.
 - Service needs to be deployed as part of the application.
-
-
-## Systems Deployment
-
-[TODO]
 
 
 ## Points Table 
