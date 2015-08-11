@@ -1,7 +1,5 @@
 # EMC{code} Hackathon
 
-[![codecov.io](http://codecov.io/github/emccode/mars-challenge/coverage.svg?branch=master)](http://codecov.io/github/emccode/mars-challenge?branch=master)
-
 ## The Mars Challenge
 
 ![Planet Mars](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/mars-11608_640.jpg)
@@ -52,14 +50,17 @@ This Hackathon will challenge you to accomplish the following:
 **For more details refer to the:[ Mars Challenge Instructions document](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-instructions.md "Mars challenge Instructions document")**
 
 
-
-
-
 ## License & Contributions
 
 [Please follow this link for License and Contributions](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-Challenge-licence.md "License and Contributions")
 
  
+ ## DevOps Tools 
+ 
+|Service| Status|
+|-------|-------|
+|CodecovIO|[![codecov.io](http://codecov.io/github/emccode/mars-challenge/coverage.svg?branch=master)](http://codecov.io/github/emccode/mars-challenge?branch=master)|
+
 
 
 
