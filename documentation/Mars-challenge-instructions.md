@@ -8,7 +8,7 @@
 - [Requirements](#requirements)
 - [Winning](#winning)
 - [Challenge Assets](#challenge-assets)
-- [Participant's Implementation](#participant's-implementation)
+- [Participant's Implementation](#participants-implementation)
 - [Testing the Command and Control Center](#testing-the-command-and-control-center)
 - [System Tiers](#system-tiers)
 - [System Deployment](#system-deployment)
@@ -52,7 +52,7 @@ This Challenge requires the following for their participants:
 
 ## Winning
 
-The Challenge is designed to be completed in 7 hours. Each team will have to choose which features [(tasks)](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "List of Tasks") wants to implement and deploy as part of their solution. The only condition is to have a working solution that satisfies task [CC-1](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md) (been able to participate in an official Game). 
+The Challenge is designed to be completed in 7 hours. Each team will have to choose which features [(tasks)](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "List of Tasks") wants to implement and deploy as part of their solution. **The only condition** is to have a working solution that satisfies task **[CC-1](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)** (been able to participate in an official Game). Refer to the [Testing the Command and Control Center](#testing-the-command-and-control-center) section to get this part running.
 
 **[Each task your team accomplishes has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
 
@@ -101,9 +101,11 @@ These are the containers available for all the teams to use:
 
  Participants have an opportunity to implement multiple tier and functionality. These are been organized on the following groups:
  
- 1. Section 1: Getting Data From the Sensors to the Command and Control Service
- 2. Section 2: Perform Analytics and Data saving operations 
- 3. Section 3: DevOps and Application Management 
+ - Section 1: Getting Data From the Sensors to the Command and Control Service
+ - Section 2: Perform Analytics and Data saving operations 
+ - Section 3: DevOps and Application Management 
+
+ The
 
  
 
@@ -137,12 +139,20 @@ create a deployment and orchestrate how services are deployed 1 by one in a spec
 You will get points for automating the deployment and orchestration of this section. 
 
 
+### Section 2: Perform Analytics and Data saving operations 
+
 
 **Section 2:** This section focusses on getting the rest of services that work with the Team Command and Control center:
 
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
 
 [TODO]
+
+### Section 3: DevOps and Application Management 
+
+Even in Mars, you will need to deploy your application, in your infrastructure to get to the functionality you and your team have implemented. 
+
+We are providing VM environment on a Cloud provider for you to do so
 
 
 
