@@ -11,7 +11,7 @@ type Marshaler interface {
 }
 type JSONTime time.Time
 
-func ()MarshalJSON() ([]byte, error) {
+func (t *JSONTime)MarshalJSON() ([]byte, error) {
     //do your serializing here
     stamp := fmt.Sprintf("\"%s\"", time.Now().Unix())
     return []byte(stamp), nil
