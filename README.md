@@ -59,6 +59,9 @@ This Hackathon will challenge you to accomplish the following:
  
 |Service| Status|
 |-------|-------|
+|Game Controller Build|<a href="http://buildserver.emccode.com/viewType.html?buildTypeId=MarsChallenge_GameControllerBuild&guest=1">
+<img src="http://buildserver.emccode.com/app/rest/builds/buildType:(id:MarsChallenge_GameControllerBuild)/statusIcon"/>
+</a>|
 |CodecovIO|[![codecov.io](http://codecov.io/github/emccode/mars-challenge/coverage.svg?branch=master)](http://codecov.io/github/emccode/mars-challenge?branch=master)|
 
 
