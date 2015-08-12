@@ -4,7 +4,6 @@ import (
 	"math/rand"
 	"time"
 	"fmt"
-	"strconv"
 )
 type Marshaler interface {
     MarshalJSON() ([]byte, error)
@@ -13,21 +12,9 @@ type JSONTime time.Time
 
 func (t *JSONTime)MarshalJSON() ([]byte, error) {
     //do your serializing here
-    stamp := fmt.Sprint(time.Now().Unix())
+    stamp := fmt.Sprint(time.Now().UTC().Format("2006-01-02T15:04:05"))
     return []byte(stamp), nil
 }
-
-func (t *JSONTime) UnmarshalJSON(b []byte) error {
-	ts, err := strconv.Atoi(string(b))
-	if err != nil {
-		return err
-	}
-
-	*t = JSONTime(time.Unix(int64(ts), 0))
-
-	return nil
-}
-
 
 const (
 	variationTemperature = 5.00
