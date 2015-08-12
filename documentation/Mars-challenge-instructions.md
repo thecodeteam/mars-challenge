@@ -137,7 +137,17 @@ You will get [points](https://github.com/emccode/mars-challenge/blob/master/docu
 
 ![Mars Challenge Participants Stage 2](https://github.com/emccode/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
 
-You can test your implementation of the Command & Control (C&C) service using the information in [Testing the Command and Control Center](#testing-the-command-and-control-center) section. Once you have the C&C service ready and on a container, you can start adding the other pieces that you may need. These are some of the options: 
+
+The first step would be make sure you have a Command and Control service working. You can test your implementation of the Command & Control (C&C) service using the information in [Testing the Command and Control Center](#testing-the-command-and-control-center) section. 
+
+
+Once you have the C&C service ready and on a container, you can start adding the other pieces that you may need. These are some of the options of the services you can implement: 
+
+- Data Repository Tier
+- Data Analytic Tier 
+- Backup Service
+
+Please Refer to the **[System Tiers](#system-tiers)** section for more details on these. Remember, each one of these tier will get you more [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") and at the same time it will increase the complexity of the deployments.
 
 
 ### Section 3: DevOps and Application Management 
