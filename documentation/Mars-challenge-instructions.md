@@ -16,12 +16,12 @@
 
 ## Introduction 
 
-Welcome to the Mars Challenge, you and your team are about to embark into a 7 hours space adventure that will challenge your **developer, operational, data analysis and infrastructure** skills. The Challenge puts you in the arid lands of Mars: 
+Welcome to the Mars Challenge, you and your team are about to embark into a 7 hour space adventure that will challenge your **developer, operational, data analysis and infrastructure** skills. The Challenge puts you in the arid lands of Mars: 
 
 
 *You and your team just landed in Mars. As you prepare your base of operations, massive Sun storms are coming your way. That was the last communication you had from Earth. Now connectivity to earth has been cut, and although the base has enough energy, your protective shields can only be running for a few minutes at the time, without recharging.* 
 
-*Your only chance of survival is to monitor the current temperature and radiation levels in the planet atmosphere to detect sun flares and activate your base shields for protection.*
+*Your only chance of survival is to monitor the current temperature and radiation levels in the planet atmosphere to detect solar flares and activate your base shields for protection.*
 
 *You only have a few hours, 7 of them, to implement a sensor array, build and deploy the monitoring application to engage/disengage your shields, then fine tune an algorithm based on your data analysis that decides when to charge your shields and when to engage them for protection. Will you and your team survive?*
 
@@ -30,14 +30,14 @@ You and your team will have at your disposal the necessary tools to survive and 
 
 ## Goals 
 
-This challenge was build by people passionate about technology for people as passionate or more about technology. The goals for the challenge are the following: 
+The Mars challenge was build by people passionate about technology for people as passionate or more about technology. The goals for the challenge are the following: 
 
-- Network with people that share the same Passions as you do
+- Network with people that share the same interests as you do
 - Gather on teams to accomplish something fun and learn something while doing it
 - Build and deploy a modern distributed application using best practices.
 - Deploy a distributed application using Containers. 
 - Practice container configuration, execution and debugging. 
-- Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Messos, and Kubernetes).
+- Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Mesos, and Kubernetes).
 - Develop an application on the Internet of Things (IoT) space.
 
 ## Requirements
@@ -47,11 +47,11 @@ This Challenge requires the following for their participants:
 - Each Participant needs to bring their own computer/laptop
 - Have a good attitude and plan to have serious technical fun
 - Be a Team player 
-- Adhere to the LinuxCon/ContainterCon/MessosCon code of Conduct
+- Adhere to the LinuxCon/ContainterCon/MesosCon code of Conduct
 
 ## Winning
 
-The Challenge is designed to be completed in 7 hours. Each team will have to choose which features [(tasks)](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "List of Tasks") wants to implement and deploy as part of their solution. **The only condition** is to have a working solution that satisfies task **[CC-1](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)** (been able to participate in an official Game). Refer to the [Testing the Command and Control Center](#testing-the-command-and-control-center) section to get this part running.
+The Challenge is designed to be completed in 7 hours. Each team will have to choose which features [(tasks)](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "List of Tasks") wants to implement and deploy as part of their solution. **The only condition** is to have a working solution that satisfies task **[CC-1](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md)** (demonstrate participation in an official Game). Refer to the [Testing the Command and Control Center](#testing-the-command-and-control-center) section to get this part running.
 
 **[Each task your team accomplishes has a point value](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**
 
@@ -67,7 +67,7 @@ For this challenge we are providing most of the services, the codebases, and ass
 
 ### Services and Codebases locations
 
-These are the locations for each one o code that you can can find information and code for each one of the services:
+These are the locations for code samples and information for each one of the services:
 
 
 |Service Name|Folder Location|
@@ -92,11 +92,11 @@ These are the containers available for all the teams to use:
 |Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
-**Note:** You can use the implementation and containers provided or you can choose to build your own. There are [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") associated for each decision that you make. 
+**Note:** You can use the code implementations and containers provided or you can choose to build your own. There are [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") associated for each decision that you make. 
 
 ## Participant's Implementation
 
- Participants have an opportunity to implement multiple tier and functionality. These are been organized on the following groups:
+ Participants have an opportunity to build multiple tiers of functionality. These are been organized on the following groups:
  
  - Section 1: Getting Data From the Sensors to the Command and Control Service
  - Section 2: Perform Analytic and Data saving operations 
@@ -120,7 +120,7 @@ In order to implement section 1 you will need the following components:
 
 A Demo implementations of a Command and Control (Tier 5) Service, implemented in Python, is located in the following folder: [https://github.com/emccode/mars-challenge/tree/master/clients/python](https://github.com/emccode/mars-challenge/tree/master/clients/python "Command and Control Demo")
 
-Once you have the components in place, you and your team will have to create a deployment and orchestrate how services are deployed be by one in a specify order:
+Once you have the components in place, you and your team will have to create a deployment and orchestrate how services are deployed in a specific order:
 
 1. Sensor Service
 2. Game Controller
@@ -131,7 +131,7 @@ Once you have the components in place, you and your team will have to create a d
 You will get [points](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") for automating the deployment and orchestration of this section. 
 
 
-### Section 2: Perform Analytics and Data saving operations 
+### Section 2: Perform Analytic and Data Saving Operations 
 
 **Section 2:** This section focuses on getting the rest of services that work with the Team Command and Control center:
 
@@ -152,13 +152,14 @@ Please Refer to the **[System Tiers](#system-tiers)** section for more details o
 
 ### Section 3: DevOps and Application Management 
 
-Even in Mars, you will need to deploy your application, in your infrastructure to get to the functionality you and your team have implemented. The goal is for you and your team to get experience managing and deploying micro services applications. Some important aspects of managing micro services are:
+Even on Mars, you will need to deploy your application, in your infrastructure to get to the functionality you and your team have implemented. The goal is for you and your team to get experience managing and deploying micro services applications. Some important aspects of managing micro services are:
 
 - **Service Discovery:** Implement Service Discovery between all the containers deployed in the solution.
 - **Service Monitoring:** Implement Service Monitoring of all containers deployed in the solution.
 - **Service Configuration:** Implement Service configuration for all the Tiers/containers.
 - **Service Orchestration:** Implement Service Orchestration for all the Tiers/containers.
-- **Automated Service Deployment:** Deployment of the implemented system using Docker Tooling, Kubernetes, Messos, Puppet/Ansible/Chef/Saltstack or other Tooling.
+- **Automated Service Deployment:** Deployment of the implemented system using Docker Tooling, Kubernetes, Me
+- sos, Puppet/Ansible/Chef/Saltstack or other Tooling.
 - **Logging Router:** Deploy, connect and route the logs of the application using a logging router.
 
 **Note:** We are providing VMs on a Cloud provider for you to do deploy your system. You can use any tooling to automate this process. 
@@ -305,7 +306,7 @@ A container with a working gateway can be found here: [https://hub.docker.com/r/
 
 
 ### Tier 3 | Data Repository Tier
-The  data Repository tier stores the data in the system. This tier can be implemented using any data repository.
+The data Repository tier stores the data in the system. This tier can be implemented using any data repository.
 
 **Functionality:**
 - Receives sensor data from the Data Aggregation tier.
@@ -334,7 +335,7 @@ The  data analysis tier takes the data from the Data Aggregation tier and determ
 
 
 ### Tier 5 | Team Client and Control Dashboard Tier
-The  Team Client and Control dashboard is the core of the teams HQ operations. This service allows the team in Mars to view their sensor data, the analysis information, and shield status. In addition the dashboard needs to send the join/exit challenge  to the Mars Challenge engine websocket.
+The  Team Client and Control dashboard is the core of the teams HQ operations. This service allows the team in Mars to view their sensor data, the analysis information, and shield status. In addition the dashboard needs to send the join/exit challenge  to the Mars Challenge engine Websocket.
 
 **Functionality:**
 - Receives sensor data from the Data Aggregation tier.
@@ -351,7 +352,7 @@ The  Team Client and Control dashboard is the core of the teams HQ operations. T
 
 
 ### Tier 6 | Data Backup
-The Data Backup tier takes care of taking the sensor data and back it up on 1 min batches for future analysis. This is a bonus tier. 
+The Data Backup tier involves taking the sensor data and backs it up on one(1) minute batches for future analysis. This is a bonus tier. 
 
 **Functionality:**
 - Receives per second Data from the Data Aggregation tier, a queue or the data repository and performs a 1 minute backup. the Gateway array and calculate the Average temperature and radiation for all the sensors.
@@ -369,7 +370,7 @@ The Points table shows the points received for each one of the tasks that your t
 
 - Application Tier
 - Deployment and Management 
-- Completing the scenarios
+- Completing the challenge
 - Bonus Points
 
 **Detailed Points Table is located [here](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")**

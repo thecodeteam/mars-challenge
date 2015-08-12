@@ -21,7 +21,6 @@ There are multiple ways of installing Go 1.4.2 on the Raspberry PI. These are tw
 
 and
 
-
 [https://xivilization.net/~marek/blog/2015/05/04/go-1-dot-4-2-for-raspberry-pi/](https://xivilization.net/~marek/blog/2015/05/04/go-1-dot-4-2-for-raspberry-pi/)
 
     wget https://xivilization.net/~marek/raspbian/xivilization-raspbian.gpg.key -O - | sudo apt-key add -
@@ -35,14 +34,14 @@ and
 
 Download the Mar's Sensors' service that will provide you with the Temperature and Radiation time series: 
 
-    git clone https://github.com/emccode/hackathon-mars.git
+    git clone https://github.com/emccode/mars-challenge.git
 
 
 ### Check your Go Environment Variables
 
-Check your Go environment variables by executing `go env`. You will probably have to setup the **GOPATH** variable to point to the folder where you cloned the hackaton-mars git repository. Assuming you cloned the repository in the /home/pi folder, you would setup the GOPATH variable like this: 
+Check your Go environment variables by executing `go env`. You will probably have to setup the **GOPATH** variable to point to the folder where you cloned the mars-challenge git repository. Assuming you cloned the repository in the /home/pi folder, you would setup the GOPATH variable like this: 
 
-    export GOPATH=/home/pi/hackathon-mars/
+    export GOPATH=/home/pi/mars-challenge/
 
 
 ### Installing the Required Go Packages
@@ -60,12 +59,12 @@ Install using the following Commands:
 
 ### Executing the Sensors' Service
 
-You are now ready to star the service. Navigate to the src directory in the hackaton-mars folder. For example: **/home/pi/hackathon-mars/src/**. Then execute the following command: 
+You are now ready to star the service. Navigate to the `sensor-client` directory in the mars-challenge folder. For example: **/home/pi/mars-challenge/sensor-client**. Then execute the following command: 
 
-    cd /home/pi/hackathon-mars/src/
+    cd /home/pi/mars-challenge/sensor-client/
 	go run *.go 
 
-This will start the service on port 8080. The service will open a websocket in Port 8080 and also post the weather data on the console.
+This will start the service on port 8080. The service will open a Websocket in Port 8080 and also post the weather data on the console.
 
 
 ### Opening Port 8080 on the Raspberry Pi 
@@ -85,7 +84,7 @@ To verify the Sensors' service from another computer in the same network, you ca
 
     sudo ifconfig 
 
-The command should provide you with the Raspberry IP address. The port has been setup to 8080.So, for example the URL could be: http://10.0.0.4:8080 
+The command should provide you with the Raspberry IP address. The port has been setup to `8080`.So, for example the URL could be: http://10.0.0.4:8080 
 
 
  
