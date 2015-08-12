@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"bytes"
 	
-	"strconv"
+	/*"strconv"*/
 	
 )
 type JSONTime time.Time
@@ -20,7 +20,7 @@ type Message struct {
 	Solarflare	bool   	`json:"solarFlare"`
 	Temperature float64 `json:"temperature"`
 	Radiation   int32	`json:"radiation"`
-	Stamp		time.Time
+	Stamp		time.Time `json:"timestamp"`
 }
 
 
@@ -35,8 +35,8 @@ func readSensorMessages(ws *websocket.Conn, incomingMessages chan string, sensor
 }
 
 func postAvgReading(msg Message,gc string){
-		log.Println("=========================================")
 		admin_password := "1234"
+/*		log.Println("=========================================")
 	    log.Println("game console ulr:",gc)
 		log.Println("Aadmin Pass:",admin_password)
 		log.Println("AVG Solar Flare:",msg.Solarflare)
@@ -44,14 +44,12 @@ func postAvgReading(msg Message,gc string){
 		log.Println("AVG Temperature:",msg.Temperature)
 		log.Println("TimeStamp:",msg.Stamp)
 		
-		log.Println("=========================================")
+*/		log.Println("=========================================")
+		
 		b, err := json.Marshal(msg)
 		fmt.Printf("Marshal Json: %s\n",b)
-		var jsonStr = []byte(`{"solarFlare":`+strconv.FormatBool(msg.Solarflare)+`,"temperature":`+strconv.FormatFloat(msg.Temperature,'f', -1, 64)+`,"radiation":`+string(msg.Radiation)+`}`)
-		//var jsonStr=[]byte(b)
-		
-		fmt.Printf("Marshal Json2: %s\n",jsonStr)
-		
+	
+		var jsonStr=[]byte(b)
 	    req, err := http.NewRequest("POST", gc, bytes.NewBuffer(jsonStr))
     	req.Header.Set("X-Auth-Token", admin_password)
     	req.Header.Set("Content-Type", "application/json")
