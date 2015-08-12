@@ -28,7 +28,7 @@ This is the official score table for the hackathon
 |DO-4|Service Orchestration|DO|5|------|------|-------|------|-------|
 |DO-5|Docker Me up!|DO|15|------|------|-------|------|-------|
 |DO-6|Kubernetes Me up!|DO|15|------|------|-------|------|-------|
-|DO-7|Messos Me up!|DO|15|------|------|-------|------|-------|
+|DO-7|Mesos Me up!|DO|15|------|------|-------|------|-------|
 |DO-8|Deploy Me up!|DO|10|------|------|-------|------|-------|
 |DO-9|Logging Router|DO|10|------|------|-------|------|-------|
 |BC-1|DevOps Power|BC|20|------|------|-------|------|-------|

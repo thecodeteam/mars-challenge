@@ -187,7 +187,7 @@ The provided containers are Docker containers. You need to have docker installed
 
 Please use the following commands to setup the containers: 
  
-First, start by executing the Game Controller Container. You can define both the listening port: `-p 80:8080` and the Admin Token: `-e ADMIN_TOKEN=1234` to what you may need:
+First, start by executing the Game Controller Container. You can define both the listening port: `-p 80:8080` and the Admin Token: **`-e ADMIN_TOKEN=1234`** to what you may need:
 
     docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 emccode/mars-challenge-controller
 
@@ -214,7 +214,7 @@ For our example we will run the code directly from command line/terminal:
 	- Line 17: `server_ws = 'ws://192.168.59.103:8080/ws'`       # URL of the Sensors Websocket 
 4. Save the File
 5. Execute the following command: `sudo python Team-client.py'. The Program will wait until the game starts to register. 
-6. To Start a Game in the Game Controller **Requires administrator rights.**
+6. To Start a Game in the Game Controller. This will require for you to send a curl command to the Game Controller API. I will require administrator rights. Use the authentication token that you defined when you executed the docker Game Controller docker container. In our example: the Admin Token is: **`-e ADMIN_TOKEN=1234`**
 		
 	    $ curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/start
 	    HTTP/1.1 200 OK
@@ -234,7 +234,7 @@ For our example we will run the code directly from command line/terminal:
 	
 	    Game is already started, not doing anything
 
-7. To Reset a Game in the Game Controller **Requires administrator rights.**
+7. To Reset a Game in the Game Controller. This will require for you to send a curl command to the Game Controller API. It requires administrator rights. Use the authentication token that you defined when you executed the docker Game Controller docker container. In our example: the Admin Token is: **`-e ADMIN_TOKEN=1234`**
 
 	    $ curl -i -H 'X-Auth-Token: 1234' -X POST http://localhost:8080/api/reset
 	    HTTP/1.1 200 OK

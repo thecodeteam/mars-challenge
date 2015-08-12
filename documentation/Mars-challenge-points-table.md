@@ -80,7 +80,7 @@ For each one of the tasks completed your team will get points. These Points will
 |DO-4|Service Orchestration|DO| Implement Service Orchestration for all the Tiers/containers| 5|
 |DO-5|Docker Me up!|DO| Deployment of the implemented system using Docker Tooling| 15|
 |DO-6|Kubernetes Me up!|DO| Deployment of the implemented system using Kubernetes Tooling| 15|
-|DO-7|Messos Me up!|DO| Deployment of the implemented system using Messos Tooling| 15|
+|DO-7|Mesos Me up!|DO| Deployment of the implemented system using Mesos Tooling| 15|
 |DO-8|Deploy Me up!|DO| Deployment of the implemented system using Puppet/Ansible/Chef/Saltstack or other Tooling| 10|
 |DO-9|Logging Router|DO|Deploy, connect and route the logs of the application using a logging router|10|
 
@@ -93,3 +93,4 @@ For each one of the tasks completed your team will get points. These Points will
 |BC-2|Limited Resources|BC| The team commits to only drink water for the entire challenge. It is Mars after all!|10|
 |BC-3|The FOSS|BC| The team commits to share all the information about what you are doing. Free and open-source software works even in Space!|10|
 |BC-4|Evil Genius|BC| The team commits to not sharing any information with anybody. You and your team are Evil Geniuses!|10|
+
