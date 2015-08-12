@@ -10,11 +10,24 @@ type Marshaler interface {
 }
 type JSONTime time.Time
 
-func (t JSONTime)MarshalJSON() ([]byte, error) {
+func ()MarshalJSON() ([]byte, error) {
     //do your serializing here
-    stamp := fmt.Sprintf("\"%s\"", time.Now().UTC())
+    stamp := fmt.Sprintf("\"%s\"", time.Now().Unix())
     return []byte(stamp), nil
 }
+
+func (t *Timestamp) UnmarshalJSON(b []byte) error {
+	ts, err := strconv.Atoi(string(b))
+	if err != nil {
+		return err
+	}
+
+	*t = Timestamp(time.Unix(int64(ts), 0))
+
+	return nil
+}
+
+
 const (
 	variationTemperature = 5.00
 	variationRadiation   = 20
