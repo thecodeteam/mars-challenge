@@ -12,7 +12,7 @@ type JSONTime time.Time
 
 func (t *JSONTime)MarshalJSON() ([]byte, error) {
     //do your serializing here
-    stamp := fmt.Sprint(time.Now().UTC().Format("2006-01-02T15:04:05"))
+    stamp := fmt.Sprint(time.Now().Format("2006-01-02T15:04:05z07:00"))
     return []byte(stamp), nil
 }
 
