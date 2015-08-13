@@ -28,6 +28,7 @@ func readSensorMessages(ws *websocket.Conn, incomingMessages chan string, sensor
 	for {
 		var in [] byte
 			if err := websocket.Message.Receive(ws, &in); err != nil {
+				fmt.Println(err.Error())
 				return
 			}
 			incomingMessages <- string(in)
@@ -67,58 +68,61 @@ func postAvgReading(msg Message,gc string){
 		time.Sleep(time.Second)
 }
 
-func getAvgReading(messagelist [5]string,gc string){
+func getAvgReading(messagelist *[5]string,gc string){
 
 	var msg Message
 	var avgMsg Message
-	avgMsg.Radiation=0
-	avgMsg.Temperature=0
-	var avgFlare float32=0
 	
-	var c int = 0
-	for i := range messagelist {
-		 
-		   fmt.Println("sendor #",i,":",messagelist[i])
-		   b:=[]byte(messagelist[i])
-		   
-	 	   err := json.Unmarshal(b, &msg)
-			if err != nil {
-				fmt.Printf("Error: %s\n", err.Error())
-				//return
-			}else{
-				c++;
-			/*	
-				log.Println("Current Solar Flare:",msg.Solarflare)
-				log.Println("Current Radation:",msg.Radiation)
-				log.Println("current Temperature:",msg.Temperature)
-				log.Println("current TimeStamp:",msg.Stamp)
-				*/
-				avgMsg.Radiation=avgMsg.Radiation+msg.Radiation
-				avgMsg.Temperature=avgMsg.Temperature+msg.Temperature
-				if msg.Solarflare{
-					avgFlare++
+	var avgFlare float32=0
+	for{
+		avgMsg.Radiation=0
+		avgMsg.Temperature=0
+		avgFlare =0
+		var c int = 0
+		for i := range messagelist {
+			 if len(messagelist[0])>0{
+			   fmt.Println("sendor #",i,":",messagelist[i])
+			   b:=[]byte(messagelist[i])
+			   
+		 	   err := json.Unmarshal(b, &msg)
+				if err != nil {
+					fmt.Printf("Error: %s\n", err.Error())
+					//return
+				}else{
+					c++;
+				/*	
+					log.Println("Current Solar Flare:",msg.Solarflare)
+					log.Println("Current Radation:",msg.Radiation)
+					log.Println("current Temperature:",msg.Temperature)
+					log.Println("current TimeStamp:",msg.Stamp)
+					*/
+					avgMsg.Radiation=avgMsg.Radiation+msg.Radiation
+					avgMsg.Temperature=avgMsg.Temperature+msg.Temperature
+					if msg.Solarflare{
+						avgFlare++
+					}
+					avgMsg.Stamp=msg.Stamp
 				}
-				avgMsg.Stamp=msg.Stamp
 			}
-			
-			
-	}
-	if c >0 {
-		fmt.Println("counter#:",c)
-		log.Println("Total Solar Flare:",avgMsg.Solarflare)
-		log.Println("Total Radation:",avgMsg.Radiation)
-		log.Println("Total Temperature:",avgMsg.Temperature)
-		log.Println("Last TimeStamp:",avgMsg.Stamp)
-		
-		avgMsg.Radiation=avgMsg.Radiation/int32(c)
-		avgMsg.Temperature=avgMsg.Temperature/float64(c)
-		avgFlare=avgFlare/float32(c)
-		if avgFlare>=0.5{
-				avgMsg.Solarflare = true
+				
 		}
-		 postAvgReading(avgMsg,gc)
-		
-		
+		if c >0 {
+			fmt.Println("counter#:",c)
+			log.Println("Total Solar Flare:",avgMsg.Solarflare)
+			log.Println("Total Radation:",avgMsg.Radiation)
+			log.Println("Total Temperature:",avgMsg.Temperature)
+			log.Println("Last TimeStamp:",avgMsg.Stamp)
+			
+			avgMsg.Radiation=avgMsg.Radiation/int32(c)
+			avgMsg.Temperature=avgMsg.Temperature/float64(c)
+			avgFlare=avgFlare/float32(c)
+			if avgFlare>=0.5{
+					avgMsg.Solarflare = true
+			}
+			 postAvgReading(avgMsg,gc)
+			
+			
+		}
 	}
 }
 
@@ -161,11 +165,14 @@ func main() {
 	
 			}else{
 
-				log.Println("Print mesg:", chans[i])
+				log.Println("Print msg:", chans[i])
 				go readSensorMessages(ws, chans[i],i)	
 	
 			}
 	}
+	
+	
+	go getAvgReading(&incomingMessages,controller_url)
 	
 	for {
 		select {
@@ -190,8 +197,8 @@ func main() {
 			//fmt.Println("Message from IncommingMessage4:", sensor4)
 			incomingMessages[4]=sensor4
 			
-		default:
-			getAvgReading(incomingMessages,controller_url)
+		//default:
+			
 		}
 	}
 	
