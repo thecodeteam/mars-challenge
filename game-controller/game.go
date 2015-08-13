@@ -73,10 +73,7 @@ func (game *GameInfo) run(adminToken string) {
 		case req := <-game.start:
 			success, message := game.startGame(req.token)
 			if success {
-				if game.autoReadings {
-					go game.getReadings(&wg)
-				}
-				
+				go game.getReadings(&wg)
 				go game.runEngine(&wg)	
 			}
 			
