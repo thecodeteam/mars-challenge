@@ -20,7 +20,7 @@ type Message struct {
 	Solarflare	bool   	`json:"solarFlare"`
 	Temperature float64 `json:"temperature"`
 	Radiation   int32	`json:"radiation"`
-	Stamp		time.Time `json:"timestamp"`
+	Stamp		time.Time `json:"stamp"`
 }
 
 

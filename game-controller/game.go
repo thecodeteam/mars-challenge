@@ -73,7 +73,9 @@ func (game *GameInfo) run(adminToken string) {
 		case req := <-game.start:
 			success, message := game.startGame(req.token)
 			if success {
-				go game.getReadings(&wg)
+				if game.autoReadings{
+					go game.getReadings(&wg)
+				}
 				go game.runEngine(&wg)	
 			}
 			
@@ -81,7 +83,7 @@ func (game *GameInfo) run(adminToken string) {
 			close(req.Response)
 		case req := <-game.stop:
 			success, message := game.stopGame(req.token)
-			if success && game.autoReadings {
+			if success  {
 				wg.Wait()
 			}
 			req.Response <- GameResponse{success: success, message: message}
