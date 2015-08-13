@@ -63,7 +63,8 @@ This Hackathon will challenge you to accomplish the following:
 
 ### Code Coverage
 
-- **Code Coverage (CodecovIO):** [![codecov.io](http://codecov.io/github/emccode/mars-challenge/coverage.svg?branch=master)](http://codecov.io/github/emccode/mars-challenge?branch=master)
+- **Code Coverage(CodecovIO):** [![codecov.io](http://codecov.io/github/emccode/mars-challenge/coverage.svg?branch=master)](http://codecov.io/github/emccode/mars-challenge?branch=master)
+- **Code Coverage(Coveralls):** [![Coverage Status](https://coveralls.io/repos/emccode/mars-challenge/badge.svg?branch=master&service=github)](https://coveralls.io/github/emccode/mars-challenge?branch=master)
 
 
 
