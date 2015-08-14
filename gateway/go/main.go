@@ -80,8 +80,9 @@ func getAvgReading(messagelist *[5]string,gc string){
 		avgFlare =0
 		var c int = 0
 		for i := range messagelist {
-			 if len(messagelist[0])>0{
-			   log.Println("sendor #",i,":",messagelist[i])
+			log.Println("sendor #",i,":",messagelist[i]," len:",len(messagelist[i]))
+			 if len(messagelist[i])>0{
+			   
 			   b:=[]byte(messagelist[i])
 			   
 		 	   err := json.Unmarshal(b, &msg)
@@ -129,10 +130,9 @@ func getAvgReading(messagelist *[5]string,gc string){
 func main() {
 
 	//Read Env Variables
-	//sensor_endpoints_str :="104.40.93.11:8080,104.40.93.11:8081,104.40.93.11:8082,104.40.93.11:8083"
-	
-	
 	sensor_endpoints_str:=os.Getenv("SENSOR_ENDPOINT")
+	//sensor_endpoints_str ="104.40.93.11:8080,104.40.93.11:8081,104.40.93.11:8082,104.40.93.11:8083"
+		
 	controller_endpoint := os.Getenv("GC_ENDPOINT")
 	//controller_endpoint ="104.40.89.227:8080"
 	
@@ -156,9 +156,7 @@ func main() {
 	for i := range chans {
 	   chans[i] = make(chan string)
 	}
-	
-	time.Sleep(time.Second)
-	
+		
 	
 	for i := 0; i < len(sensor_endpoint_list); i++ {
 			log.Println("Process Socket:", sensor_endpoint_list[i])
@@ -168,7 +166,7 @@ func main() {
 	
 			}else{
 
-				log.Println("Print msg:", chans[i])
+				//log.Println("Print msg:", chans[i])
 				go readSensorMessages(ws, chans[i],i)	
 	
 			}
@@ -176,7 +174,7 @@ func main() {
 	
 	
 	go getAvgReading(&incomingMessages,controller_url)
-	
+	log.Println("Start Infinite loop")
 	for {
 		select {
 	
