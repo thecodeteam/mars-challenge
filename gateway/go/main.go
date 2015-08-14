@@ -81,12 +81,12 @@ func getAvgReading(messagelist *[5]string,gc string){
 		var c int = 0
 		for i := range messagelist {
 			 if len(messagelist[0])>0{
-			   fmt.Println("sendor #",i,":",messagelist[i])
+			   log.Println("sendor #",i,":",messagelist[i])
 			   b:=[]byte(messagelist[i])
 			   
 		 	   err := json.Unmarshal(b, &msg)
 				if err != nil {
-					fmt.Printf("Error: %s\n", err.Error())
+					log.Println("Error: %s\n", err.Error())
 					//return
 				}else{
 					c++;
@@ -156,7 +156,10 @@ func main() {
 	for i := range chans {
 	   chans[i] = make(chan string)
 	}
-
+	
+	time.Sleep(time.Second)
+	
+	
 	for i := 0; i < len(sensor_endpoint_list); i++ {
 			log.Println("Process Socket:", sensor_endpoint_list[i])
 			ws, err := websocket.Dial(sensor_endpoint_list[i], "", sensor_endpoint_list[i])
