@@ -6,10 +6,15 @@
 import requests  # https://github.com/kennethreitz/requests/
 import time
 import random
+import os
 
+
+
+# Global Variables
+controller_endpoint = os.environ['GC_ENDPOINT']
 
 #Replace this variables as appropriate
-server_url = 'http://192.168.59.103:8080/api'
+server_url = 'http://' + controller_endpoint + '/api'
 admin_header = {'X-Auth-Token': '1234'}
 
 
