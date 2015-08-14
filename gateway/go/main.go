@@ -125,12 +125,12 @@ func getAvgReading(messagelist [5]string,gc string){
 func main() {
 
 	//Read Env Variables
-	sensor_endpoints_str :="104.40.93.11:8080,104.40.93.11:8081,104.40.93.11:8082,104.40.93.11:8083"
+	//sensor_endpoints_str :="104.40.93.11:8080,104.40.93.11:8081,104.40.93.11:8082,104.40.93.11:8083"
 	
 	
-	//sensor_endpoints_str:=os.Getenv("SENSOR_ENDPOINT")
+	sensor_endpoints_str:=os.Getenv("SENSOR_ENDPOINT")
 	controller_endpoint := os.Getenv("GC_ENDPOINT")
-	controller_endpoint ="104.40.89.227:8080"
+	//controller_endpoint ="104.40.89.227:8080"
 	
 	log.Printf("Current Sensor EndPoints '%s'", sensor_endpoints_str)
 	log.Printf("Current Controller '%s'", controller_endpoint)	
