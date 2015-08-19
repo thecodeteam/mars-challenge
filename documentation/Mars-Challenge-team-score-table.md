@@ -4,16 +4,16 @@ This is the official score table for the hackathon
 
 ## Team Competition Table
 
-|####|Name|Tier|Points|Team Alpha|Team Bravo| Team C|Team D| Team E|
+|####|Name|Tier|Points|Team Alpha|Team Bravo| Team Charlie|Team D| Team E|
 |----|----|----|------|------|------|-------|------|-------|
 |**CC-1**|**Level Up!**|**CC**|**20**|------|------|-------|------|-------|
 |CC-2|Challenge Champion|CC|30|------|------|-------|------|-------|
 |T1-1 |Sensor Software Running in Raspberry|Tier 1|10|------|10|-------|------|-------|
-|T1-2 |My Sensor Containers|Tier 1|5|------|------|-------|------|-------|
+|T1-2 |My Sensor Containers|Tier 1|5|------|------|5|------|-------|
 |T2-1|Multi-Sensors Gateway|Tier 2|5|------|------|-------|------|-------|
 |T2-2|Data smarts| Tier 2|5|------|------|-------|------|-------|
 |T2-3*|Repair Crew|Tier 2|5|------|------|-------|------|-------|
-|T2-4|My Gateway Container|Tier 2|5|------|------|-------|------|-------|
+|T2-4|My Gateway Container|Tier 2|5|------|------|5|------|-------|
 |T3-1 |Data Hog|Tier 3|10|------|------|-------|------|-------|
 |T3-2 |The Black Box|Tier 3|5|------|------|-------|------|-------|
 |T4-1|Analytic Brain|Tier 4|15|------|------|-------|------|-------|
