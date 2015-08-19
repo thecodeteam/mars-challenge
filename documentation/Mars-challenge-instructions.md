@@ -88,7 +88,8 @@ These are the containers available for all the teams to use:
 |Service Name|Container Location|
 |----|----|
 |Sensor Client Service (Tier 1)| [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")|
-|Gateway and Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")|
+|Gateway and Aggregator Service (Tier 2) Python| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")|
+|Gateway and Aggregator Service (Tier 2) Go| [https://hub.docker.com/r/emccode/mars-challenge-gateway-go/](https://hub.docker.com/r/emccode/mars-challenge-gateway-go// "Gateway and Aggregator Service")|
 |Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
@@ -114,7 +115,7 @@ In order to implement section 1 you will need the following components:
 |Service Name|Container Location|
 |----|----|
 |Sensor Client Service (Tier 1)| [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")|
-|Gateway and Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")|
+|Gateway and Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service in Python") or [https://hub.docker.com/r/emccode/mars-challenge-gateway-go/](https://hub.docker.com/r/emccode/mars-challenge-gateway-go/ "Gateway and Agregrator in Go")|
 |Game Challenge Controller|[https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard|[https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
