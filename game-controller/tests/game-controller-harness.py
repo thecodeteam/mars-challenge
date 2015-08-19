@@ -15,7 +15,7 @@ controller_endpoint = os.environ['GC_ENDPOINT']
 
 #Replace this variables as appropriate
 server_url = 'http://' + controller_endpoint + '/api'
-admin_header = {'X-Auth-Token': 'ce851cefe53a1ae6'}
+admin_header = {'X-Auth-Token': '1234'}
 
 
 # Server Calls ----------------------------------------------
