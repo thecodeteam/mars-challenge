@@ -181,62 +181,6 @@ while True:
         print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
     time.sleep(2)
 
-    # Adding team: QuickFandango
-    team2_name = 'QuickFandango'
-    team2_auth = ''
-
-    url = server_url + "/join/" + team2_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team2_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team2_name + '\' joined the game!')
-        print (team2_name + ' authentication Code: ' + team2_auth)
-    else:
-        print ('Team \'' + team2_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
-
-    # Adding team: InTheBigMesos
-    team3_name = 'InTheBigMessos'
-    team3_auth = ''
-
-    url = server_url + "/join/" + team3_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team3_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team3_name + '\' joined the game!')
-        print (team3_name + ' authentication Code: ' + team3_auth)
-    else:
-        print ('Team \'' + team3_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-
-
- # Adding team: Matadors
-    team4_name = 'Matadors'
-    team4_auth = ''
-
-    url = server_url + "/join/" + team4_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team4_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team4_name + '\' joined the game!')
-        print (team4_name + ' authentication Code: ' + team4_auth)
-    else:
-        print ('Team \'' + team4_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
 
 
     # Testing Kick Team Functionality
@@ -278,9 +222,9 @@ while True:
 
     # Starting the Teams Logic
     while True:
-        team = random.randrange(0, 4)
+        team = random.randrange(0, 1)
         action = random.randrange(1, 3)
-        team_list = [(team1_name, team1_auth), (team2_name, team2_auth), (team3_name, team3_auth), (team4_name, team4_auth)]
+        team_list = [(team1_name, team1_auth)]
         # print("\nGameMove: Team: " + team_list[team][0] + ' Action:' + str(action) + ' Name: ' + team_list[team][0] +'|'+ team_list[team][1])
         if action > 1:
             print("\nGameMove: Team: " + team_list[team][0] + ' Action: Shield UP! | Team Key: ' + team_list[team][1])
