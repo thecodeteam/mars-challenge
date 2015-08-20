@@ -4,9 +4,9 @@ This is the official score table for the hackathon
 
 ## Team Competition Table
 
-|####|Name|Tier|Points|Team Alpha|Team Bravo| Team Charlie|Team Kilo| Team E|
+|####|Name|Tier|Points|Team Alpha|Team Bravo| Team Charlie|Team Kilo| Team Oscar|
 |----|----|----|------|------|------|-------|------|-------|
-|**CC-1**|**Level Up!**|**CC**|**20**|------|------|-------|------|-------|
+|**CC-1**|**Level Up!**|**CC**|**20**|------|------|-------|20|20|
 |CC-2|Challenge Champion|CC|30|------|------|-------|------|-------|
 |T1-1 |Sensor Software Running in Raspberry|Tier 1|10|------|10|10|10|-------|
 |T1-2 |My Sensor Containers|Tier 1|5|------|------|5|------|-------|
