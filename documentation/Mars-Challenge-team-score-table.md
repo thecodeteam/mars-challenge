@@ -4,7 +4,7 @@ This is the official score table for the hackathon
 
 ## Team Competition Table
 
-|####|Name|Tier|Points|Team Alpha|Team Bravo| Team Charlie|Team D| Team E|
+|####|Name|Tier|Points|Team Alpha|Team Bravo| Team Charlie|Team Kilo| Team E|
 |----|----|----|------|------|------|-------|------|-------|
 |**CC-1**|**Level Up!**|**CC**|**20**|------|------|-------|------|-------|
 |CC-2|Challenge Champion|CC|30|------|------|-------|------|-------|
@@ -19,14 +19,14 @@ This is the official score table for the hackathon
 |T4-1|Analytic Brain|Tier 4|15|------|------|-------|------|-------|
 |T4-2|My Analytic Container|Tier 4| 5|------|------|-------|------|-------|
 |T5-1|Command and Control|Tier 5| 5|------|------|-------|------|-------|
-|T5-2|My C&C Container|Tier 5|5|------|------|-------|------|-------|
+|T5-2|My C&C Container|Tier 5|5|------|------|-------|5|-------|
 |T6-1|For the Ages|Tier 6|5|------|------|-------|------|-------|
 |T6-2|My Backup Service Container |Tier 6|5|------|------|-------|------|-------|
 |DO-1|Service Discovery|DO|5|------|------|-------|------|-------|
 |DO-2|Service Monitoring|DO|5|------|------|-------|------|-------|
 |DO-3|Service Configuration|DO|5|------|------|-------|------|-------|
 |DO-4|Service Orchestration|DO|5|------|------|-------|------|-------|
-|DO-5|Docker Me up!|DO|15|------|------|-------|------|-------|
+|DO-5|Docker Me up!|DO|15|------|------|-------|15|-------|
 |DO-6|Kubernetes Me up!|DO|15|------|------|-------|------|-------|
 |DO-7|Mesos Me up!|DO|15|------|------|-------|------|-------|
 |DO-8|Deploy Me up!|DO|10|------|------|-------|------|-------|
