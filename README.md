@@ -1,5 +1,8 @@
 # EMC{code} Hackathon
 
+Mars Challenge Board: https://waffle.io/emccode/mars-challenge
+EMCCODE Chat: https://gitter.im/emccode
+
 ## The Mars Challenge
 
 ![Planet Mars](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/mars-11608_640.jpg)
