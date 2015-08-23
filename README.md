@@ -1,7 +1,7 @@
 # EMC{code} Hackathon
 
-Mars Challenge Board: https://waffle.io/emccode/mars-challenge
-EMCCODE Chat: https://gitter.im/emccode
+[![Join the chat at https://gitter.im/emccode](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/emccode?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Stories in Ready](https://waffle.io/emccode/mars-challenge.png?label=ready&title=Ready)](https://waffle.io/emccode/mars-challenge)
 
 ## The Mars Challenge
 
