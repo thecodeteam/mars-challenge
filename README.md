@@ -4,7 +4,7 @@
 [![Stories in Ready](https://badge.waffle.io/emccode/mars-challenge.svg?label=ready&title=Ready)](http://waffle.io/emccode/mars-challenge)
 
 
-**Join us @ LISA November 10th 2015:** Register for Mars Hackaton @ [LISA](https://www.usenix.org/conference/lisa15) 2015** [Hackathon event at LISA 2015](http://www.eventbrite.com/e/mars-data-challenge-at-lisa-2015-tickets-18984702757 "Mars Challenge Hackathon @ LISA November 2015")**
+**Join us @ LISA November 10th 2015:** Register for Mars Hackaton @ [LISA](https://www.usenix.org/conference/lisa15) 2015:  **[Click here!](http://www.eventbrite.com/e/mars-data-challenge-at-lisa-2015-tickets-18984702757 "Mars Challenge Hackathon @ LISA November 2015")**
 
 
 **August 26th 2015:** Read about the results of our first **[Hackathon event at LinuxCon/ContainerCon](http://blog.emccode.com/2015/08/26/mars-challenge-hackathon-at-containerconlinuxcon-2015/ "Mars Challenge Hackathon @ LinuxCon/ContainerCon 2015")**
