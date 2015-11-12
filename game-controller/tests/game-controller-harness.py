@@ -9,7 +9,6 @@ import random
 import os
 
 
-
 # Global Variables
 controller_endpoint = os.environ['GC_ENDPOINT']
 
@@ -104,7 +103,6 @@ def team_shield_up(team_name, team_auth):
     """
     Sets the team shield up
     curl -i -H 'X-Auth-Token: 1335aa6af5d0289f' -X POST http://localhost:8080/api/shield/enable
-
     """
     url = server_url + '/shield/enable'
     auth_header = {'X-Auth-Token': team_auth}
@@ -182,139 +180,7 @@ while True:
         print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
     time.sleep(2)
 
-    # Adding team: QuickFandango
-    team2_name = 'QuickFandango'
-    team2_auth = ''
 
-    url = server_url + "/join/" + team2_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team2_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team2_name + '\' joined the game!')
-        print (team2_name + ' authentication Code: ' + team2_auth)
-    else:
-        print ('Team \'' + team2_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
-
-    # Adding team: InTheBigMessos
-    team3_name = 'InTheBigMessos'
-    team3_auth = ''
-
-    url = server_url + "/join/" + team3_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team3_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team3_name + '\' joined the game!')
-        print (team3_name + ' authentication Code: ' + team3_auth)
-    else:
-        print ('Team \'' + team3_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-
-
- # Adding team: Matadors
-    team4_name = 'Matadors'
-    team4_auth = ''
-
-    url = server_url + "/join/" + team4_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team4_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team4_name + '\' joined the game!')
-        print (team4_name + ' authentication Code: ' + team4_auth)
-    else:
-        print ('Team \'' + team4_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
-
-# Adding team: DaVinChis
-    team5_name = 'DaVinChis'
-    team5_auth = ''
-
-    url = server_url + "/join/" + team5_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team5_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team5_name + '\' joined the game!')
-        print (team5_name + ' authentication Code: ' + team5_auth)
-    else:
-        print ('Team \'' + team5_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
-
-
-    # Adding team: MeatBalls
-    team6_name = 'MeatBalls'
-    team6_auth = ''
-
-    url = server_url + "/join/" + team6_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team6_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team6_name + '\' joined the game!')
-        print (team6_name + ' authentication Code: ' + team6_auth)
-    else:
-        print ('Team \'' + team6_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
-
-    # Adding team: MondoLinux
-    team7_name = 'MondoLinux'
-    team7_auth = ''
-
-    url = server_url + "/join/" + team7_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team7_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team7_name + '\' joined the game!')
-        print (team7_name + ' authentication Code: ' + team7_auth)
-    else:
-        print ('Team \'' + team7_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
-
-     # Adding team: ALotOfGuacamole
-    team8_name = 'ALotOfGuacamole'
-    team8_auth = ''
-
-    url = server_url + "/join/" + team8_name
-    payload = ''
-    # POST with form-encoded data
-    response = requests.post(url, data=payload)
-
-    team8_auth = response.text
-
-    if response.status_code == 200:
-        print ('Team \'' + team8_name + '\' joined the game!')
-        print (team8_name + ' authentication Code: ' + team8_auth)
-    else:
-        print ('Team \'' + team8_name + '\' joining game Failed!')
-        print ("HTTP Code: " + str(response.status_code) + " | Response: " + response.text)
-    time.sleep(2)
 
     # Testing Kick Team Functionality
     # ------------------------------------------------
@@ -355,9 +221,9 @@ while True:
 
     # Starting the Teams Logic
     while True:
-        team = random.randrange(0, 8)
+        team = random.randrange(0, 1)
         action = random.randrange(1, 3)
-        team_list = [(team1_name, team1_auth), (team2_name, team2_auth), (team3_name, team3_auth), (team4_name, team4_auth), (team5_name, team5_auth), (team6_name, team6_auth), (team7_name, team7_auth), (team8_name, team8_auth)]
+        team_list = [(team1_name, team1_auth)]
         # print("\nGameMove: Team: " + team_list[team][0] + ' Action:' + str(action) + ' Name: ' + team_list[team][0] +'|'+ team_list[team][1])
         if action > 1:
             print("\nGameMove: Team: " + team_list[team][0] + ' Action: Shield UP! | Team Key: ' + team_list[team][1])
@@ -369,4 +235,3 @@ while True:
         if server_check_game_started(server_url) == False:
             print('\nServer: Game is Over...')
             break
-
