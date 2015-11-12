@@ -29,14 +29,13 @@ func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
 
 	for team.Life > 0 && game.Running {
 		time.Sleep(1 * time.Second)
-
-		if team.Energy <= 0 {
+		radiationRatio = (float64)(game.Reading.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
+		energyLoss = radiationRatio * maxEnergyLoss
+		if team.Energy-energyloss <= 0 {
 			team.Shield = false
 		}
 
 		if team.Shield {
-			radiationRatio = (float64)(game.Reading.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
-			energyLoss = radiationRatio * maxEnergyLoss
 			team.Energy = int64(math.Max(float64(team.Energy)-math.Ceil(energyLoss), 0))
 			log.Printf("Team %s: Energy -%.2f\n", team.Name, energyLoss)
 			continue
