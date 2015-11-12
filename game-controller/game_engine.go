@@ -31,7 +31,7 @@ func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
 		time.Sleep(1 * time.Second)
 		radiationRatio = (float64)(game.Reading.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
 		energyLoss = radiationRatio * maxEnergyLoss
-		if team.Energy-energyloss <= 0 {
+		if team.Energy-energyLoss <= 0 {
 			team.Shield = false
 		}
 
