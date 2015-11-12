@@ -15,13 +15,13 @@ logging.config.dictConfig(settings.GATEWAY_LOGGING)
 logger = logging.getLogger("root")
 
 # Global Variables
+admin_password = os.environ['GC_PASSWORD']
 sensor_endpoints = os.environ['SENSOR_ENDPOINTS'].split(',')
 logger.info("Sensor EndPoints: {0}.".format(sensor_endpoints))
 
 controller_endpoint = os.environ['GC_ENDPOINT']
 controller_url = 'http://' + controller_endpoint + '/api/readings'  #'http://localhost:8080/api/readings'
 
-admin_password = '98765'
 auth_header = {'X-Auth-Token': admin_password}
 
 sensor_data = ''
