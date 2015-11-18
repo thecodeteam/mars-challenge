@@ -64,17 +64,6 @@ This Hackathon will challenge you to accomplish the following:
 [Please follow this link for License and Contributions](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-Challenge-licence.md "License and Contributions")
 
  
-## DevOps Tools 
- 
-### EMCCODE Build Server
-- **Game Controller Build:** <a href="http://buildserver.emccode.com/viewType.html?-buildTypeId=MarsChallenge_GameControllerBuild&guest=1"><img src="http://buildserver.emccode.com/app/rest/builds/buildType:(id:MarsChallenge_GameControllerBuild)/statusIcon"/></a>
-- **Sensor Service Build:** <a href="http://buildserver.emccode.com/viewType.html?buildTypeId=MarsChallenge_SensorGo_Main&guest=1"><img src="http://buildserver.emccode.com/app/rest/builds/buildType:(id:MarsChallenge_SensorGo_Main)/statusIcon"/></a>
-
-### Code Coverage
-
-- **Code Coverage(CodecovIO):** [![codecov.io](http://codecov.io/github/emccode/mars-challenge/coverage.svg?branch=master)](http://codecov.io/github/emccode/mars-challenge?branch=master)
-- **Code Coverage(Coveralls):** [![Coverage Status](https://coveralls.io/repos/emccode/mars-challenge/badge.svg?branch=master&service=github)](https://coveralls.io/github/emccode/mars-challenge?branch=master)
-
 
 
 
