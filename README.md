@@ -3,8 +3,9 @@
 [![Join the chat at https://gitter.im/emccode](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/emccode?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Stories in Ready](https://badge.waffle.io/emccode/mars-challenge.svg?label=ready&title=Ready)](http://waffle.io/emccode/mars-challenge)
 
+**April 8th, 2016:** Mars Hackathon @ University of Utah
 
-**November 10th 2015:** Mars Hackaton @ [LISA](https://www.usenix.org/conference/lisa15) 2015
+**November 10th 2015:** Mars Hackathon @ [LISA](https://www.usenix.org/conference/lisa15) 2015
 
 
 **August 26th 2015:** Read about the results of our first **[Hackathon event at LinuxCon/ContainerCon](http://blog.emccode.com/2015/08/26/mars-challenge-hackathon-at-containerconlinuxcon-2015/ "Mars Challenge Hackathon @ LinuxCon/ContainerCon 2015")**
