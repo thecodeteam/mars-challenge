@@ -14,7 +14,7 @@ RUN npm install bower grunt-cli -g &&\
   npm install grunt
 
 RUN cd /opt &&\
-  git clone https://github.com/emccode/mars-challenge &&\
+  git clone https://github.com/codedellemc/mars-challenge &&\
   cd /opt/mars-challenge/dashboard/ &&\
   npm install &&\
   bower install --allow-root --force-latest --config.interactive=false &&\

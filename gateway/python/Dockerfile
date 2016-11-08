@@ -11,7 +11,7 @@ RUN apt-get update &&\
 RUN pip install websocket-client
 
 RUN cd /opt &&\
-  git clone https://github.com/emccode/mars-challenge &&\
+  git clone https://github.com/codedellemc/mars-challenge &&\
   cd /opt/mars-challenge/gateway/python/
 
 # Set the default directory where CMD will execute
