@@ -15,10 +15,10 @@
 ![Planet Mars](https://github.com/emccode/hackathon-mars/blob/master/documentation/images/mars-11608_640.jpg)
 
 
-Welcome to the Mars Challenge, you and your team are about to embark into a 7 hours space adventure that will challenge your **developer, operational, data analysis and infrastructure** skills. The Challenge puts you in the arid lands of Mars: 
+Welcome to the Mars Challenge, you and your team are about to embark into a 7 hours space adventure that will challenge your **developer, operational, data analysis and infrastructure** skills. The Challenge puts you in the arid lands of Mars:
 
 
-*You and your team just landed in Mars. As you prepare your base of operations, massive Sun storms are coming your way. That was the last communication you had from Earth. Now connectivity to earth has been cut, and although the base has enough energy, your protective shields can only be running for a few minutes at the time, without recharging.* 
+*You and your team just landed in Mars. As you prepare your base of operations, massive Sun storms are coming your way. That was the last communication you had from Earth. Now connectivity to earth has been cut, and although the base has enough energy, your protective shields can only be running for a few minutes at the time, without recharging.*
 
 *Your only chance of survival is to monitor the current temperature and radiation levels in the planet atmosphere to detect sun flares and activate your base shields for protection.*
 
@@ -44,16 +44,16 @@ You and your team will have at your disposal the necessary tools to survive and 
 - Deployment of the system needs to be automated using Deployment Tools.
 - All data from sensors and services needs to be logged.
 - All data needs be backed on regular intervals.
-- Team solutions need to connect to the Mars Challenge [Game controller](https://github.com/emccode/mars-challenge/tree/master/game-controller "Game Controller") 
+- Team solutions need to connect to the Mars Challenge [Game controller](https://github.com/emccode/mars-challenge/tree/master/game-controller "Game Controller")
 
 
 **What would you accomplish from participating on this Hackathon?**
 
-This Hackathon will challenge you to accomplish the following: 
+This Hackathon will challenge you to accomplish the following:
 
 - Build and deploy a modern distributed application using best practices.
-- Deploy a distributed application using Containers. 
-- Practice container configuration, execution and debugging. 
+- Deploy a distributed application using Containers.
+- Practice container configuration, execution and debugging.
 - Deploy a distributed application using modern deployment technologies like  Docker Swarm, Compose, Messos, and Kubernetes).
 - Develop an application on the Internet of Things (IoT) space.
 
@@ -62,10 +62,4 @@ This Hackathon will challenge you to accomplish the following:
 
 ## License & Contributions
 
-[Please follow this link for License and Contributions](https://github.com/emccode/mars-challenge/blob/master/documentation/Mars-Challenge-licence.md "License and Contributions")
-
- 
-
-
-
-
+Mars Challenge is freely distributed under the [MIT License](http://codedellemc.github.io/sampledocs/LICENSE "LICENSE"). See LICENSE for details.
