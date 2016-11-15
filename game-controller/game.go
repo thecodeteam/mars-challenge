@@ -40,11 +40,12 @@ type GameInfo struct {
 
 // Team contains information about a team
 type Team struct {
-	Name   string `json:"name"`
 	token  string
-	Energy int64 `json:"energy"`
-	Life   int64 `json:"life"`
-	Shield bool  `json:"shield"`
+	Name   string `json:"name"`
+	Energy int64  `json:"energy"`
+	Life   int64  `json:"life"`
+	Shield bool   `json:"shield"`
+	Lasted string `json:"lasted"`
 }
 
 var game = GameInfo{

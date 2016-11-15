@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"sync"
@@ -53,6 +54,10 @@ func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
 			(ss.MaxTemp - ss.MinTemp)
 		energyGain = temperatureRatio * maxEnergyGain
 		team.Energy = int64(math.Min(float64(team.Energy)+math.Ceil(energyGain), 100))
+
+		if team.Life == 0 {
+			team.Lasted = fmt.Sprintf("%.2f", time.Since(game.StartedAt).Seconds())
+		}
 
 		log.Printf("Team %s: Life -%.2f, Energy +%.2f\n", team.Name, lifeLoss, energyGain)
 	}
