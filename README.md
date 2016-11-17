@@ -15,7 +15,7 @@ can protect you from the radiation, but can only be running for a few minutes
 at a time without recharging.*
 
 *Your only chance of survival is to monitor the current temperature and
-radiation levels in the planet's atmosphere to detect sun flares and activate
+radiation levels in the planet's atmosphere to detect solar flares and activate
 your base shields for protection.*
 
 *You only have a few hours to implement a sensor array, build and deploy the

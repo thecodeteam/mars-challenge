@@ -99,8 +99,8 @@ services:
 
 |Service Name|Folder Location|
 |----|----|
-|Sensor Client Service| [https://github.com/codedellemc/mars-challenge/tree/master/sensor-client](https://github.com/codedellemc/mars-challenge/tree/master/sensor-client)|
-|Gateway and Aggregator Service| [https://github.com/codedellemc/mars-challenge/tree/master/gateway](https://github.com/codedellemc/mars-challenge/tree/master/gateway)|
+|SensorSuite Service| [https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite](https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite)|
+|Aggregator Service| [https://github.com/codedellemc/mars-challenge/tree/master/aggregator](https://github.com/codedellemc/mars-challenge/tree/master/aggregator)|
 |Data Repository| Refer to the [System Tiers](#system-tiers) section for more information . |
 |Data Analysis | Refer to the [System Tiers](#system-tiers) for more information.|
 |Team Command & Control| [https://github.com/codedellemc/mars-challenge/tree/master/clients/python](https://github.com/codedellemc/mars-challenge/tree/master/clients/python)|
@@ -110,29 +110,25 @@ services:
 
 ### Containers
 
-These are the containers available for all the teams to use:
+These are the containers available for all the teams to use. These containers
+are the same images that will be used when running the end of game shootout.
 
 |Service Name|Container Location|
 |----|----|
-|Sensor Client Service (Tier 1)| [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")|
-| Gateway and Aggregator Service (Tier 2) Python| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")|
-|Gateway and Aggregator Service (Tier 2) Go| [https://hub.docker.com/r/emccode/mars-challenge-gateway-go/](https://hub.docker.com/r/emccode/mars-challenge-gateway-go// "Gateway and Aggregator Service")|
+|Aggregator Service| [https://hub.docker.com/r/emccode/mars-challenge-aggregator/](https://hub.docker.com/r/emccode/mars-challenge-aggregator/ "Aggregator Service")|
 |Game Challenge Controller| [https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard| [https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
-
-**Note:** You can use the code implementations and containers provided or you
-can choose to build your own. There are [points](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table") associated for each decision that you make.
 
 ## Participant's Implementation
 
 Participants have an opportunity to build multiple tiers of functionality. These
 have been organized into the following groups:
 
- - Section 1: Getting Data From the Sensors to the Command and Control Service
+ - Section 1: Getting Data From the Sensors to the Aggregator Service
  - Section 2: Perform Analytic and Data saving operations
  - Section 3: DevOps and Application Management
 
-###  Section 1: Getting Data From the Sensors to the Command and Control Service
+###  Section 1: Getting Data From the Sensors to the Aggregator Service
 
 This section focuses on getting the sensor data from the Sensor services to the
 Command and Control Tier.  
@@ -143,8 +139,8 @@ In order to implement section 1 you will need the following components:
 
 |Service Name|Container Location|
 |----|----|
-|Sensor Client Service (Tier 1)| [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")|
-|Gateway and Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service in Python") or [https://hub.docker.com/r/emccode/mars-challenge-gateway-go/](https://hub.docker.com/r/emccode/mars-challenge-gateway-go/ "Gateway and Agregrator in Go")|
+|SensorSuite Service (Tier 1)| [https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite](https://github.com/codedellemc/mars-challenge/tree/master/sensorsuite)|
+|Aggregator Service (Tier 2)| [https://hub.docker.com/r/emccode/mars-challenge-aggregator/](https://hub.docker.com/r/emccode/mars-challenge-aggregator/ "Aggregator Service")|
 |Game Challenge Controller| [https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard| [https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
@@ -154,11 +150,11 @@ Python, is located in the following folder: [https://github.com/codedellemc/mars
 Once you have the components in place, you and your team will have to create a
 deployment and orchestrate how services are deployed in a specific order:
 
-1. Sensor Service
-2. Game Controller
-3. Game Controller UI
-4. Gateway and Aggregation service
-5. Team Control and Command Center service
+1. Game Controller
+2. Game Controller UI
+3. Aggregator service
+4. Sensor Service
+5. Team Command and Control Center service
 
 You will get [points](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")
 for automating the deployment and orchestration of this section.
@@ -214,7 +210,7 @@ system. You can use any tooling to automate this process.
 ## Testing the Command and Control Center
 
 In order to Test your Team Command and Control center you can run the Mars Game
-Controller in testing mode. You will need the to run the Game Controller and
+Controller in testing mode. You will need to run the Game Controller and
 Game Controller's Dashboard.
 
 ![Testing the Command and Control Center](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/Mars-challenge-testing-control-center.JPG)
@@ -223,7 +219,7 @@ The Game containers are located here:
 
 |Service Name|Container Location|
 |----|----|
-|Game Challenge Controller| [https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
+|Game Controller| [https://hub.docker.com/r/emccode/mars-challenge-controller/](https://hub.docker.com/r/emccode/mars-challenge-controller/ "Game Challenge Controller")|
 |Controller Dashboard| [https://hub.docker.com/r/emccode/mars-challenge-dashboard/](https://hub.docker.com/r/emccode/mars-challenge-dashboard/ "Controller Dashboard")|
 
 The provided containers are Docker containers. You need to have Docker installed
@@ -241,23 +237,23 @@ listening port: `-p 80:8080` and the Admin Token: **`-e ADMIN_TOKEN=1234`** to
 what you may need:
 
 ```sh
-docker run -d --name=controller -p 80:8080 -e ADMIN_TOKEN=1234 emccode/mars-challenge-controller
+docker run -d --name=controller -p 8080:8080 -e ADMIN_TOKEN=1234 emccode/mars-challenge-controller
 ```
 
 You can check the Game Controller service is running using a web browser against
-the URL: `http://<host ip address>:80`.
+the URL: `http://<host ip address>:8080`.
 
 Second, execute the Game Controller Dashboard and map it to the endpoint used by
 the Game Controller:
 
 ```
-docker run -d --name dashboard -e WS_ENDPOINT=localhost:80/ws -p 82:80 emccode/mars-challenge-dashboard
+docker run -d --name dashboard -e WS_ENDPOINT=localhost:8080/ws -p 80:80 emccode/mars-challenge-dashboard
 ```
 
-Where `-e WS_ENDPOINT=localhost:80/ws` is the location of the Game Controller
-and `-p 82:80` is the endpoint of the Game Controller Dashboard. You can check
+Where `-e WS_ENDPOINT=localhost:8080/ws` is the location of the Game Controller
+and `-p 80:80` is the endpoint of the Game Controller Dashboard. You can check
 the Game Controller Dashboard service running on the specified address. In our
-example, the address would be: `http://<host ip address>:82`.
+example, the address would be: `http://<host ip address>:80`.
 
 The last step is to execute the Command and Control Center code. You can run the
 code directly or run it as a container.
@@ -354,33 +350,34 @@ sensor information.
 **Functionality:**
 - Provides Temperature Information.
 - Provides Radiation Information.
-- Provides Solar Flare Information.
+- Receives Solar Flare Information.
 
 **Implementation:**
-- Connect to the Raspberry Pis.
-- Execute the provided Mars Atmospheric simulator .
+- Connect to the Raspberry Pi.
+- Execute the provided SensorSuite.
   (Web Socket service application written in GO).
-- Configure Mars Atmospheric simulator to send data to Sensor Gateway
+- Configure SensorSuite to send data to Sensor Aggregator
 
-Setting up the RaspberryPi with the weather simulator: **[Setting up the RaspBerry Pi](https://github.com/codedellemc/hackathon-mars/blob/master/documentation/Raspberry-Go-Weather-Simulator-Setup.md)**.
+**Note** You can execute the SensorSuite applications directly, or you can
+deploy them in containers. There are points associated with each choice.
 
-A container Implementation is located here: [https://hub.docker.com/r/emccode/mars-challenge-client/](https://hub.docker.com/r/emccode/mars-challenge-client/ "Sensor Client Service")
+### Tier 2 | Sensor Aggregation ###
 
-### Tier 2 | Sensor Gateway and Aggregation ###
-
-The Sensors gateway collects all the data feeds from each of one of the Sensors.
-It relays the sensor information to the Aggregation tier.
+The Sensors Aggregator collects the data feeds from each of one of the Sensor
+Arrays. It averages the temperature and radiation values, and relays that data
+to the Game Controller.
 
 **Functionality:**
-- Relay information to the Aggregation Tier.
+- Receive, aggregate, and relay information to the Game Controller.
 
 **Implementation:**
-- Consume the Mars Atmospheric Simulator Web Sockets for each Raspberry Pi.
-- Relay the Data to the Aggregation Tier.
+- Expose endpoint that each SensorSuite **Publisher** can connect to
+- Receive and average data from all Sensor Arrays
+- Relay the Data to the Game Controller.
 
-Implementations of the Gateway tier are located in this folder: [https://github.com/codedellemc/mars-challenge/tree/master/gateway](https://github.com/codedellemc/mars-challenge/tree/master/gateway)
+Implementation of the Aggregator tier is located in this folder: [https://github.com/codedellemc/mars-challenge/tree/master/aggregator](https://github.com/codedellemc/mars-challenge/tree/master/aggregator)
 
-A container with a working gateway can be found here: [https://hub.docker.com/r/emccode/mars-challenge-gateway-py/](https://hub.docker.com/r/emccode/mars-challenge-gateway-py/ "Gateway and Aggregator Service")
+A container with a working aggregator can be found here: [https://hub.docker.com/r/emccode/mars-challenge-aggregator/](https://hub.docker.com/r/emccode/mars-challenge-aggregator/ "Aggregator Service")
 
 ### Tier 3 | Data Repository Tier
 The data Repository tier stores the data in the system. This tier can be
@@ -413,16 +410,17 @@ that functionality to the Monitoring and Control Dashboard Tier.
 - Service needs to be executed in a container.
 - Service needs to be deployed as part of the application.
 
-### Tier 5 | Team Client and Control Dashboard Tier
-The  Team Client and Control dashboard is the core of your team's operations.
+### Tier 5 | Team Command and Control Tier
+The Team Command and Control service is the core of your team's operations.
 This service allows the team on Mars to view their sensor data, the analysis
-information, and shield status. In addition the dashboard needs to send the
+information, and shield status. In addition the service needs to send the
 join/exit challenge to the Mars Challenge engine Websocket.
 
 **Functionality:**
-- Receives sensor data from the Data Aggregation tier.
+- Receives sensor data from the Game Controller.
 - Displays information for sensor data, data analysis and shield status.
 - Display information about the team status on the MARS Challenge engine.
+- Implements shield control algorithm
 
 **Implementation:**
 - Needs to be implemented as a service.
@@ -436,7 +434,7 @@ The Data Backup tier involves taking the sensor data and backs it up on one (1)
 minute batches for future analysis. This is a bonus tier.
 
 **Functionality:**
-- Receives per second Data from the Data Aggregation tier, a queue, or the data
+- Receives per second Data from the Game Controller, a queue, or the data
   repository and performs a 1 minute backup.
 - Stores the data in the Data Repository Tier.
 
