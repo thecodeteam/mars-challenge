@@ -50,12 +50,22 @@ func (b *Blaster) Run() {
 	go b.h.run()
 
 	http.HandleFunc("/", serveHome)
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		serveWs(b.h, w, r)
-	})
+	http.HandleFunc("/ws", b.GetWSHandler())
 
 	fmt.Printf("Listening on: %s\n", *b.addr)
 	log.Fatal(http.ListenAndServe(*b.addr, nil))
+}
+
+//StartHub runs the Hub/blaster, but does not do its own HTTP Listening
+func (b *Blaster) StartHub() {
+	go b.h.run()
+}
+
+//GetWSHandler returns a HTTP handler function for the websocket
+func (b *Blaster) GetWSHandler() func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		serveWs(b, w, r)
+	}
 }
 
 func (b *Blaster) Write(m []byte) {
@@ -66,14 +76,14 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 	homeTemplate.Execute(w, r.Host)
 }
 
-func serveWs(h *Hub, w http.ResponseWriter, r *http.Request) {
+func serveWs(b *Blaster, w http.ResponseWriter, r *http.Request) {
 	log.Println("handling WS request")
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: h, conn: conn, send: make(chan []byte, 256)}
+	client := &Client{hub: b.h, conn: conn, send: make(chan []byte, 256)}
 	client.hub.register <- client
 	log.Println("new client registered")
 	go client.writePump()

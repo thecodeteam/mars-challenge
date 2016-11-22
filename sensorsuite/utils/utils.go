@@ -6,7 +6,7 @@ import (
 	"net/url"
 
 	"github.com/codedellemc/mars-challenge/sensorsuite/types"
-	"github.com/codedellemc/mars-challenge/sensorsuite/wsreader"
+	"github.com/codedellemc/mars-challenge/websocket/wsreader"
 )
 
 //FlareUpdateRoutine will update a flare value from the websocket

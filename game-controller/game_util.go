@@ -16,7 +16,7 @@ func (reading *Reading) validate() (bool, string) {
 		return false, fmt.Sprintf("Temperature not within valid range [%.2f, %.2f]", minTemperature, maxTemperature)
 	}
 	if reading.Radiation < minRadiation || reading.Radiation > maxRadiation {
-		return false, fmt.Sprintf("Radiation not within valid range [%.2f, %.2f]", minRadiation, maxRadiation)
+		return false, fmt.Sprintf("Radiation not within valid range [%d, %d]", minRadiation, maxRadiation)
 	}
 	return true, ""
 }

@@ -6,6 +6,8 @@ import (
 	"log"
 	"sync"
 	"time"
+
+	"github.com/codedellemc/mars-challenge/websocket/wsblaster"
 )
 
 const (
@@ -38,6 +40,7 @@ type GameInfo struct {
 	readings     chan ReadingsRequest
 	exit         chan []byte
 	shield       chan ShieldRequest
+	blaster      *wsblaster.Blaster
 }
 
 // Team contains information about a team
@@ -73,17 +76,17 @@ func (game *GameInfo) run(adminToken string) {
 		case req := <-game.start:
 			success, message := game.startGame(req.token)
 			if success {
-				if game.autoReadings{
+				if game.autoReadings {
 					go game.getReadings(&wg)
 				}
-				go game.runEngine(&wg)	
+				go game.runEngine(&wg)
 			}
-			
+
 			req.Response <- GameResponse{success: success, message: message}
 			close(req.Response)
 		case req := <-game.stop:
 			success, message := game.stopGame(req.token)
-			if success  {
+			if success {
 				wg.Wait()
 			}
 			req.Response <- GameResponse{success: success, message: message}
@@ -123,7 +126,7 @@ func (game *GameInfo) run(adminToken string) {
 				continue
 			}
 			log.Println(string(m))
-			h.broadcast <- []byte(m)
+			game.blaster.Write(m)
 
 		case <-game.exit:
 			log.Println("Exiting game")

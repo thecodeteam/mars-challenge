@@ -21,12 +21,6 @@ var routes = Routes{
 		serveHome,
 	},
 	Route{
-		"Websocket",
-		"GET",
-		"/ws",
-		serveWs,
-	},
-	Route{
 		"Start Game",
 		"POST",
 		"/api/start",

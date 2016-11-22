@@ -11,7 +11,7 @@ import (
 	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 	"github.com/codedellemc/mars-challenge/sensorsuite/types"
 	"github.com/codedellemc/mars-challenge/sensorsuite/utils"
-	"github.com/codedellemc/mars-challenge/sensorsuite/wsblaster"
+	"github.com/codedellemc/mars-challenge/websocket/wsblaster"
 )
 
 func temperatureRoutine(r *types.TemperatureReading) {

@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"html/template"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -24,18 +23,6 @@ func serveHome(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	homeTempl.Execute(w, r.Host)
-}
-
-func serveWs(w http.ResponseWriter, r *http.Request) {
-
-	ws, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	c := &connection{send: make(chan []byte, 256), ws: ws}
-	h.register <- c
-	go c.writePump()
 }
 
 func serveAPIConfig(w http.ResponseWriter, r *http.Request) {

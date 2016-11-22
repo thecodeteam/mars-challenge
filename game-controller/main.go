@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+
+	"github.com/codedellemc/mars-challenge/websocket/wsblaster"
 )
 
 var addr = flag.String("addr", ":8080", "http service address")
@@ -26,10 +28,13 @@ func main() {
 	game.autoReadings = autoReadings
 	log.Printf("Automatic readings set to '%t'", autoReadings)
 
-	go h.run()
+	blaster := wsblaster.GetBlaster(addr, false)
+	blaster.StartHub()
+	game.blaster = blaster
+
 	go game.run(adminToken)
 
-	router := NewRouter()
+	router := NewRouter(blaster)
 
 	err = http.ListenAndServe(*addr, router)
 	if err != nil {
