@@ -23,16 +23,17 @@ be added at the end of the Challenge. The team that has the most points will win
 
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
-|T1-1 |Sensor Software Running in Raspberry|Tier 1|Get the Sensor program running in the Raspberry Pi|10|
-|T1-2 |My Sensor Containers|Tier 1| Build a container with the Sensor Software and Deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
+|T1-1 |Sensor Software Running in Raspberry|Tier 1|Get the SensorSuite program running in the Raspberry Pi|5|
+|T1-2 |My Sensor Containers|Tier 1| Build a container for each sensor in the SensorSuite and Deploy it on DockerHub.com. Use these containers for the rest of the challenge|10|
+|T1-3 |Bridge The Gap|Run your *Flare* container in your cloud VM, and configure your other sensors to reach it|5|
 
-### Tier 2 The Gateway & Aggregation:
+### Tier 2 The Aggregator:
 
 |####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
-|T2-1|Multi-Sensors Gateway|Tier 2| Build a gateway that can read from multiple sensors and can calculate the AVG between the sensor Data|5|
-|T2-2|Data smarts| Tier 2| Build functionality on the gateway where the gateway sends all the RAW sensor and AVG data to a storage repository|5|
-|T2-3|My Gateway Container|Tier 2| Build a container with the Gateway Software and Deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
+|T2-1|Start the Aggregator|Tier 2| Run the Aggregator in your cloud VM, show it received data from your SensorSuite|5|
+|T2-2|Data smarts| Tier 2| Modify the Aggregator to send all the RAW sensor and AVG data to a storage repository|5|
+|T2-3|My Gateway Container|Tier 2| Build a container for the Aggregator and upload it on DockerHub.com. Use this container for the rest of the challenge|5|
 
 ### Tier 3 Data Repository:
 
@@ -48,7 +49,7 @@ be added at the end of the Challenge. The team that has the most points will win
 |T4-1|Analytic Brain|Tier 4| Setup a cluster of Hadoop/Spark/F# to analyze data. This tier will help you to better anticipate change.|15|
 |T4-2|My Analytic Container|Tier 4| Build a container with the Data Analysis tier and deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
 
-### Tier 5 Team Client and Control Dashboard Tier
+### Tier 5 Team Client and Control Tier
 
 |#####|Name|Tier|Description|Points|
 |----|----|----|-----------|------|
