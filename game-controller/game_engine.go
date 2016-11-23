@@ -5,6 +5,8 @@ import (
 	"math"
 	"sync"
 	"time"
+
+	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 )
 
 const (
@@ -29,7 +31,10 @@ func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
 
 	for team.Life > 0 && game.Running {
 		time.Sleep(1 * time.Second)
-		radiationRatio = (float64)(game.Reading.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
+		radiationRatio = (float64)(
+			game.Reading.Radiation-ss.MinRadiation) / (float64)(
+			ss.MaxRadiation-ss.MinRadiation)
+
 		energyLoss = radiationRatio * maxEnergyLoss
 		if float64(team.Energy)-energyLoss <= 0 {
 			team.Shield = false
@@ -41,11 +46,11 @@ func (game *GameInfo) handleTeam(team *Team, wg *sync.WaitGroup) {
 			continue
 		}
 
-		radiationRatio = (float64)(game.Reading.Radiation-minRadiation) / (float64)(maxRadiation-minRadiation)
 		lifeLoss = radiationRatio * maxLifeLoss
 		team.Life = int64(math.Max(float64(team.Life)-math.Ceil(lifeLoss), 0))
 
-		temperatureRatio = (game.Reading.Temperature - minTemperature) / (maxTemperature - minTemperature)
+		temperatureRatio = (game.Reading.Temperature - ss.MinTemp) /
+			(ss.MaxTemp - ss.MinTemp)
 		energyGain = temperatureRatio * maxEnergyGain
 		team.Energy = int64(math.Min(float64(team.Energy)+math.Ceil(energyGain), 100))
 

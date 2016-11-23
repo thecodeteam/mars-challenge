@@ -3,6 +3,8 @@ package main
 import (
 	"crypto/rand"
 	"fmt"
+
+	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 )
 
 func randToken() string {
@@ -12,11 +14,19 @@ func randToken() string {
 }
 
 func (reading *Reading) validate() (bool, string) {
-	if reading.Temperature < minTemperature || reading.Temperature > maxTemperature {
-		return false, fmt.Sprintf("Temperature not within valid range [%.2f, %.2f]", minTemperature, maxTemperature)
+	if reading.Temperature < ss.MinTemp ||
+		reading.Temperature > ss.MaxTemp {
+		return false,
+			fmt.Sprintf(
+				"Temperature not within valid range [%.2f, %.2f]",
+				ss.MinTemp, ss.MaxTemp)
 	}
-	if reading.Radiation < minRadiation || reading.Radiation > maxRadiation {
-		return false, fmt.Sprintf("Radiation not within valid range [%d, %d]", minRadiation, maxRadiation)
+	if reading.Radiation < ss.MinRadiation ||
+		reading.Radiation > ss.MaxRadiation {
+		return false,
+			fmt.Sprintf(
+				"Radiation not within valid range [%d, %d]",
+				ss.MinRadiation, ss.MaxRadiation)
 	}
 	return true, ""
 }

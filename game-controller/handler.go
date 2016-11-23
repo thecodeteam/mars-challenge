@@ -8,6 +8,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+
+	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 )
 
 var homeTempl = template.Must(template.ParseFiles("home.html"))
@@ -34,10 +36,10 @@ func serveAPIConfig(w http.ResponseWriter, r *http.Request) {
 		MinRadiation   float64 `json:"minRadiation"`
 		AutoReadings   bool    `json:"autoReadings"`
 	}{
-		maxTemperature,
-		minTemperature,
-		maxRadiation,
-		minRadiation,
+		ss.MaxTemp,
+		ss.MinTemp,
+		ss.MaxRadiation,
+		ss.MinRadiation,
 		game.autoReadings,
 	}
 

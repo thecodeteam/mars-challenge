@@ -1,35 +1,75 @@
 package utils
 
 import (
-	"encoding/json"
-	"log"
-	"net/url"
+	"math/rand"
 
-	"github.com/codedellemc/mars-challenge/sensorsuite/types"
-	"github.com/codedellemc/mars-challenge/websocket/wsreader"
+	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 )
 
-//FlareUpdateRoutine will update a flare value from the websocket
-func FlareUpdateRoutine(f types.FlareUpdater, addr *string, exit chan bool) {
-	u := url.URL{Scheme: "ws", Host: *addr, Path: "/ws"}
-	uStr := u.String()
-	reader, err := wsreader.GetWSReader(&uStr)
-	if err != nil {
-		log.Printf("%s", err)
-		exit <- true
-		return
+// GetNewFlare returns a new, random Solar Flare value
+func GetNewFlare() bool {
+	x := rand.Intn(2)
+	if x != 0 {
+		return true
 	}
-	reader.Run()
-	for {
-		sf := &types.FlareReading{}
-		select {
-		case m := <-reader.C:
-			json.Unmarshal(m, sf)
-			f.UpdateSolarFlare(sf.SolarFlare)
-		case <-reader.Exit:
-			log.Printf("Lost connection to Flare websocket")
-			exit <- true
-			return
-		}
+	return false
+}
+
+// GetNewTempTrend returns a new Temperature Trend value
+func GetNewTempTrend(temp float64, flare bool) bool {
+	ratio := (temp - ss.MinTemp) / (ss.MaxTemp - ss.MinTemp)
+	chance := rand.Float64()
+	return chance > ratio || flare
+}
+
+// GetNewTemp returns a new Temperature value
+func GetNewTemp(currTemp float64, uptrend bool) float64 {
+	var min float64
+	var max float64
+
+	if uptrend {
+		max = currTemp + ss.VariationTemp
+		min = currTemp
+	} else {
+		max = currTemp
+		min = currTemp - ss.VariationTemp
 	}
+
+	temperature := (rand.Float64() * (max - min)) + min
+	if temperature < ss.MinTemp {
+		temperature = ss.MinTemp
+	} else if temperature > ss.MaxTemp {
+		temperature = ss.MaxTemp
+	}
+	return temperature
+}
+
+// GetNewRadiation returns a new Radiation value
+func GetNewRadiation(currRad int, uptrend bool) int {
+	var min int
+	var max int
+
+	if uptrend {
+		max = currRad + ss.VariationRadiation
+		min = currRad
+	} else {
+		max = currRad
+		min = currRad - ss.VariationRadiation
+	}
+
+	radiation := rand.Intn(max-min) + min
+	if radiation < ss.MinRadiation {
+		radiation = ss.MinRadiation
+	} else if radiation > ss.MaxRadiation {
+		radiation = ss.MaxRadiation
+	}
+	return radiation
+}
+
+// GetNewRadiationTrend returns a new radiation trend value
+func GetNewRadiationTrend(rad int, flare bool) bool {
+	ratio := (float64)(rad-ss.MinRadiation) /
+		(float64)(ss.MaxRadiation-ss.MinRadiation)
+	chance := rand.Float64()
+	return chance > ratio || flare
 }

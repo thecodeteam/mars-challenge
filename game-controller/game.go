@@ -7,19 +7,14 @@ import (
 	"sync"
 	"time"
 
+	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 	"github.com/codedellemc/mars-challenge/websocket/wsblaster"
 )
 
 const (
-	initialEnergy      = 100
-	initialLife        = 100
-	initialTemperature = -53.5
-	initialRadiation   = 500
-	initialSolarFlare  = false
-	maxTemperature     = 35.00
-	minTemperature     = -142.00
-	maxRadiation       = 1000
-	minRadiation       = 0
+	initialEnergy = 100
+	initialLife   = 100
+	strUnauth     = "Unauthorized"
 )
 
 // GameInfo contains information about the state of the game
@@ -63,8 +58,12 @@ var game = GameInfo{
 	shield:       make(chan ShieldRequest),
 	readings:     make(chan ReadingsRequest),
 	exit:         make(chan []byte),
-	Reading:      Reading{SolarFlare: initialSolarFlare, Temperature: initialTemperature, Radiation: initialRadiation},
-	Teams:        []Team{},
+	Reading: Reading{
+		SolarFlare:  ss.InitSolarFlare,
+		Temperature: ss.InitTemp,
+		Radiation:   ss.InitRadiation,
+	},
+	Teams: []Team{},
 }
 
 func (game *GameInfo) run(adminToken string) {
@@ -138,7 +137,7 @@ func (game *GameInfo) run(adminToken string) {
 func (game *GameInfo) stopGame(token string) (bool, string) {
 	if !game.authorizeAdmin(token) {
 		log.Printf("Unauthorized request to stop game. Token: %s\n", token)
-		return false, "Unauthorized"
+		return false, strUnauth
 	}
 	if game.Running {
 		game.Running = false
@@ -152,7 +151,7 @@ func (game *GameInfo) stopGame(token string) (bool, string) {
 func (game *GameInfo) startGame(token string) (bool, string) {
 	if !game.authorizeAdmin(token) {
 		log.Printf("Unauthorized request to start game. Token: %s\n", token)
-		return false, "Unauthorized"
+		return false, strUnauth
 	}
 	if game.Running {
 		log.Println("Game is already started, not doing anything...")
@@ -173,7 +172,7 @@ func (game *GameInfo) startGame(token string) (bool, string) {
 func (game *GameInfo) resetGame(token string) (bool, string) {
 	if !game.authorizeAdmin(token) {
 		log.Printf("Unauthorized request to reset game. Token: %s\n", token)
-		return false, "Unauthorized"
+		return false, strUnauth
 	}
 
 	if game.Running {
@@ -182,9 +181,9 @@ func (game *GameInfo) resetGame(token string) (bool, string) {
 	}
 
 	game.Teams = []Team{}
-	game.Reading.Temperature = initialTemperature
-	game.Reading.Radiation = initialRadiation
-	game.Reading.SolarFlare = initialSolarFlare
+	game.Reading.Temperature = ss.InitTemp
+	game.Reading.Radiation = ss.InitRadiation
+	game.Reading.SolarFlare = ss.InitSolarFlare
 	// TODO: Reset startedAt
 	return true, "Game reset successfully"
 }
@@ -211,7 +210,7 @@ func (game *GameInfo) kickTeam(token, name string) (bool, string) {
 
 	if !game.authorizeAdmin(token) {
 		log.Printf("Unauthorized request to kick team. Token: %s\n", token)
-		return false, "Unauthorized"
+		return false, strUnauth
 	}
 
 	i, ok := game.getTeamIndex(name)
@@ -231,7 +230,7 @@ func (game *GameInfo) enableShield(token string, enable bool) (bool, string) {
 	i, ok := game.authorizeTeam(token)
 	if !ok {
 		log.Printf("Invalid token '%s'\n", token)
-		return false, "Unauthorized"
+		return false, strUnauth
 	}
 
 	game.Teams[i].Shield = enable
@@ -243,7 +242,7 @@ func (game *GameInfo) enableShield(token string, enable bool) (bool, string) {
 func (game *GameInfo) updateReadings(readings Reading, token string) (bool, string) {
 	if !game.authorizeAdmin(token) {
 		log.Printf("Unauthorized request to kick team. Token: %s\n", token)
-		return false, "Unauthorized"
+		return false, strUnauth
 	}
 
 	if game.autoReadings {

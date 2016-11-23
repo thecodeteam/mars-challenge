@@ -12,7 +12,6 @@ import (
 
 	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 	"github.com/codedellemc/mars-challenge/sensorsuite/types"
-	"github.com/codedellemc/mars-challenge/sensorsuite/utils"
 	"github.com/codedellemc/mars-challenge/websocket/wsblaster"
 )
 
@@ -47,12 +46,12 @@ func main() {
 	reading := &Message{}
 
 	flareExit := make(chan bool)
-	flareAddr := viper.GetString("flare_address")
-	go utils.FlareUpdateRoutine(reading, &flareAddr, flareExit)
+	flareAddr := viper.GetString("sensor_flare_address")
+	go types.FlareUpdateRoutine(reading, &flareAddr, flareExit)
 
 	doPost := viper.GetBool("post_gc")
 	gcAddr := "http://" + viper.GetString("gc_address") + "/api/readings"
-	gcToken := viper.GetString("gc_admin_token")
+	gcToken := viper.GetString("admin_token")
 
 	ticker := time.NewTicker(1 * time.Second)
 	for {

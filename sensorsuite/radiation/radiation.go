@@ -10,7 +10,6 @@ import (
 
 	ss "github.com/codedellemc/mars-challenge/sensorsuite"
 	"github.com/codedellemc/mars-challenge/sensorsuite/types"
-	"github.com/codedellemc/mars-challenge/sensorsuite/utils"
 	"github.com/codedellemc/mars-challenge/websocket/wsblaster"
 )
 
@@ -44,7 +43,7 @@ func main() {
 
 	flareExit := make(chan bool)
 	flareAddr := viper.GetString("flare_address")
-	go utils.FlareUpdateRoutine(reading, &flareAddr, flareExit)
+	go types.FlareUpdateRoutine(reading, &flareAddr, flareExit)
 
 	go radiationRoutine(reading)
 
