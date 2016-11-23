@@ -1,8 +1,10 @@
 # Base image
-FROM golang:1.4.2
+FROM golang:1.7-alpine
 
 # Maintainer info
-MAINTAINER Adrian Moreno <adrian.moreno@emc.com>
+MAINTAINER Travis Rhoden <travis.rhoden@dell.com>
+
+RUN apk add --no-cache git
 
 # Get the project
 RUN go get github.com/codedellemc/mars-challenge/game-controller

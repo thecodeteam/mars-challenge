@@ -55,6 +55,34 @@ Aggregator are:
 - POST_GC
 - ADMIN_TOKEN
 
+## Docker container
+
+The Docker image for the Aggregator is located in
+[Docker hub](https://registry.hub.docker.com/u/emccode/mars-challenge-aggregator/).
+To get the image just run `docker pull emccode/mars-challenge-aggregator`.
+
+You will need to provide the address of the Solar Flare sensor, and for the
+Game Controller. In order to successfully POST to the game controller, you must
+also provide the same `ADMIN_TOKEN` that was used to start the Game Controller.
+
+The Aggregator can be started *before* the Game Controller, and it will connect
+when it is available. However, the Aggregator will not run without being in
+contact with the Solar Flare sensor.
+
+### Example
+
+In the following case we are going to use "1234" as admin token and connect to
+the Flare sensor running in a container named `flare` at port `9000`. We also
+map port `9004` to the same port on our local host so we can point our
+webrowser at `http://localhost:9004` and see what data the Aggregator has.
+
+    docker run -d --name=aggregator --link flare -p 9004:9004 -e SENSOR_FLARE_ADDRESS=flare:9000 -e ADMIN_TOKEN=1234 -e GC_ADDRESS=<some ip>:8080 emccode/mars-challenge-aggregator
+
+The IP address or hostname that you use for the Flare Sensor and the Game
+Controller will depend on how you are running the container (e.g. `docker run`
+vs `docker-compose`) and whether you are connecting to your own sensor and
+controller or one run by the Hackathon judges.
+
 ## Building the Aggregator
 
 Should you wish to compile the aggregator into an executable binary, `go build`
