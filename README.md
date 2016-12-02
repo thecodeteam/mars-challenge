@@ -27,7 +27,7 @@ You and your team will have at your disposal the necessary tools to survive and
 win the challenge, however you will need all wits and skills to work together
 and implement a solution that allows you to survive and outlast other teams.
 
-![Mars Challenge High Level Architecture](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/Mars-challenge-high-level-architecture.gif)
+![Mars Challenge High Level Architecture](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/Mars-challenge-high-level-architecture.png)
 
 **Available hardware and software resources for each team:**
 - 1 x Raspberry Pi **per Team** to act as an atmospheric sensor
