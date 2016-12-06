@@ -220,10 +220,11 @@ system. You can use any tooling to automate this process.
 ## Testing the Command and Control Center
 
 In order to Test your Team Command and Control center you can run the Mars Game
-Controller in testing mode. You will need to run the Game Controller and
-Game Controller's Dashboard.
+Controller in testing mode. This disables the Sensor API and causes the Game
+Controller to locally generate sensor readings instead. You will need to run the
+Game Controller and Game Controller's Dashboard.
 
-![Testing the Command and Control Center](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/Mars-challenge-testing-control-center.JPG)
+![Testing the Command and Control Center](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/Mars-challenge-testing-control-center.png)
 
 The Game containers are located here:
 
@@ -237,13 +238,13 @@ on the host(s) that you plan to run these on. You should start up the containers
 in the following order:
 
 1. Game Controller
-2. Game Controller UI
-3. Command and Control Service
+2. Game Controller Dashboard
+3. Team Command and Control Service
 
 Please use the following commands to setup the containers:
 
 First, start by executing the Game Controller Container. You can define both the
-listening port: `-p 80:8080` and the Admin Token: **`-e ADMIN_TOKEN=1234`** to
+listening port: `-p 8080:8080` and the Admin Token: **`-e ADMIN_TOKEN=1234`** to
 what you may need:
 
 ```sh
