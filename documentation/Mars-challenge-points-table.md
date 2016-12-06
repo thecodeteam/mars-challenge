@@ -25,7 +25,7 @@ be added at the end of the Challenge. The team that has the most points will win
 |----|----|----|-----------|------|
 |T1-1 |Sensor Software Running in Raspberry|Tier 1|Get the SensorSuite program running in the Raspberry Pi|5|
 |T1-2 |My Sensor Containers|Tier 1| Build a container for each sensor in the SensorSuite and Deploy it on DockerHub.com. Use these containers for the rest of the challenge|10|
-|T1-3 |Bridge The Gap|Run your *Flare* container in your cloud VM, and configure your other sensors to reach it|5|
+|T1-3 |Bridge The Gap|Tier 1|Run your *Flare* container in your cloud VM, and configure your other sensors to reach it|5|
 
 ### Tier 2 The Aggregator:
 
@@ -41,6 +41,7 @@ be added at the end of the Challenge. The team that has the most points will win
 |----|----|----|-----------|------|
 |T3-1 |Data Hog|Tier 3|Store all data from system: Sensor Data, Logs, etc...|10|
 |T3-2 |The Black Box|Tier 3| Create a separate storage for data backups. Needs to be durable at least 3 copies. |5|
+|T3-3 |REX-Ray|Tier 3|Use REX-ray to mount external storage volume for persistence|10|
 
 ### Tier 4 Data Analysis Tier
 
@@ -62,6 +63,7 @@ be added at the end of the Challenge. The team that has the most points will win
 |----|----|----|-----------|------|
 |T6-1|For the Ages|Tier 6|Build a Backup service that takes data and performs backups and stores them in Tier 3 Data repository. Can be combined with the "The Black Box" for added points|5|
 |T6-2|My Backup Service Container |Tier 6| Build a container with the Data Backup service tier and deploy it on DockerHub.com. Use this container for the rest of the challenge|5|
+|T6-3 |REX-Ray|Tier 6|Use REX-ray to mount external storage volume for persistence|10|
 
 ## DevOps
 
