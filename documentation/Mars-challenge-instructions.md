@@ -172,11 +172,13 @@ for automating the deployment and orchestration of this section.
 **Section 2:** This section focuses on getting the rest of services that work
 with the Team Command and Control center:
 
-![Mars Challenge Participants Stage 2](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.jpg)
+![Mars Challenge Participants Stage 2](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage2.png)
 
-The first step would be make sure you have a Command and Control service
-working. You can test your implementation of the Command & Control (C&C) service
-using the information in [Testing the Command and Control Center](#testing-the-command-and-control-center)
+The first step is to make sure you have a Command and Control service
+working. This is algorithm you create for deciding when to raise your shields
+and when to charge them. You can test your implementation of the Command &
+Control (C&C) service using the information in
+[Testing the Command and Control Center](#testing-the-command-and-control-center)
 section.
 
 Once you have the C&C service ready and on a container, you can start adding the
