@@ -128,12 +128,13 @@ have been organized into the following groups:
  - Section 2: Perform Analytic and Data saving operations
  - Section 3: DevOps and Application Management
 
-###  Section 1: Getting Data From the Sensors to the Aggregator Service
+###  Section 1: Getting Data From the SensorSuite to the Aggregator Service
 
-This section focuses on getting the sensor data from the Sensor services to the
-Command and Control Tier.  
+This section focuses on getting the sensor data from the SensorSuite to the
+Aggregator Service, which then sends an aggregated stream to the Game
+Controller.
 
- ![Mars Challenge Participants Stage 1](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.jpg).
+ ![Mars Challenge Participants Stage 1](https://github.com/codedellemc/mars-challenge/blob/master/documentation/images/marshackathon-Participant-stage1.png).
 
 In order to implement section 1 you will need the following components:
 
@@ -151,10 +152,17 @@ Once you have the components in place, you and your team will have to create a
 deployment and orchestrate how services are deployed in a specific order:
 
 1. Game Controller
-2. Game Controller UI
-3. Aggregator service
-4. Sensor Service
-5. Team Command and Control Center service
+2. Dashboard
+3. Sensor Suite's Solar Flare
+4. Aggregator Service
+5. Sensor Service
+6. Team Command and Control Center service
+
+**NOTE:** The components you deploy for early testing and working on your Team
+Solution will be different than what you deploy for the end of game shootout.
+To test and iterate, you will deploy all components yourself, outlined above.
+At the end of the game, the judges will have deployed a central solar flare
+component, an Aggregator, the Game Controller and Dashboard.
 
 You will get [points](https://github.com/codedellemc/mars-challenge/blob/master/documentation/Mars-challenge-points-table.md "Mars Challenge Points Table")
 for automating the deployment and orchestration of this section.
